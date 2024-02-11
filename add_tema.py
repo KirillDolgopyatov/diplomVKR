@@ -1,5 +1,7 @@
 import sys
 
+import pickle
+
 from PyQt5.QtCore import Qt, QSize
 from PyQt5.QtGui import QIcon
 from PyQt5.QtWidgets import QApplication, QMainWindow, QVBoxLayout, QLabel, QGridLayout, QLineEdit, QPushButton, \
@@ -19,8 +21,9 @@ class MainWindow(QMainWindow):
         self.layout = QVBoxLayout()
         self.ui.widget_2.setLayout(self.layout)  # Установка QVBoxLayout как layout для виджета widget_2
 
-        self.ui.btnSaveTopic.clicked.connect(
-            self.create_new_label)  # Подключение функции create_new_label при нажатии на кнопку btnSaveTopic
+        self.ui.btnSaveTopic.clicked.connect(self.create_new_label)
+
+        self.restore_widgets()
 
     def create_new_label(self):  # Создание новой метки и вызов функции new_grid
         if self.ui.lineTopic.text() != "":
@@ -80,6 +83,8 @@ class MainWindow(QMainWindow):
         grid.addWidget(plus_down, row + 1, column)
         grid.addWidget(plus_right, row, column + 1)
 
+        self.save_state()
+
     def create_new_btn_right(self, grid):  # Создание новой колонки при нажатии на кнопку вправо
         clicked_widget = self.sender()
 
@@ -99,6 +104,32 @@ class MainWindow(QMainWindow):
         grid.addWidget(plus_right, row, column + 1)
 
         self.column_stretch(grid)
+
+        self.save_state()
+
+    def restore_widgets(self):
+        try:
+            with open("widget_state.txt", "r") as file:
+                for line in file:
+                    widget_type, row, column = line.strip().split(',')
+                    if widget_type == "LineEdit":
+                        self.add_line_edit_at_position(int(row), int(column))
+                    elif widget_type == "Button":
+                        self.add_button_at_position(int(row), int(column))
+        except FileNotFoundError:
+            pass  # No saved state, start fresh
+
+    def save_state(self):
+        widgets = []
+        for i in range(self.layout.count()):
+            widget = self.layout.itemAt(i).widget()
+            if isinstance(widget, QLineEdit):
+                widgets.append(('QLineEdit', widget.text()))
+            elif isinstance(widget, QPushButton):
+                # Assuming you want to save QPushButton without text or with a specific identifier
+                widgets.append(('QPushButton', 'plus'))
+        with open('saveData/widgets_state.pickle', 'wb') as file:
+            pickle.dump(widgets, file)
 
     @staticmethod
     def column_stretch(grid):  # Установка растягиваем колонки и строки сетки
