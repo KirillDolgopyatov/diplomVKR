@@ -5,42 +5,37 @@ from PyQt5.QtGui import QIcon
 from PyQt5.QtWidgets import QApplication, QMainWindow, QVBoxLayout, QLabel, QGridLayout, QLineEdit, QPushButton, \
     QMessageBox
 
-from Designer.designerTest import Ui_MainWindow
+from Designer.designerTest import Ui_MainWindow  # Импорт класса Ui_MainWindow из другого модуля
 
 
 ########################################################################################################################
 
-
 class MainWindow(QMainWindow):
     def __init__(self):
         super().__init__()
-        self.ui = Ui_MainWindow()
-        self.ui.setupUi(self)
+        self.ui = Ui_MainWindow()  # Создание экземпляра класса Ui_MainWindow
+        self.ui.setupUi(self)  # Инициализация UI элементов
 
         self.layout = QVBoxLayout()
+        self.ui.widget_2.setLayout(self.layout)  # Установка QVBoxLayout как layout для виджета widget_2
 
-        self.ui.widget_2.setLayout(self.layout)
+        self.ui.btnSaveTopic.clicked.connect(
+            self.create_new_label)  # Подключение функции create_new_label при нажатии на кнопку btnSaveTopic
 
-        self.ui.btnSaveTopic.clicked.connect(self.create_new_label)
-
-    ####################################################################################################################
-
-    def create_new_label(self):  # создает тему, и обращается к функции "new_grid"
+    def create_new_label(self):  # Создание новой метки и вызов функции new_grid
         if self.ui.lineTopic.text() != "":
             text = self.ui.lineTopic.text()
             label = QLabel(text)
             label.setStyleSheet('color: white; font: 14pt;')
             self.layout.addWidget(label)
 
-            self.new_grid()
+            self.new_grid()  # Создание нового grid
 
             self.ui.lineTopic.clear()
         else:
-            QMessageBox.warning(None, "Ошибка", "Введите тему")
+            QMessageBox.warning(None, "Ошибка", "Введите тему")  # Показ предупреждающего сообщения
 
-    ####################################################################################################################
-
-    def new_grid(self):  # создает новые макет с кнопками и Linedit
+    def new_grid(self):  # Создание нового grid layout с элементами
         grid = QGridLayout()
         self.layout.addLayout(grid)
 
@@ -63,14 +58,12 @@ class MainWindow(QMainWindow):
         plus_right.clicked.connect(lambda: self.create_new_btn_right(grid))
         plus_down.clicked.connect(lambda: self.create_new_btn_down(grid))
 
-        self.column_stretch(grid)
+        self.column_stretch(grid)  # Установка растягиваем колонки и строки
 
-    ####################################################################################################################
-
-    def create_new_btn_down(self, grid):
+    def create_new_btn_down(self, grid):  # Создание новой строки при нажатии на кнопку вниз
         clicked_widget = self.sender()
 
-        # Находим позицию нажатого виджета в сетке
+        # Получение позиции нажатого виджета в сетке
         for i in range(grid.count()):
             item = grid.itemAt(i)
             if item.widget() == clicked_widget:
@@ -87,12 +80,10 @@ class MainWindow(QMainWindow):
         grid.addWidget(plus_down, row + 1, column)
         grid.addWidget(plus_right, row, column + 1)
 
-    ####################################################################################################################
-
-    def create_new_btn_right(self, grid):
+    def create_new_btn_right(self, grid):  # Создание новой колонки при нажатии на кнопку вправо
         clicked_widget = self.sender()
 
-        # Находим позицию нажатого виджета в сетке
+        # Получение позиции нажатого виджета в сетке
         for i in range(grid.count()):
             item = grid.itemAt(i)
             if item.widget() == clicked_widget:
@@ -109,23 +100,21 @@ class MainWindow(QMainWindow):
 
         self.column_stretch(grid)
 
-    ####################################################################################################################
-
     @staticmethod
-    def column_stretch(grid):
+    def column_stretch(grid):  # Установка растягиваем колонки и строки сетки
         grid.setColumnStretch(grid.columnCount(), 1)
         grid.setRowStretch(grid.rowCount(), 1)
 
-    @staticmethod  # функция возвращает новый lineedit
-    def create_new_line_edit():
+    @staticmethod
+    def create_new_line_edit():  # Создание нового QLineEdit
         line_edit = QLineEdit()
         line_edit.setFixedSize(30, 30)
         line_edit.setStyleSheet("background-color: white; color: black; font: 10pt;")
         line_edit.setAlignment(Qt.AlignCenter)
         return line_edit
 
-    @staticmethod  # функция возвращает новую кнопку
-    def create_new_button(callback):
+    @staticmethod
+    def create_new_button(callback):  # Создание новой кнопки
         button = QPushButton()
         button.setFixedSize(20, 20)
         button.setIcon(QIcon("icons/iconPlus.svg"))
@@ -135,7 +124,6 @@ class MainWindow(QMainWindow):
 
 
 ########################################################################################################################
-
 
 if __name__ == "__main__":
     app = QApplication(sys.argv)
