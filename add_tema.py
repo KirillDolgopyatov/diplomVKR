@@ -19,6 +19,8 @@ class MainWindow(QMainWindow):
         self.ui.widget_2.setLayout(self.layout)
         self.ui.btnSaveTopic.clicked.connect(self.create_new_label)
 
+        self.load_layout()
+
     def explore_layout(self):
         widgets_dict = {}
 
@@ -26,17 +28,22 @@ class MainWindow(QMainWindow):
             item = self.layout.itemAt(i)
             if item.widget():
                 widget = item.widget()
-                widget_properties = {
-                    "text": widget.text(),
-                }
-                key = widget.text()
+                # widget_properties = {"text": widget.text()}
+                if item.layout():
+                    layout = item.layout()
+                    grid_info = []
+                    for j in range(layout.count()):
+                        grid_widget = layout.itemAt(j).widget()
+                        if isinstance(grid_widget, QLineEdit):
+                            widget_info = {'type': 'QLineEdit', 'text': grid_widget.text(),
+                                           'position': layout.getItemPosition(j)}
+                            grid_info.append(widget_info)
+                        elif isinstance(grid_widget, QPushButton):
+                            widget_info = {'type': 'QPushButton', 'position': layout.getItemPosition(j)}
+                            grid_info.append(widget_info)
 
-                if key in widgets_dict:
-                    # Если виджет уже существует в словаре, обновляем информацию
-                    widgets_dict[key].update(widget_properties)
-                else:
-                    # Если виджета еще нет в словаре, добавляем его
-                    widgets_dict[key] = widget_properties
+                    key = str(widget)
+                    widgets_dict[key[:23]] = widget_info
 
         with open('layout_state.json', 'w') as f:
             json.dump(widgets_dict, f)
@@ -52,9 +59,7 @@ class MainWindow(QMainWindow):
             #                 "class_name": widget.__class__.__name__
             #             }
             #             widgets_dict[widget] = widget_properties
-                        # print(f"GridLayout Widget: {widget.__class__.__name__}")
-
-        print(widgets_dict)
+            # print(f"GridLayout Widget: {widget.__class__.__name__}")
 
     def create_new_label(self):
         if self.ui.lineTopic.text() != "":
@@ -69,12 +74,16 @@ class MainWindow(QMainWindow):
             QMessageBox.warning(None, "Ошибка", "Введите тему")
 
     def load_layout(self):
-        with open('layout_state.json', 'r') as f:
-            widgets_dict = json.load(f)
-            for widget_name, properties in widgets_dict.items():
-                label = QLabel()
-                label.setText(properties.get('text', ''))
-                self.layout.addWidget(label)
+        try:
+            with open('layout_state.json', 'r') as f:
+                widgets_dict = json.load(f)
+                for widget_name, properties in widgets_dict.items():
+                    label = QLabel()
+                    label.setText(properties.get('text', ''))
+                    label.setStyleSheet('color: white; font: 14pt;')  # Установите стиль, если необходимо
+                    self.layout.addWidget(label)
+        except FileNotFoundError:
+            pass
 
     def new_grid(self):
         grid = QGridLayout()
@@ -84,7 +93,6 @@ class MainWindow(QMainWindow):
         grid.addWidget(line_edit, 0, 0)
 
         self.add_buttons_to_grid(grid, 0, 0)
-        self.explore_layout()
 
     def add_buttons_to_grid(self, grid, row, column):
         plus_right = self.create_new_button(lambda: self.add_new_element(grid, row, column + 1, 'right'))
@@ -107,7 +115,7 @@ class MainWindow(QMainWindow):
         self.column_stretch(grid)
 
     def closeEvent(self, event):
-        # self.save_state()
+        self.explore_layout()
         event.accept()  # Подтверждаем закрытие приложения
 
     @staticmethod
