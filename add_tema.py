@@ -36,14 +36,14 @@ class MainWindow(QMainWindow):
                 grid_info = {}
                 for j in range(layout.count()):
                     grid_widget = layout.itemAt(j).widget()
+                    position = layout.getItemPosition(j)  # Получаем позицию виджета
+                    pos_key = f"{position[0]}_{position[1]}"  # Создаем уникальный ключ из позиции
                     if isinstance(grid_widget, QLineEdit):
-                        widget_info = {'type': 'QLineEdit', 'text': grid_widget.text(),
-                                       'position': layout.getItemPosition(j)}
-                        grid_info.update(widget_info)
+                        widget_info = {'type': 'QLineEdit', 'text': grid_widget.text()}
+                        grid_info[pos_key] = widget_info  # Используем уникальный ключ для сохранения виджета
                     elif isinstance(grid_widget, QPushButton):
-                        widget_info = {'type': 'QPushButton', 'position': layout.getItemPosition(j)}
-                        grid_info.update(widget_info)
-                # Сохраняем данные QGridLayout и его дочерних виджетов
+                        widget_info = {'type': 'QPushButton'}
+                        grid_info[pos_key] = widget_info  # Используем уникальный ключ для сохранения виджета
                 widgets_dict[f"grid_{i}"] = grid_info
 
         with open('layout_state.json', 'w') as f:
@@ -65,31 +65,34 @@ class MainWindow(QMainWindow):
         try:
             with open('layout_state.json', 'r') as f:
                 widgets_dict = json.load(f)
-                for widget_name, properties in widgets_dict.items():
+                for properties in widgets_dict.items():
                     if properties['type'] == 'QLabel':
                         label = QLabel()
                         label.setText(properties.get('text', ''))
                         label.setStyleSheet('color: white; font: 14pt;')
                         self.layout.addWidget(label)
-                    elif properties['type'] == 'grid':
+                    elif properties['type'] == 'QGridLayout':
                         grid = QGridLayout()
                         self.layout.addLayout(grid)
-                        for widget_info in properties['widgets']:
+                        for pos_key, widget_info in properties.items():
                             if widget_info['type'] == 'QLineEdit':
                                 line_edit = QLineEdit()
                                 line_edit.setText(widget_info.get('text', ''))
                                 line_edit.setFixedSize(30, 30)
                                 line_edit.setStyleSheet("background-color: white; color: black; font: 10pt;")
                                 line_edit.setAlignment(Qt.AlignCenter)
-                                grid.addWidget(line_edit, widget_info['position'][0], widget_info['position'][1])
+                                # Распаковываем позицию виджета из ключа
+                                row, col = map(int, pos_key.split('_'))
+                                grid.addWidget(line_edit, row, col)
 
                             elif widget_info['type'] == 'QPushButton':
                                 button = QPushButton()
                                 button.setFixedSize(20, 20)
                                 button.setIcon(QIcon("icons/iconPlus.svg"))
                                 button.setIconSize(QSize(14, 14))
-                                # Здесь добавьте свою логику для обработки нажатия кнопки, если необходимо
-                                grid.addWidget(button, widget_info['position'][0], widget_info['position'][1])
+                                # Распаковываем позицию виджета из ключа
+                                row, col = map(int, pos_key.split('_'))
+                                grid.addWidget(button, row, col)
         except FileNotFoundError:
             pass
 
