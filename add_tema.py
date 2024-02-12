@@ -33,34 +33,21 @@ class MainWindow(QMainWindow):
                     widgets_dict[f"label_{i}"] = {'type': 'QLabel', 'text': widget.text()}
             elif item.layout():
                 layout = item.layout()
-                grid_info = []
+                grid_info = {}
                 for j in range(layout.count()):
                     grid_widget = layout.itemAt(j).widget()
                     if isinstance(grid_widget, QLineEdit):
                         widget_info = {'type': 'QLineEdit', 'text': grid_widget.text(),
                                        'position': layout.getItemPosition(j)}
-                        grid_info.append(widget_info)
+                        grid_info.update(widget_info)
                     elif isinstance(grid_widget, QPushButton):
                         widget_info = {'type': 'QPushButton', 'position': layout.getItemPosition(j)}
-                        grid_info.append(widget_info)
+                        grid_info.update(widget_info)
                 # Сохраняем данные QGridLayout и его дочерних виджетов
                 widgets_dict[f"grid_{i}"] = grid_info
 
         with open('layout_state.json', 'w') as f:
             json.dump(widgets_dict, f, indent=4)
-
-            # elif item.layout():
-            #     print(f"Layout: {item.layout().__class__.__name__}")
-            #     for j in range(item.layout().count()):
-            #         grid_layout = item.layout().itemAt(j)
-            #         if grid_layout.widget():
-            #             widget = grid_layout.widget()
-            #             widget_properties = {
-            #                 "text": widget.text(),
-            #                 "class_name": widget.__class__.__name__
-            #             }
-            #             widgets_dict[widget] = widget_properties
-            # print(f"GridLayout Widget: {widget.__class__.__name__}")
 
     def create_new_label(self):
         if self.ui.lineTopic.text() != "":
@@ -79,10 +66,30 @@ class MainWindow(QMainWindow):
             with open('layout_state.json', 'r') as f:
                 widgets_dict = json.load(f)
                 for widget_name, properties in widgets_dict.items():
-                    label = QLabel()
-                    label.setText(properties.get('text', ''))
-                    label.setStyleSheet('color: white; font: 14pt;')  # Установите стиль, если необходимо
-                    self.layout.addWidget(label)
+                    if properties['type'] == 'QLabel':
+                        label = QLabel()
+                        label.setText(properties.get('text', ''))
+                        label.setStyleSheet('color: white; font: 14pt;')
+                        self.layout.addWidget(label)
+                    elif properties['type'] == 'grid':
+                        grid = QGridLayout()
+                        self.layout.addLayout(grid)
+                        for widget_info in properties['widgets']:
+                            if widget_info['type'] == 'QLineEdit':
+                                line_edit = QLineEdit()
+                                line_edit.setText(widget_info.get('text', ''))
+                                line_edit.setFixedSize(30, 30)
+                                line_edit.setStyleSheet("background-color: white; color: black; font: 10pt;")
+                                line_edit.setAlignment(Qt.AlignCenter)
+                                grid.addWidget(line_edit, widget_info['position'][0], widget_info['position'][1])
+
+                            elif widget_info['type'] == 'QPushButton':
+                                button = QPushButton()
+                                button.setFixedSize(20, 20)
+                                button.setIcon(QIcon("icons/iconPlus.svg"))
+                                button.setIconSize(QSize(14, 14))
+                                # Здесь добавьте свою логику для обработки нажатия кнопки, если необходимо
+                                grid.addWidget(button, widget_info['position'][0], widget_info['position'][1])
         except FileNotFoundError:
             pass
 
