@@ -65,33 +65,29 @@ class MainWindow(QMainWindow):
         try:
             with open('layout_state.json', 'r') as f:
                 widgets_dict = json.load(f)
-                for properties in widgets_dict.items():
-                    if properties['type'] == 'QLabel':
+                for widget_name, properties in widgets_dict.items():
+                    if 'label' in widget_name:  # Проверяем, является ли виджет QLabel
                         label = QLabel()
                         label.setText(properties.get('text', ''))
                         label.setStyleSheet('color: white; font: 14pt;')
                         self.layout.addWidget(label)
-                    elif properties['type'] == 'QGridLayout':
+                    elif 'grid' in widget_name:  # Проверяем, содержит ли виджет QGridLayout
                         grid = QGridLayout()
                         self.layout.addLayout(grid)
                         for pos_key, widget_info in properties.items():
+                            row, col = map(int, pos_key.split('_'))
                             if widget_info['type'] == 'QLineEdit':
                                 line_edit = QLineEdit()
                                 line_edit.setText(widget_info.get('text', ''))
                                 line_edit.setFixedSize(30, 30)
                                 line_edit.setStyleSheet("background-color: white; color: black; font: 10pt;")
                                 line_edit.setAlignment(Qt.AlignCenter)
-                                # Распаковываем позицию виджета из ключа
-                                row, col = map(int, pos_key.split('_'))
                                 grid.addWidget(line_edit, row, col)
-
                             elif widget_info['type'] == 'QPushButton':
                                 button = QPushButton()
                                 button.setFixedSize(20, 20)
                                 button.setIcon(QIcon("icons/iconPlus.svg"))
                                 button.setIconSize(QSize(14, 14))
-                                # Распаковываем позицию виджета из ключа
-                                row, col = map(int, pos_key.split('_'))
                                 grid.addWidget(button, row, col)
         except FileNotFoundError:
             pass
