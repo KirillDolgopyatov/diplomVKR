@@ -1,0 +1,166 @@
+{
+    "label_0": {
+        "type": "QLabel",
+        "text": "trg"
+    },
+    "grid_1": [
+        {
+            "type": "QLineEdit",
+            "text": "54",
+            "position": [
+                0,
+                0,
+                1,
+                1
+            ]
+        },
+        {
+            "type": "QPushButton",
+            "position": [
+                0,
+                1,
+                1,
+                1
+            ]
+        },
+        {
+            "type": "QPushButton",
+            "position": [
+                1,
+                0,
+                1,
+                1
+            ]
+        },
+        {
+            "type": "QLineEdit",
+            "text": "45",
+            "position": [
+                0,
+                1,
+                1,
+                1
+            ]
+        },
+        {
+            "type": "QPushButton",
+            "position": [
+                0,
+                2,
+                1,
+                1
+            ]
+        },
+        {
+            "type": "QPushButton",
+            "position": [
+                1,
+                1,
+                1,
+                1
+            ]
+        }
+    ],
+    "label_2": {
+        "type": "QLabel",
+        "text": "trgr"
+    },
+    "grid_3": [
+        {
+            "type": "QLineEdit",
+            "text": "3",
+            "position": [
+                0,
+                0,
+                1,
+                1
+            ]
+        },
+        {
+            "type": "QPushButton",
+            "position": [
+                0,
+                1,
+                1,
+                1
+            ]
+        },
+        {
+            "type": "QPushButton",
+            "position": [
+                1,
+                0,
+                1,
+                1
+            ]
+        }
+    ],
+    "label_4": {
+        "type": "QLabel",
+        "text": "tgtr"
+    },
+    "grid_5": [
+        {
+            "type": "QLineEdit",
+            "text": "2",
+            "position": [
+                0,
+                0,
+                1,
+                1
+            ]
+        },
+        {
+            "type": "QPushButton",
+            "position": [
+                0,
+                1,
+                1,
+                1
+            ]
+        },
+        {
+            "type": "QPushButton",
+            "position": [
+                1,
+                0,
+                1,
+                1
+            ]
+        }
+    ],
+    "label_6": {
+        "type": "QLabel",
+        "text": "trg"
+    },
+    "grid_7": [
+        {
+            "type": "QLineEdit",
+            "text": "1",
+            "position": [
+                0,
+                0,
+                1,
+                1
+            ]
+        },
+        {
+            "type": "QPushButton",
+            "position": [
+                0,
+                1,
+                1,
+                1
+            ]
+        },
+        {
+            "type": "QPushButton",
+            "position": [
+                1,
+                0,
+                1,
+                1
+            ]
+        }
+    ]
+}

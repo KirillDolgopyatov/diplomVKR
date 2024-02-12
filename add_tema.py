@@ -22,31 +22,32 @@ class MainWindow(QMainWindow):
         self.load_layout()
 
     def explore_layout(self):
-        widgets_dict = {}
+        widgets_dict = {}  # Пересоздаем словарь для очистки предыдущих данных
 
         for i in range(self.layout.count()):
             item = self.layout.itemAt(i)
             if item.widget():
                 widget = item.widget()
-                # widget_properties = {"text": widget.text()}
-                if item.layout():
-                    layout = item.layout()
-                    grid_info = []
-                    for j in range(layout.count()):
-                        grid_widget = layout.itemAt(j).widget()
-                        if isinstance(grid_widget, QLineEdit):
-                            widget_info = {'type': 'QLineEdit', 'text': grid_widget.text(),
-                                           'position': layout.getItemPosition(j)}
-                            grid_info.append(widget_info)
-                        elif isinstance(grid_widget, QPushButton):
-                            widget_info = {'type': 'QPushButton', 'position': layout.getItemPosition(j)}
-                            grid_info.append(widget_info)
-
-                    key = str(widget)
-                    widgets_dict[key[:23]] = widget_info
+                if isinstance(widget, QLabel):
+                    # Сохраняем данные QLabel
+                    widgets_dict[f"label_{i}"] = {'type': 'QLabel', 'text': widget.text()}
+            elif item.layout():
+                layout = item.layout()
+                grid_info = []
+                for j in range(layout.count()):
+                    grid_widget = layout.itemAt(j).widget()
+                    if isinstance(grid_widget, QLineEdit):
+                        widget_info = {'type': 'QLineEdit', 'text': grid_widget.text(),
+                                       'position': layout.getItemPosition(j)}
+                        grid_info.append(widget_info)
+                    elif isinstance(grid_widget, QPushButton):
+                        widget_info = {'type': 'QPushButton', 'position': layout.getItemPosition(j)}
+                        grid_info.append(widget_info)
+                # Сохраняем данные QGridLayout и его дочерних виджетов
+                widgets_dict[f"grid_{i}"] = grid_info
 
         with open('layout_state.json', 'w') as f:
-            json.dump(widgets_dict, f)
+            json.dump(widgets_dict, f, indent=4)
 
             # elif item.layout():
             #     print(f"Layout: {item.layout().__class__.__name__}")
