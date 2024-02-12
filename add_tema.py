@@ -1,7 +1,5 @@
 import sys
 
-import json
-
 from PyQt5.QtCore import Qt, QSize
 from PyQt5.QtGui import QIcon
 from PyQt5.QtWidgets import QApplication, QMainWindow, QVBoxLayout, QLabel, QGridLayout, QLineEdit, QPushButton, \
@@ -19,6 +17,20 @@ class MainWindow(QMainWindow):
         self.layout = QVBoxLayout()
         self.ui.widget_2.setLayout(self.layout)
         self.ui.btnSaveTopic.clicked.connect(self.create_new_label)
+
+    def explore_layout(self):
+        grid_layout = []
+        for i in range(self.layout.count()):
+            item = self.layout.itemAt(i)
+            if item.widget():
+                print(f"Widget: {item.widget().__class__.__name__}")
+            elif item.layout():
+                print(f"Layout: {item.layout().__class__.__name__}")
+                for j in range(item.layout().count()):
+                    widgets = item.layout().itemAt(j)
+                    grid_layout.append(widgets)
+                    print(f"LineEdit: {widgets.widget().__class__.__name__}")
+        print(grid_layout)
 
     def create_new_label(self):
         if self.ui.lineTopic.text() != "":
@@ -40,6 +52,7 @@ class MainWindow(QMainWindow):
         grid.addWidget(line_edit, 0, 0)
 
         self.add_buttons_to_grid(grid, 0, 0)
+        self.explore_layout()
 
     def add_buttons_to_grid(self, grid, row, column):
         plus_right = self.create_new_button(lambda: self.add_new_element(grid, row, column + 1, 'right'))
@@ -61,29 +74,8 @@ class MainWindow(QMainWindow):
 
         self.column_stretch(grid)
 
-    def save_state(self):
-        layout_data = []
-        for i in range(self.layout.count()):
-            item = self.layout.itemAt(i)
-            grid = item.layout()
-            grid_data = {'widgets': []}
-            for j in range(grid.count()):
-                widget = grid.itemAt(j).widget()
-                if isinstance(widget, QLineEdit):
-                    widget_data = {'type': 'QLineEdit', 'text': widget.text(), 'row': grid.getItemPosition(j)[0],
-                                   'column': grid.getItemPosition(j)[1]}
-                elif isinstance(widget, QPushButton):
-                    # Здесь можно добавить дополнительные свойства кнопок, если это необходимо
-                    widget_data = {'type': 'QPushButton', 'row': grid.getItemPosition(j)[0],
-                                   'column': grid.getItemPosition(j)[1]}
-                grid_data['widgets'].append(widget_data)
-            layout_data.append(grid_data)
-
-        with open('layout_state.json', 'w') as f:
-            json.dump(layout_data, f)
-
     def closeEvent(self, event):
-        self.save_state()
+        # self.save_state()
         event.accept()  # Подтверждаем закрытие приложения
 
     @staticmethod
