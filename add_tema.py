@@ -42,7 +42,7 @@ class MainWindow(QMainWindow):
                         widget_info = {'type': 'QLineEdit', 'text': grid_widget.text()}
                         grid_info[pos_key] = widget_info  # Используем уникальный ключ для сохранения виджета
                     elif isinstance(grid_widget, QPushButton):
-                        widget_info = {'type': 'QPushButton', 'direction': grid_widget.objectName()}
+                        widget_info = {'type': 'QPushButton'}
                         grid_info[pos_key] = widget_info  # Используем уникальный ключ для сохранения виджета
                 widgets_dict[f"grid_{i}"] = grid_info
 
@@ -89,12 +89,11 @@ class MainWindow(QMainWindow):
                                 button.setFixedSize(20, 20)
                                 button.setIcon(QIcon("icons/iconPlus.svg"))
                                 button.setIconSize(QSize(14, 14))
-                                direction = widget_info['direction']
-                                print(direction)
                                 # Важно: используем замыкание для сохранения контекста grid, row, col
                                 button.clicked.connect(
                                     lambda checked, g=grid, r=row, c=col: self.add_new_element(g, r, c, 'right'))
                                 grid.addWidget(button, row, col)
+
                                 self.column_stretch(grid)
         except FileNotFoundError:
             pass
@@ -110,9 +109,8 @@ class MainWindow(QMainWindow):
 
     def add_buttons_to_grid(self, grid, row, column):
         plus_right = self.create_new_button(lambda: self.add_new_element(grid, row, column + 1, 'right'))
-        plus_right.setObjectName('right')
         plus_down = self.create_new_button(lambda: self.add_new_element(grid, row + 1, column, 'down'))
-        plus_down.setObjectName('down')
+
         grid.addWidget(plus_right, row, column + 1)
         grid.addWidget(plus_down, row + 1, column)
 
