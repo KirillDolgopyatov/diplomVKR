@@ -42,7 +42,7 @@ class MainWindow(QMainWindow):
                         widget_info = {'type': 'QLineEdit', 'text': grid_widget.text()}
                         grid_info[pos_key] = widget_info  # Используем уникальный ключ для сохранения виджета
                     elif isinstance(grid_widget, QPushButton):
-                        widget_info = {'type': 'QPushButton'}
+                        widget_info = {'type': 'QPushButton', 'direction': grid_widget.objectName()}
                         grid_info[pos_key] = widget_info  # Используем уникальный ключ для сохранения виджета
                 widgets_dict[f"grid_{i}"] = grid_info
 
@@ -90,9 +90,16 @@ class MainWindow(QMainWindow):
                                 button.setIcon(QIcon("icons/iconPlus.svg"))
                                 button.setIconSize(QSize(14, 14))
                                 # Важно: используем замыкание для сохранения контекста grid, row, col
-                                button.clicked.connect(
-                                    lambda checked, g=grid, r=row, c=col: self.add_new_element(g, r, c, 'right'))
-                                grid.addWidget(button, row, col)
+                                direction = widget_info.get('direction')
+                                if direction == 'right':
+                                    button.clicked.connect(
+                                        lambda checked, g=grid, r=row, c=col: self.add_new_element(g, r, c, 'right'))
+                                    grid.addWidget(button, row, col)
+                                else:
+                                    button.clicked.connect(
+                                        lambda checked, g=grid, r=row, c=col: self.add_new_element(g, r, c, 'down'))
+                                    grid.addWidget(button, row, col)
+
 
                                 self.column_stretch(grid)
         except FileNotFoundError:
@@ -123,6 +130,7 @@ class MainWindow(QMainWindow):
         if direction == 'right':
             # Добавляем кнопку plus_right справа от нового элемента
             plus_right = self.create_new_button(lambda: self.add_new_element(grid, row, column + 1, 'right'))
+            plus_right.setObjectName('right')
             grid.addWidget(plus_right, row, column + 1)
 
             self.column_stretch(grid)
@@ -130,9 +138,11 @@ class MainWindow(QMainWindow):
         elif direction == 'down':
             # Добавляем кнопку plus_down ниже нового элемента и plus_right справа от исходного элемента
             plus_down = self.create_new_button(lambda: self.add_new_element(grid, row + 1, column, 'down'))
+            plus_down.setObjectName('down')
             grid.addWidget(plus_down, row + 1, column)
             # Возможно, вам также нужно добавить plus_right снова, если это необходимо по логике вашего интерфейса
             plus_right = self.create_new_button(lambda: self.add_new_element(grid, row, column + 1, 'right'))
+            plus_right.setObjectName('right')
             grid.addWidget(plus_right, row, column + 1)
 
             self.column_stretch(grid)
