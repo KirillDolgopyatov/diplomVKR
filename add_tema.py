@@ -100,7 +100,6 @@ class MainWindow(QMainWindow):
                                         lambda checked, g=grid, r=row, c=col: self.add_new_element(g, r, c, 'down'))
                                     grid.addWidget(button, row, col)
 
-
                                 self.column_stretch(grid)
         except FileNotFoundError:
             pass
