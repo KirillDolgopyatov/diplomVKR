@@ -21,7 +21,7 @@
   </property>
   <property name="styleSheet">
    <string notr="true">QFrame#frame{
-border-image: url(:/images/images/mchs1.jpg);
+	border-image: url(:/icons/icons/mchs1.jpg);
 border-top-left-radius: 80px;
 border-bottom-right-radius: 40px;
 }
@@ -78,6 +78,9 @@ border-bottom-right-radius: 40px;
             <enum>QFrame::Raised</enum>
            </property>
            <layout class="QVBoxLayout" name="verticalLayout_3">
+            <property name="topMargin">
+             <number>0</number>
+            </property>
             <item alignment="Qt::AlignRight">
              <widget class="QPushButton" name="btn_close">
               <property name="styleSheet">
@@ -95,13 +98,16 @@ border-radius: 5px;
               </property>
               <property name="icon">
                <iconset resource="log_res.qrc">
-                <normaloff>:/images/images/close.svg</normaloff>:/images/images/close.svg</iconset>
+                <normaloff>:/icons/icons/close.png</normaloff>:/icons/icons/close.png</iconset>
               </property>
               <property name="iconSize">
                <size>
-                <width>20</width>
-                <height>20</height>
+                <width>24</width>
+                <height>24</height>
                </size>
+              </property>
+              <property name="shortcut">
+               <string>Esc</string>
               </property>
              </widget>
             </item>
@@ -275,6 +281,9 @@ color: rgba(0, 0, 0, 255);
               </property>
               <property name="text">
                <string>Войти</string>
+              </property>
+              <property name="shortcut">
+               <string>Return</string>
               </property>
              </widget>
             </item>

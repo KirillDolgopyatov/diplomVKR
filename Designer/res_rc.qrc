@@ -1,17 +1,15 @@
 <RCC>
   <qresource prefix="icons">
-    <file>icons/iconPlus.svg</file>
-    <file>icons/minus.svg</file>
-    <file>icons/mchs1.jpg</file>
-    <file>icons/mchs2.jpg</file>
-    <file>icons/35658.970.jpg</file>
-    <file>icons/title.png</file>
-    <file>icons/emercom.png</file>
-    <file>icons/magazine.png</file>
-    <file>icons/person.png</file>
-    <file>icons/plus.svg</file>
-    <file>icons/setting.png</file>
-    <file>icons/tasts.png</file>
-    <file>icons/tema.png</file>
+    <file>../icons/emercom.png</file>
+    <file>../icons/iconPlus.svg</file>
+    <file>../icons/magazine.png</file>
+    <file>../icons/mchs1.jpg</file>
+    <file>../icons/minus.svg</file>
+    <file>../icons/person.png</file>
+    <file>../icons/plus.svg</file>
+    <file>../icons/setting.png</file>
+    <file>../icons/tasts.png</file>
+    <file>../icons/tema.png</file>
+    <file>../icons/title.png</file>
   </qresource>
 </RCC>

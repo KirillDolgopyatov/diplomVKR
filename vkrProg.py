@@ -1,14 +1,16 @@
+import json
 import pickle
 import sys
 
 import PyQt5
 from PyQt5 import QtCore
-from PyQt5.QtCore import Qt, QPropertyAnimation
+from PyQt5.QtCore import Qt, QPropertyAnimation, QSize
 from PyQt5.QtGui import QIcon
-from PyQt5.QtWidgets import QWidget, QApplication, QMainWindow, QTableWidgetItem, QHeaderView, QMessageBox
+from PyQt5.QtWidgets import (QWidget, QApplication, QMainWindow, QTableWidgetItem, QHeaderView, QMessageBox,
+                             QPushButton, QLineEdit, QGridLayout, QLabel, QVBoxLayout)
 
-from Designer.loginVKR import Ui_Form
 from Designer.designerVKR import Ui_MainWindow
+from Designer.loginVKR import Ui_Form
 
 
 ########################################################################################################################
@@ -77,73 +79,16 @@ class MainWindow(QMainWindow):
         self.ui.btnSavePerson_22.clicked.connect(self.person_save)
         self.ui.btnDeleteFio_22.clicked.connect(self.btn_delete)
 
-        # self.ui.lineTopic.returnPressed.connect(self.topic_save)
-        # self.ui.btnSaveTopic.clicked.connect(self.topic_save)
-        # self.ui.btnDeleteTopic.clicked.connect(self.btnDeleteTopic)
-
-        self.ui.plus_right.clicked.connect(self.add_line_edit_right)
-        self.ui.plus_down.clicked.connect(self.add_line_edit_down)
-
-        self.ui.plus_right_1.clicked.connect(self.add_line_edit_right)
-        self.ui.plus_down_1.clicked.connect(self.add_line_edit_down)
-
-        self.ui.plus_right_2.clicked.connect(self.add_line_edit_right)
-        self.ui.plus_down_2.clicked.connect(self.add_line_edit_down)
-
-        self.ui.plus_right_3.clicked.connect(self.add_line_edit_right)
-        self.ui.plus_down_3.clicked.connect(self.add_line_edit_down)
-
-        self.ui.plus_right_4.clicked.connect(self.add_line_edit_right)
-        self.ui.plus_down_4.clicked.connect(self.add_line_edit_down)
-
-        self.ui.plus_right_5.clicked.connect(self.add_line_edit_right)
-        self.ui.plus_down_5.clicked.connect(self.add_line_edit_down)
-
-        self.ui.plus_right_6.clicked.connect(self.add_line_edit_right)
-        self.ui.plus_down_6.clicked.connect(self.add_line_edit_down)
-
-        self.ui.plus_right_7.clicked.connect(self.add_line_edit_right)
-        self.ui.plus_down_7.clicked.connect(self.add_line_edit_down)
-
-        self.ui.plus_right_8.clicked.connect(self.add_line_edit_right)
-        self.ui.plus_down_8.clicked.connect(self.add_line_edit_down)
-
-        self.ui.plus_right_9.clicked.connect(self.add_line_edit_right)
-        self.ui.plus_down_9.clicked.connect(self.add_line_edit_down)
-
-        self.ui.plus_right_10.clicked.connect(self.add_line_edit_right)
-        self.ui.plus_down_10.clicked.connect(self.add_line_edit_down)
-
-        self.ui.plus_right_11.clicked.connect(self.add_line_edit_right)
-        self.ui.plus_down_11.clicked.connect(self.add_line_edit_down)
-
-        self.ui.plus_right_13.clicked.connect(self.add_line_edit_right)
-        self.ui.plus_down_13.clicked.connect(self.add_line_edit_down)
-
-        self.ui.plus_right_14.clicked.connect(self.add_line_edit_right)
-        self.ui.plus_down_14.clicked.connect(self.add_line_edit_down)
-
-        self.ui.plus_right_15.clicked.connect(self.add_line_edit_right)
-        self.ui.plus_down_15.clicked.connect(self.add_line_edit_down)
-
-        self.ui.plus_right_16.clicked.connect(self.add_line_edit_right)
-        self.ui.plus_down_16.clicked.connect(self.add_line_edit_down)
-
-        self.ui.plus_right_17.clicked.connect(self.add_line_edit_right)
-        self.ui.plus_down_17.clicked.connect(self.add_line_edit_down)
-
-        self.ui.plus_right_18.clicked.connect(self.add_line_edit_right)
-        self.ui.plus_down_18.clicked.connect(self.add_line_edit_down)
-
-        self.ui.btnAdd_row.clicked.connect(self.add_row_person)
-        self.ui.btnAdd_column.clicked.connect(self.add_column_person)
-        self.ui.btnDelete_row.clicked.connect(self.delete_row_person)
-        self.ui.btnDelete_column.clicked.connect(self.delete_column_person)
-
         self.installEventFilter(self)
         self.keyPressEvent = self.key_press_event
 
         self.table_widget()
+
+        self.layout = QVBoxLayout()
+        self.ui.widget_2.setLayout(self.layout)
+        self.ui.btnSaveTopic.clicked.connect(self.create_new_label)
+
+        self.load_layout()
 
     ####################################################################################################################
 
@@ -211,77 +156,6 @@ class MainWindow(QMainWindow):
     ####################################################################################################################
     def btnDeleteTopic(self):  # удаление выбранных строк в таблице с личным составом
         pass
-
-    def add_line_edit_right(self):
-        name_layout = self.sender().parent().layout()
-
-        row, column = self.get_row_column(name_layout)
-
-        self.remove_previous_widget(row, column, name_layout)
-
-        new_line_edit = self.create_line_edit()
-        plus_btn = self.create_button(self.on_plus_btn_right)
-
-        name_layout.addWidget(new_line_edit, row, column)
-        name_layout.addWidget(plus_btn, row, column + 1)
-
-    def on_plus_btn_right(self):
-        self.add_line_edit_right()
-
-    def add_line_edit_down(self):
-        name_layout = self.sender().parent().layout()  # не забудь завтра добавить try except
-
-        row, column = self.get_row_column(name_layout)
-
-        self.remove_previous_widget(row, column, name_layout)
-
-        new_line_edit = self.create_line_edit()
-        plus_btn_down = self.create_button(self.on_plus_btn_right)
-        plus_btn = self.create_button(self.on_plus_btn_clicked)
-
-        name_layout.addWidget(new_line_edit, row, column)
-        name_layout.addWidget(plus_btn_down, row, column + 1)
-        name_layout.addWidget(plus_btn, row + 1, column)
-
-    def on_plus_btn_clicked(self):
-        self.add_line_edit_down()
-
-    def get_row_column(self, name_layout):
-        clicked_widget = self.sender()
-        index = name_layout.indexOf(clicked_widget)
-        if index != -1:
-            row, column, _, _ = name_layout.getItemPosition(index)
-            return row, column
-
-    @staticmethod
-    def remove_previous_widget(row, column, name_layout):
-        try:
-            item = name_layout.itemAtPosition(row, column)
-            if item:
-                widget = item.widget()
-                if widget:
-                    name_layout.removeWidget(widget)
-                    widget.deleteLater()
-        except UnboundLocalError:
-            pass
-
-    @staticmethod
-    def create_line_edit():
-        line_edit = PyQt5.QtWidgets.QLineEdit()
-        line_edit.setFixedSize(30, 30)
-        line_edit.setStyleSheet("background-color: white; color: black; font: 10pt;")
-        line_edit.setAlignment(QtCore.Qt.AlignCenter)
-        return line_edit
-
-    @staticmethod
-    def create_button(callback):
-        button = PyQt5.QtWidgets.QPushButton()
-        button.setFixedSize(20, 20)
-        button.setObjectName("plus_right")
-        button.setIcon(QIcon("icons/iconPlus.svg"))
-        button.setIconSize(QtCore.QSize(14, 14))
-        button.clicked.connect(callback)
-        return button
 
     ####################################################################################################################
     def key_press_event(self, event):  # удаление строк с помощью клавиши DELETE
@@ -382,12 +256,6 @@ class MainWindow(QMainWindow):
             self.ui.tableWidget_1.setCellWidget(row, 0, combobox)
 
     ####################################################################################################################
-    def closeEvent(self, event):
-        # Вызывается при закрытии приложения
-        self.save_data()
-        event.accept()
-
-    ####################################################################################################################
     def add_column_person(self):
         rowCount = self.ui.tableWidget_1.rowCount()
         self.ui.tableWidget_1.insertRow(rowCount)
@@ -434,6 +302,161 @@ class MainWindow(QMainWindow):
                 self.ui.tableWidget_1.removeRow(last_row)
             else:
                 QMessageBox.warning(None, "Ошибка", "Таблица пустая")
+
+    ####################################################################################################################
+    def save_layout(self):  # создаем виджеты для темы
+        widgets_dict = {}  # Пересоздаем словарь для очистки предыдущих данных
+
+        for i in range(self.layout.count()):
+            item = self.layout.itemAt(i)
+            if item.widget():
+                widget = item.widget()
+                if isinstance(widget, QLabel):
+                    # Сохраняем данные QLabel
+                    widgets_dict[f"label_{i}"] = {'type': 'QLabel', 'text': widget.text()}
+            elif item.layout():
+                layout = item.layout()
+                grid_info = {}
+                for j in range(layout.count()):
+                    grid_widget = layout.itemAt(j).widget()
+                    position = layout.getItemPosition(j)  # Получаем позицию виджета
+                    pos_key = f"{position[0]}_{position[1]}"  # Создаем уникальный ключ из позиции
+                    if isinstance(grid_widget, QLineEdit):
+                        widget_info = {'type': 'QLineEdit', 'text': grid_widget.text()}
+                        grid_info[pos_key] = widget_info  # Используем уникальный ключ для сохранения виджета
+                    elif isinstance(grid_widget, QPushButton):
+                        widget_info = {'type': 'QPushButton', 'direction': grid_widget.objectName()}
+                        grid_info[pos_key] = widget_info  # Используем уникальный ключ для сохранения виджета
+                widgets_dict[f"grid_{i}"] = grid_info
+
+        with open('saveData/layout_state.json', 'w') as f:
+            json.dump(widgets_dict, f, indent=4)
+
+    def create_new_label(self):
+        if self.ui.lineTopic.text() != "":
+            text = self.ui.lineTopic.text()
+            label = QLabel(text)
+            label.setStyleSheet('color: white; font: 14pt;')
+            self.layout.addWidget(label)
+
+            self.new_grid()
+            self.ui.lineTopic.clear()
+        else:
+            QMessageBox.warning(None, "Ошибка", "Введите тему")
+
+    def load_layout(self):  # загружаем виджеты с таблицы
+        try:
+            with open('saveData/layout_state.json', 'r') as f:
+                widgets_dict = json.load(f)
+                for widget_name, properties in widgets_dict.items():
+                    if 'label' in widget_name:
+                        label = QLabel()
+                        label.setText(properties.get('text', ''))
+                        label.setStyleSheet('color: white; font: 14pt;')
+                        self.layout.addWidget(label)
+                    elif 'grid' in widget_name:
+                        grid = QGridLayout()
+                        self.layout.addLayout(grid)
+                        for pos_key, widget_info in properties.items():
+                            row, col = map(int, pos_key.split('_'))
+                            if widget_info['type'] == 'QLineEdit':
+                                line_edit = QLineEdit()
+                                line_edit.setText(widget_info.get('text', ''))
+                                line_edit.setFixedSize(30, 30)
+                                line_edit.setStyleSheet("background-color: white; color: black; font: 10pt;")
+                                line_edit.setAlignment(Qt.AlignCenter)
+                                grid.addWidget(line_edit, row, col)
+                            elif widget_info['type'] == 'QPushButton':
+                                # Создаем кнопку с привязанной функцией, которая добавляет элемент в ее собственный grid
+                                button = QPushButton()
+                                button.setFixedSize(20, 20)
+                                button.setIcon(QIcon("icons/iconPlus.svg"))
+                                button.setIconSize(QSize(14, 14))
+                                # Важно: используем замыкание для сохранения контекста grid, row, col
+                                direction = widget_info.get('direction')
+                                if direction == 'right':
+                                    button.clicked.connect(
+                                        lambda checked, g=grid, r=row, c=col: self.add_new_element(g, r, c, 'right'))
+                                    grid.addWidget(button, row, col)
+                                else:
+                                    button.clicked.connect(
+                                        lambda checked, g=grid, r=row, c=col: self.add_new_element(g, r, c, 'down'))
+                                    grid.addWidget(button, row, col)
+
+                                self.column_stretch(grid)
+        except FileNotFoundError:
+            pass
+
+    def new_grid(self):  # создаем виджеты для тем
+        grid = QGridLayout()
+        self.layout.addLayout(grid)
+
+        line_edit = self.create_new_line_edit()
+        grid.addWidget(line_edit, 0, 0)
+
+        self.add_buttons_to_grid(grid, 0, 0)
+
+    def add_buttons_to_grid(self, grid, row, column):
+        plus_right = self.create_new_button(lambda: self.add_new_element(grid, row, column + 1, 'right'))
+        plus_down = self.create_new_button(lambda: self.add_new_element(grid, row + 1, column, 'down'))
+
+        grid.addWidget(plus_right, row, column + 1)
+        grid.addWidget(plus_down, row + 1, column)
+
+        self.column_stretch(grid)
+
+    def add_new_element(self, grid, row, column, direction):
+        line_edit = self.create_new_line_edit()
+        grid.addWidget(line_edit, row, column)
+
+        if direction == 'right':
+            # Добавляем кнопку plus_right справа от нового элемента
+            plus_right = self.create_new_button(lambda: self.add_new_element(grid, row, column + 1, 'right'))
+            plus_right.setObjectName('right')
+            grid.addWidget(plus_right, row, column + 1)
+
+            self.column_stretch(grid)
+
+        elif direction == 'down':
+            # Добавляем кнопку plus_down ниже нового элемента и plus_right справа от исходного элемента
+            plus_down = self.create_new_button(lambda: self.add_new_element(grid, row + 1, column, 'down'))
+            plus_down.setObjectName('down')
+            grid.addWidget(plus_down, row + 1, column)
+            # Возможно, вам также нужно добавить plus_right снова, если это необходимо по логике вашего интерфейса
+            plus_right = self.create_new_button(lambda: self.add_new_element(grid, row, column + 1, 'right'))
+            plus_right.setObjectName('right')
+            grid.addWidget(plus_right, row, column + 1)
+
+            self.column_stretch(grid)
+
+    @staticmethod
+    def column_stretch(grid):
+        grid.setColumnStretch(grid.columnCount(), 1)
+        grid.setRowStretch(grid.rowCount(), 1)
+
+    @staticmethod
+    def create_new_line_edit():
+        line_edit = QLineEdit()
+        line_edit.setFixedSize(30, 30)
+        line_edit.setStyleSheet("background-color: white; color: black; font: 10pt;")
+        line_edit.setAlignment(Qt.AlignCenter)
+        return line_edit
+
+    @staticmethod
+    def create_new_button(callback):
+        button = QPushButton()
+        button.setFixedSize(20, 20)
+        button.setIcon(QIcon("icons/iconPlus.svg"))
+        button.setIconSize(QSize(14, 14))
+        button.clicked.connect(callback)
+        return button
+
+    ####################################################################################################################
+    def closeEvent(self, event):
+        # Вызывается при закрытии приложения
+        self.save_data()  # сохраняем данные с таблиц
+        self.save_layout()  # сохраняем данные с виджетов тем
+        event.accept()
 
     ####################################################################################################################
     def slideRightSubMenu(self):  # открывает левое меню для кнопки задачи дизайн

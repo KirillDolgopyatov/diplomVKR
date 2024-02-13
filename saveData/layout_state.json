@@ -1,0 +1,92 @@
+{
+    "label_0": {
+        "type": "QLabel",
+        "text": "Hi"
+    },
+    "grid_1": {
+        "0_0": {
+            "type": "QLineEdit",
+            "text": "1"
+        },
+        "0_1": {
+            "type": "QLineEdit",
+            "text": "3"
+        },
+        "1_0": {
+            "type": "QLineEdit",
+            "text": "2"
+        },
+        "2_0": {
+            "type": "QPushButton",
+            "direction": "down"
+        },
+        "1_1": {
+            "type": "QPushButton",
+            "direction": "right"
+        },
+        "0_2": {
+            "type": "QPushButton",
+            "direction": "right"
+        }
+    },
+    "label_2": {
+        "type": "QLabel",
+        "text": "how"
+    },
+    "grid_3": {
+        "0_0": {
+            "type": "QLineEdit",
+            "text": "5"
+        },
+        "0_1": {
+            "type": "QLineEdit",
+            "text": "5"
+        },
+        "1_0": {
+            "type": "QLineEdit",
+            "text": "5"
+        },
+        "0_2": {
+            "type": "QPushButton",
+            "direction": "right"
+        },
+        "2_0": {
+            "type": "QPushButton",
+            "direction": "down"
+        },
+        "1_1": {
+            "type": "QPushButton",
+            "direction": "right"
+        }
+    },
+    "label_4": {
+        "type": "QLabel",
+        "text": "what"
+    },
+    "grid_5": {
+        "0_0": {
+            "type": "QLineEdit",
+            "text": "3"
+        },
+        "0_1": {
+            "type": "QLineEdit",
+            "text": "3"
+        },
+        "1_0": {
+            "type": "QLineEdit",
+            "text": "3"
+        },
+        "0_2": {
+            "type": "QPushButton",
+            "direction": "right"
+        },
+        "2_0": {
+            "type": "QPushButton",
+            "direction": "down"
+        },
+        "1_1": {
+            "type": "QPushButton",
+            "direction": "right"
+        }
+    }
+}
