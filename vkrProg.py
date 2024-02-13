@@ -7,7 +7,7 @@ from PyQt5 import QtCore
 from PyQt5.QtCore import Qt, QPropertyAnimation, QSize
 from PyQt5.QtGui import QIcon
 from PyQt5.QtWidgets import (QWidget, QApplication, QMainWindow, QTableWidgetItem, QHeaderView, QMessageBox,
-                             QPushButton, QLineEdit, QGridLayout, QLabel, QVBoxLayout)
+                             QPushButton, QLineEdit, QGridLayout, QLabel, QVBoxLayout, QFrame)
 
 from Designer.designerVKR import Ui_MainWindow
 from Designer.loginVKR import Ui_Form
@@ -91,6 +91,8 @@ class MainWindow(QMainWindow):
         self.ui.btnDeleteTopic.clicked.connect(self.remove_last_label_and_grid)
 
         self.load_layout()
+
+        self.ui.btn_new_task.clicked.connect(self.addTask)
 
     ####################################################################################################################
 
@@ -357,10 +359,11 @@ class MainWindow(QMainWindow):
                             if widget_info['type'] == 'QLineEdit':
                                 line_edit = QLineEdit()
                                 line_edit.setText(widget_info.get('text', ''))
-                                line_edit.setFixedSize(30, 30)
-                                line_edit.setStyleSheet("background-color: white; color: black; font: 10pt;")
+                                line_edit.setFixedSize(25, 25)
+                                line_edit.setStyleSheet("background-color: white; color: black; font: 8pt;")
                                 line_edit.setAlignment(Qt.AlignCenter)
                                 grid.addWidget(line_edit, row, col)
+                                grid.setSpacing(2)
                             elif widget_info['type'] == 'QPushButton':
                                 # Создаем кнопку с привязанной функцией, которая добавляет элемент в ее собственный grid
                                 button = QPushButton()
@@ -388,15 +391,14 @@ class MainWindow(QMainWindow):
 
         line_edit = self.create_new_line_edit()
         grid.addWidget(line_edit, 0, 0)
+        grid.setSpacing(2)
 
         self.add_buttons_to_grid(grid, 0, 0)
 
     def add_buttons_to_grid(self, grid, row, column):
-        delete = self.create_new_button(lambda: self.add_new_element(grid, row, column + 1, 'right'))
         plus_right = self.create_new_button(lambda: self.add_new_element(grid, row, column + 1, 'right'))
         plus_down = self.create_new_button(lambda: self.add_new_element(grid, row + 1, column, 'down'))
 
-        grid.addWidget(delete, row, column + 2)
         grid.addWidget(plus_right, row, column + 1)
         grid.addWidget(plus_down, row + 1, column)
 
@@ -408,12 +410,9 @@ class MainWindow(QMainWindow):
 
         if direction == 'right':
             # Добавляем кнопку plus_right справа от нового элемента
-            delete = self.create_new_button(lambda: self.add_new_element(grid, row, column + 1, 'right'))
             plus_right = self.create_new_button(lambda: self.add_new_element(grid, row, column + 1, 'right'))
             plus_right.setObjectName('right')
-
             grid.addWidget(plus_right, row, column + 1)
-            grid.addWidget(delete, row, column + 2)
 
             self.column_stretch(grid)
 
@@ -437,8 +436,8 @@ class MainWindow(QMainWindow):
     @staticmethod
     def create_new_line_edit():
         line_edit = QLineEdit()
-        line_edit.setFixedSize(30, 30)
-        line_edit.setStyleSheet("background-color: white; color: black; font: 10pt;")
+        line_edit.setFixedSize(25, 25)
+        line_edit.setStyleSheet("background-color: white; color: black; font: 8pt;")
         line_edit.setAlignment(Qt.AlignCenter)
         return line_edit
 
@@ -471,6 +470,33 @@ class MainWindow(QMainWindow):
                         item.widget().deleteLater()
                 self.layout.removeItem(grid)  # Удаление самого QGridLayout из QVBoxLayout
                 break  # Прерываем цикл после удаления первого найденного QGridLayout
+
+    ####################################################################################################################
+
+    def addTask(self):
+        # Получаем текст из QLineEdit
+        task_text = self.ui.le_write_task.text()
+
+        # Создаем новый фрейм и настраиваем его
+        new_frame = QFrame(self.ui.frame_12)
+        new_frame.setFrameShape(QFrame.StyledPanel)
+        new_frame.setFrameShadow(QFrame.Raised)
+
+        # Создаем QLabel и QLineEdit для новой задачи
+        task_label = QLabel(task_text, new_frame)
+        task_line_edit = QLineEdit(new_frame)
+        task_line_edit.setStyleSheet("background-color: white")
+
+        # Создаем layout для фрейма и добавляем в него label и lineedit
+        frame_layout = QVBoxLayout(new_frame)
+        frame_layout.addWidget(task_label)
+        frame_layout.addWidget(task_line_edit)
+
+        # Добавляем новый фрейм в QVBoxLayout, который находится в self.ui.frame_12
+        self.ui.frame_12.layout().addWidget(new_frame)
+
+        # Очищаем QLineEdit после добавления задачи
+        self.ui.le_write_task.clear()
 
     ####################################################################################################################
     def closeEvent(self, event):
