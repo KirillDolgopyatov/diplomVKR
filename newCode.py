@@ -4,10 +4,11 @@ import sys
 
 import PyQt5
 from PyQt5 import QtCore
-from PyQt5.QtCore import Qt, QPropertyAnimation, QSize
+from PyQt5.QtCore import Qt, QPropertyAnimation, QSize, QDateTime
 from PyQt5.QtGui import QIcon
 from PyQt5.QtWidgets import (QWidget, QApplication, QMainWindow, QTableWidgetItem, QHeaderView, QMessageBox,
-                             QPushButton, QLineEdit, QGridLayout, QLabel, QVBoxLayout, QFrame)
+                             QPushButton, QLineEdit, QGridLayout, QLabel, QVBoxLayout, QFrame, QDateTimeEdit,
+                             QHBoxLayout)
 
 from Designer.designerVKR import Ui_MainWindow
 from Designer.loginVKR import Ui_Form
@@ -92,6 +93,7 @@ class MainWindow(QMainWindow):
 
         self.load_layout()
 
+        self.task_counter = 0
         self.ui.btn_new_task.clicked.connect(self.addTask)
 
     ####################################################################################################################
@@ -474,29 +476,57 @@ class MainWindow(QMainWindow):
     ####################################################################################################################
 
     def addTask(self):
-        # Получаем текст из QLineEdit
-        task_text = self.ui.le_write_task.text()
+        if self.ui.le_write_task.text() != '':
+            task_text = self.ui.le_write_task.text()
+            new_frame = QFrame(self.ui.frame_12)
+            new_frame.setFrameShape(QFrame.StyledPanel)
+            new_frame.setFrameShadow(QFrame.Raised)
+            new_frame.setStyleSheet("""
+            background-color: rgba(255, 255, 255, 160)
+            """)
+            new_frame.setFixedHeight(50)
+            frame_layout = QHBoxLayout(new_frame)
 
-        # Создаем новый фрейм и настраиваем его
-        new_frame = QFrame(self.ui.frame_12)
-        new_frame.setFrameShape(QFrame.StyledPanel)
-        new_frame.setFrameShadow(QFrame.Raised)
+            task_label = QLabel(task_text, new_frame)
 
-        # Создаем QLabel и QLineEdit для новой задачи
-        task_label = QLabel(task_text, new_frame)
-        task_line_edit = QLineEdit(new_frame)
-        task_line_edit.setStyleSheet("background-color: white")
+            task_but = QPushButton(new_frame)
+            task_but.setFixedSize(20, 20)
+            task_but.setStyleSheet("background-color: white")
 
-        # Создаем layout для фрейма и добавляем в него label и lineedit
-        frame_layout = QVBoxLayout(new_frame)
-        frame_layout.addWidget(task_label)
-        frame_layout.addWidget(task_line_edit)
+            task_line_edit = QLineEdit(new_frame)
+            task_line_edit.setStyleSheet("background-color: white")
 
-        # Добавляем новый фрейм в QVBoxLayout, который находится в self.ui.frame_12
-        self.ui.frame_12.layout().addWidget(new_frame)
+            # Создаем QDateTimeEdit и QLabel для отображения оставшегося времени
+            datetime_edit = QDateTimeEdit(new_frame)
+            datetime_edit.setCalendarPopup(True)
+            datetime_edit.setDateTime(QDateTime.currentDateTime())
 
-        # Очищаем QLineEdit после добавления задачи
-        self.ui.le_write_task.clear()
+            time_left_label = QLabel("Оставшееся время: ", new_frame)
+
+            # Подключаем сигнал dateTimeChanged к слоту для обновления QLabel
+            datetime_edit.dateTimeChanged.connect(lambda: self.update_time_left(datetime_edit, time_left_label))
+
+            frame_layout.addWidget(task_but)
+            frame_layout.addWidget(task_label)
+            frame_layout.addWidget(task_line_edit)
+            frame_layout.addWidget(datetime_edit)
+            frame_layout.addWidget(time_left_label)
+
+            self.ui.frame_12.layout().addWidget(new_frame)
+            self.ui.le_write_task.clear()
+
+            # Вызываем update_time_left вручную, чтобы инициализировать отображение оставшегося времени
+            self.update_time_left(datetime_edit, time_left_label)
+
+    @staticmethod
+    def update_time_left(datetime_edit, time_left_label):
+        current_time = QDateTime.currentDateTime()
+        selected_time = datetime_edit.dateTime()
+        time_diff = current_time.secsTo(selected_time)
+        days_left = time_diff // (60 * 60 * 24)
+        hours_left = (time_diff % (60 * 60 * 24)) // (60 * 60)
+        minutes_left = (time_diff % (60 * 60)) // 60
+        time_left_label.setText(f"Оставшееся время: {days_left} дней, {hours_left} часов, {minutes_left} минут")
 
     ####################################################################################################################
     def closeEvent(self, event):
