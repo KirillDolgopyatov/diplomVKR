@@ -86,7 +86,9 @@ class MainWindow(QMainWindow):
 
         self.layout = QVBoxLayout()
         self.ui.widget_2.setLayout(self.layout)
+
         self.ui.btnSaveTopic.clicked.connect(self.create_new_label)
+        self.ui.btnDeleteTopic.clicked.connect(self.remove_last_label_and_grid)
 
         self.load_layout()
 
@@ -150,14 +152,7 @@ class MainWindow(QMainWindow):
                 QMessageBox.warning(None, "Ошибка", "Таблица пустая")
 
     ####################################################################################################################
-    def topic_save(self):
-        pass
 
-    ####################################################################################################################
-    def btnDeleteTopic(self):  # удаление выбранных строк в таблице с личным составом
-        pass
-
-    ####################################################################################################################
     def key_press_event(self, event):  # удаление строк с помощью клавиши DELETE
         if event.key() == Qt.Key_Delete:
             current_widget_index = self.ui.MainStack.currentIndex()
@@ -397,9 +392,11 @@ class MainWindow(QMainWindow):
         self.add_buttons_to_grid(grid, 0, 0)
 
     def add_buttons_to_grid(self, grid, row, column):
+        delete = self.create_new_button(lambda: self.add_new_element(grid, row, column + 1, 'right'))
         plus_right = self.create_new_button(lambda: self.add_new_element(grid, row, column + 1, 'right'))
         plus_down = self.create_new_button(lambda: self.add_new_element(grid, row + 1, column, 'down'))
 
+        grid.addWidget(delete, row, column + 2)
         grid.addWidget(plus_right, row, column + 1)
         grid.addWidget(plus_down, row + 1, column)
 
@@ -411,9 +408,12 @@ class MainWindow(QMainWindow):
 
         if direction == 'right':
             # Добавляем кнопку plus_right справа от нового элемента
+            delete = self.create_new_button(lambda: self.add_new_element(grid, row, column + 1, 'right'))
             plus_right = self.create_new_button(lambda: self.add_new_element(grid, row, column + 1, 'right'))
             plus_right.setObjectName('right')
+
             grid.addWidget(plus_right, row, column + 1)
+            grid.addWidget(delete, row, column + 2)
 
             self.column_stretch(grid)
 
@@ -450,6 +450,27 @@ class MainWindow(QMainWindow):
         button.setIconSize(QSize(14, 14))
         button.clicked.connect(callback)
         return button
+
+    def remove_last_label_and_grid(self):
+        # Предполагаем, что self.layout - это QVBoxLayout
+        for i in reversed(range(self.layout.count())):
+            widget = self.layout.itemAt(i).widget()
+            if isinstance(widget, QLabel):
+                self.layout.removeWidget(widget)
+                widget.deleteLater()
+                break  # Прерываем цикл после удаления первого найденного QLabel
+
+        for i in reversed(range(self.layout.count())):
+            layout_item = self.layout.itemAt(i)
+            if isinstance(layout_item.layout(), QGridLayout):
+                grid = layout_item.layout()
+                # Удаление всех виджетов из QGridLayout
+                while grid.count():
+                    item = grid.takeAt(0)
+                    if item.widget():
+                        item.widget().deleteLater()
+                self.layout.removeItem(grid)  # Удаление самого QGridLayout из QVBoxLayout
+                break  # Прерываем цикл после удаления первого найденного QGridLayout
 
     ####################################################################################################################
     def closeEvent(self, event):
