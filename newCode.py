@@ -481,27 +481,31 @@ class MainWindow(QMainWindow):
             new_frame = QFrame(self.ui.frame_12)
             new_frame.setFrameShape(QFrame.StyledPanel)
             new_frame.setFrameShadow(QFrame.Raised)
-            new_frame.setStyleSheet("""
-            background-color: rgba(255, 255, 255, 160)
-            """)
+            new_frame.setStyleSheet("background-color: rgb(45, 45, 45);")
             new_frame.setFixedHeight(50)
             frame_layout = QHBoxLayout(new_frame)
 
             task_label = QLabel(task_text, new_frame)
+            task_label.setStyleSheet("color: white")
 
             task_but = QPushButton(new_frame)
-            task_but.setFixedSize(20, 20)
+            task_but.setFixedSize(25, 25)
             task_but.setStyleSheet("background-color: white")
+            task_but.setIcon(QIcon("icons/ready.png."))
+            task_but.setIconSize(QSize(24, 24))
+            task_but.setStyleSheet('border-radius: 12px; background-color: white}')
 
             task_line_edit = QLineEdit(new_frame)
-            task_line_edit.setStyleSheet("background-color: white")
+            task_line_edit.setStyleSheet("")
 
             # Создаем QDateTimeEdit и QLabel для отображения оставшегося времени
             datetime_edit = QDateTimeEdit(new_frame)
             datetime_edit.setCalendarPopup(True)
+            datetime_edit.setStyleSheet("background-color: white")
             datetime_edit.setDateTime(QDateTime.currentDateTime())
 
             time_left_label = QLabel("Оставшееся время: ", new_frame)
+            time_left_label.setStyleSheet('color:white; font: 8pt;')
 
             # Подключаем сигнал dateTimeChanged к слоту для обновления QLabel
             datetime_edit.dateTimeChanged.connect(lambda: self.update_time_left(datetime_edit, time_left_label))
@@ -526,7 +530,7 @@ class MainWindow(QMainWindow):
         days_left = time_diff // (60 * 60 * 24)
         hours_left = (time_diff % (60 * 60 * 24)) // (60 * 60)
         minutes_left = (time_diff % (60 * 60)) // 60
-        time_left_label.setText(f"Оставшееся время: {days_left} дней, {hours_left} часов, {minutes_left} минут")
+        time_left_label.setText(f"Срок выполнения: {days_left} д. {hours_left} ч. {minutes_left} м")
 
     ####################################################################################################################
     def closeEvent(self, event):

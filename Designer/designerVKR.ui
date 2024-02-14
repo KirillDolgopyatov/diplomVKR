@@ -633,7 +633,7 @@ QPushButton:Pressed {
                   </property>
                   <property name="maximumSize">
                    <size>
-                    <width>16777215</width>
+                    <width>40</width>
                     <height>16777215</height>
                    </size>
                   </property>
@@ -656,8 +656,8 @@ QPushButton:Pressed {
                    <string/>
                   </property>
                   <property name="icon">
-                   <iconset>
-                    <normaloff>:/icons/icons/x.svg</normaloff>:/icons/icons/x.svg</iconset>
+                   <iconset resource="res_rc.qrc">
+                    <normaloff>:/icons/icons/close.png</normaloff>:/icons/icons/close.png</iconset>
                   </property>
                   <property name="iconSize">
                    <size>
@@ -941,7 +941,7 @@ QPushButton:Pressed {
 background-color: rgb(28, 28, 28);}</string>
             </property>
             <property name="currentIndex">
-             <number>2</number>
+             <number>3</number>
             </property>
             <widget class="QWidget" name="page_11">
              <layout class="QVBoxLayout" name="verticalLayout_11">
@@ -1770,8 +1770,8 @@ background-color: rgb(255,255,255)
                   <rect>
                    <x>0</x>
                    <y>0</y>
-                   <width>815</width>
-                   <height>582</height>
+                   <width>100</width>
+                   <height>30</height>
                   </rect>
                  </property>
                  <layout class="QVBoxLayout" name="verticalLayout_23">
@@ -2066,7 +2066,11 @@ QTableWidget::item {
                    <property name="frameShadow">
                     <enum>QFrame::Raised</enum>
                    </property>
-                   <layout class="QVBoxLayout" name="verticalLayout_17"/>
+                   <layout class="QVBoxLayout" name="verticalLayout_17">
+                    <item>
+                     <layout class="QVBoxLayout" name="vertical_Task"/>
+                    </item>
+                   </layout>
                   </widget>
                  </item>
                  <item>
@@ -2214,6 +2218,9 @@ background-color: rgb(255,255,255)
                         <height>30</height>
                        </size>
                       </property>
+                      <property name="shortcut">
+                       <string>Return</string>
+                      </property>
                      </widget>
                     </item>
                    </layout>
@@ -2237,7 +2244,6 @@ background-color: rgb(255,255,255)
  </widget>
  <resources>
   <include location="res_rc.qrc"/>
-  <include location="../../../.designer/backup/res_rc.qrc"/>
  </resources>
  <connections/>
 </ui>

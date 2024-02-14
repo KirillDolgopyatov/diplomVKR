@@ -275,7 +275,7 @@ class Ui_MainWindow(object):
         sizePolicy.setVerticalStretch(0)
         sizePolicy.setHeightForWidth(self.closeCenterMenu_2.sizePolicy().hasHeightForWidth())
         self.closeCenterMenu_2.setSizePolicy(sizePolicy)
-        self.closeCenterMenu_2.setMaximumSize(QtCore.QSize(16777215, 16777215))
+        self.closeCenterMenu_2.setMaximumSize(QtCore.QSize(40, 16777215))
         self.closeCenterMenu_2.setStyleSheet("QPushButton {\n"
 "background-color: rgb(187, 187, 187);\n"
 "border-radius: 0px;\n"
@@ -291,7 +291,7 @@ class Ui_MainWindow(object):
 "")
         self.closeCenterMenu_2.setText("")
         icon5 = QtGui.QIcon()
-        icon5.addPixmap(QtGui.QPixmap(":/icons/icons/x.svg"), QtGui.QIcon.Normal, QtGui.QIcon.Off)
+        icon5.addPixmap(QtGui.QPixmap(":/icons/icons/close.png"), QtGui.QIcon.Normal, QtGui.QIcon.Off)
         self.closeCenterMenu_2.setIcon(icon5)
         self.closeCenterMenu_2.setIconSize(QtCore.QSize(24, 24))
         self.closeCenterMenu_2.setObjectName("closeCenterMenu_2")
@@ -842,7 +842,7 @@ class Ui_MainWindow(object):
         self.scrollArea.setWidgetResizable(True)
         self.scrollArea.setObjectName("scrollArea")
         self.scrollAreaWidgetContents = QtWidgets.QWidget()
-        self.scrollAreaWidgetContents.setGeometry(QtCore.QRect(0, 0, 815, 582))
+        self.scrollAreaWidgetContents.setGeometry(QtCore.QRect(0, 0, 100, 30))
         self.scrollAreaWidgetContents.setObjectName("scrollAreaWidgetContents")
         self.verticalLayout_23 = QtWidgets.QVBoxLayout(self.scrollAreaWidgetContents)
         self.verticalLayout_23.setContentsMargins(0, 0, 0, 0)
@@ -1003,6 +1003,9 @@ class Ui_MainWindow(object):
         self.frame_12.setObjectName("frame_12")
         self.verticalLayout_17 = QtWidgets.QVBoxLayout(self.frame_12)
         self.verticalLayout_17.setObjectName("verticalLayout_17")
+        self.vertical_Task = QtWidgets.QVBoxLayout()
+        self.vertical_Task.setObjectName("vertical_Task")
+        self.verticalLayout_17.addLayout(self.vertical_Task)
         self.verticalLayout_15.addWidget(self.frame_12)
         self.frame_14 = QtWidgets.QFrame(self.frame_11)
         self.frame_14.setFrameShape(QtWidgets.QFrame.StyledPanel)
@@ -1083,7 +1086,7 @@ class Ui_MainWindow(object):
 
         self.retranslateUi(MainWindow)
         self.stackedWidgetLeftMenu.setCurrentIndex(0)
-        self.MainStack.setCurrentIndex(2)
+        self.MainStack.setCurrentIndex(3)
         QtCore.QMetaObject.connectSlotsByName(MainWindow)
 
     def retranslateUi(self, MainWindow):
@@ -1120,5 +1123,5 @@ class Ui_MainWindow(object):
         self.btnDeleteTopic.setShortcut(_translate("MainWindow", "Del"))
         self.pushButton_2.setText(_translate("MainWindow", "Задачи"))
         self.le_write_task.setPlaceholderText(_translate("MainWindow", "Добавить задачу"))
-
+        self.btn_new_task.setShortcut(_translate("MainWindow", "Return"))
 import Designer.res_rc

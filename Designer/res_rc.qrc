@@ -1,5 +1,6 @@
 <RCC>
   <qresource prefix="icons">
+    <file>../icons/close.png</file>
     <file>../icons/emercom.png</file>
     <file>../icons/iconPlus.svg</file>
     <file>../icons/magazine.png</file>
