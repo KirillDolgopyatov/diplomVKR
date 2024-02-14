@@ -492,6 +492,7 @@ class MainWindow(QMainWindow):
             task_but.setFixedSize(25, 25)
             task_but.setStyleSheet("background-color: white")
             task_but.setIcon(QIcon("icons/ready.png."))
+
             task_but.setIconSize(QSize(24, 24))
             task_but.setStyleSheet('border-radius: 12px; background-color: white}')
 
