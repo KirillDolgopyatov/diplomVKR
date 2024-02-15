@@ -527,7 +527,6 @@ class MainWindow(QMainWindow):
             frame_layout.addWidget(task_label)
             frame_layout.addWidget(task_line_edit)
             frame_layout.addWidget(time_left_label)
-
             self.ui.frame_12.layout().addWidget(new_frame)
             self.ui.le_write_task.clear()
 
