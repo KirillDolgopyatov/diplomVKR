@@ -514,7 +514,7 @@ class MainWindow(QMainWindow):
             task_line_edit = QLineEdit(new_frame)
             task_line_edit.setStyleSheet("")
 
-            # Создаем QDateTimeEdit и QLabel для отображения оставшегося времени
+            # Создаем QDateTimeEdit и QLabel для отображения оставшегося времени.
             datetime_edit = QDateTimeEdit(new_frame)
             datetime_edit.setCalendarPopup(True)
             datetime_edit.setStyleSheet("background-color: white")
