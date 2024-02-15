@@ -1,4 +1,4 @@
-import datetime
+import json
 import json
 import pickle
 import sys
@@ -9,8 +9,7 @@ from PyQt5.QtCore import QTimer
 from PyQt5.QtCore import Qt, QPropertyAnimation, QSize, QDateTime
 from PyQt5.QtGui import QIcon
 from PyQt5.QtWidgets import (QWidget, QApplication, QMainWindow, QTableWidgetItem, QHeaderView, QMessageBox,
-                             QPushButton, QLineEdit, QGridLayout, QLabel, QVBoxLayout, QFrame, QDateTimeEdit,
-                             QHBoxLayout)
+                             QPushButton, QLineEdit, QGridLayout, QLabel, QVBoxLayout, QFrame, QHBoxLayout)
 
 from Designer.designerVKR import Ui_MainWindow
 from Designer.loginVKR import Ui_Form
@@ -96,6 +95,8 @@ class MainWindow(QMainWindow):
         self.load_layout()
 
         self.task_counter = 0
+        self.task_time_labels = []
+
         self.ui.btn_new_task.clicked.connect(self.addTask)
         self.update_timer = QTimer(self)
         self.update_timer.timeout.connect(self.update_all_time_left_labels)
@@ -103,6 +104,7 @@ class MainWindow(QMainWindow):
 
         self.ui.dateTimeEdit.setCalendarPopup(True)
         self.ui.dateTimeEdit.setDateTime(PyQt5.QtCore.QDateTime.currentDateTime())
+
     ####################################################################################################################
 
     def table_widget(self):  # создание таблиц
@@ -500,20 +502,20 @@ class MainWindow(QMainWindow):
             task_but.setFixedSize(25, 25)
             task_but.setIconSize(QSize(20, 20))
             task_but.setStyleSheet("""
-                QPushButton {
-                    border-radius: 12px;
-                    border: 2px solid white;
-                }
-                QPushButton:hover {
-                    icon: url('icons/galka.png');
-                    icon-size: 20px;
-                }
-                QPushButton:pressed {
-                    icon: url('icons/galka.png');
-                    border: 2px solid grey;
+                   QPushButton {
+                       border-radius: 12px;
+                       border: 2px solid white;
+                   }
+                   QPushButton:hover {
+                       icon: url('icons/galka.png');
+                       icon-size: 20px;
+                   }
+                   QPushButton:pressed {
+                       icon: url('icons/galka.png');
+                       border: 2px solid grey;
 
-                }
-            """)
+                   }
+               """)
 
             task_line_edit = QLineEdit(new_frame)
             task_line_edit.setStyleSheet("")
@@ -529,18 +531,14 @@ class MainWindow(QMainWindow):
             self.ui.frame_12.layout().addWidget(new_frame)
             self.ui.le_write_task.clear()
 
-            # Вызываем update_time_left вручную, чтобы инициализировать отображение оставшегося времени
-            self.update_time_left(self, time_left_label)
+            # Add the task's datetime and its label to the tracking list
+            self.task_time_labels.append((datetime_edit, time_left_label))
 
-    @staticmethod
-    def update_time_left(self, time_left_label):
+    def update_all_time_left_labels(self):
+        """Update all time left labels with the current remaining time."""
         current_time = QDateTime.currentDateTime()
-        selected_time = self.ui.dateTimeEdit.dateTime()
-
-        if abs(current_time.secsTo(selected_time)) > 5:
-            time_diff = current_time.secsTo(selected_time)
-
-            # Проверяем, просрочена ли задача (если time_diff отрицательный)
+        for datetime_edit, time_left_label in self.task_time_labels:
+            time_diff = current_time.secsTo(datetime_edit)
             is_overdue = time_diff < 0
             abs_time_diff = abs(time_diff)
 
@@ -548,13 +546,12 @@ class MainWindow(QMainWindow):
             hours_left = (abs_time_diff % (60 * 60 * 24)) // (60 * 60)
             minutes_left = (abs_time_diff % (60 * 60)) // 60
 
-        # Форматируем строку в зависимости от того, просрочена ли задача
             if is_overdue:
                 time_left_label.setStyleSheet('color: red')
-                time_left_str = f"Просрочено: {days_left} д. {hours_left} ч. {minutes_left} м."
+                time_left_str = f"Overdue: {days_left} d. {hours_left} h. {minutes_left} m."
             else:
                 time_left_label.setStyleSheet('color: green')
-                time_left_str = f"Срок выполнения: {days_left} д. {hours_left} ч. {minutes_left} м."
+                time_left_str = f"Time left: {days_left} d. {hours_left} h. {minutes_left} m."
 
             time_left_label.setText(time_left_str)
 
@@ -562,7 +559,7 @@ class MainWindow(QMainWindow):
         """Update all time left labels with the current remaining time."""
         if hasattr(self, 'task_time_labels'):
             for datetime_edit, time_left_label in self.task_time_labels:
-                self.update_time_left(datetime_edit, time_left_label)
+                self.update_all_time_left_labels(datetime_edit, time_left_label)
 
     ####################################################################################################################
     def closeEvent(self, event):
