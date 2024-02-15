@@ -100,6 +100,7 @@ class MainWindow(QMainWindow):
         self.update_timer.timeout.connect(self.update_all_time_left_labels)
         self.update_timer.start(1000)  # Update every second
 
+        self.ui.dateTimeEdit.setCalendarPopup(True)
     ####################################################################################################################
 
     def table_widget(self):  # создание таблиц
@@ -482,6 +483,7 @@ class MainWindow(QMainWindow):
     def addTask(self):
         if self.ui.le_write_task.text() != '':
             task_text = self.ui.le_write_task.text()
+            datetime_edit = self.datetime_edit.dateTime()
             new_frame = QFrame(self.ui.frame_12)
             new_frame.setFrameShape(QFrame.StyledPanel)
             new_frame.setFrameShadow(QFrame.Raised)
@@ -514,26 +516,12 @@ class MainWindow(QMainWindow):
             task_line_edit = QLineEdit(new_frame)
             task_line_edit.setStyleSheet("")
 
-            # Создаем QDateTimeEdit и QLabel для отображения оставшегося времени.
-            datetime_edit = QDateTimeEdit(new_frame)
-            datetime_edit.setCalendarPopup(True)
-            datetime_edit.setStyleSheet("background-color: white")
-            datetime_edit.setDateTime(QDateTime.currentDateTime())
-
             time_left_label = QLabel("", new_frame)
             time_left_label.setStyleSheet('color:white; font: 8pt;')
-
-            if not hasattr(self, 'task_time_labels'):
-                self.task_time_labels = []
-            self.task_time_labels.append((datetime_edit, time_left_label))
-
-            # Подключаем сигнал dateTimeChanged к слоту для обновления QLabel
-            datetime_edit.dateTimeChanged.connect(lambda: self.update_time_left(datetime_edit, time_left_label))
 
             frame_layout.addWidget(task_but)
             frame_layout.addWidget(task_label)
             frame_layout.addWidget(task_line_edit)
-            frame_layout.addWidget(datetime_edit)
             frame_layout.addWidget(time_left_label)
 
             self.ui.frame_12.layout().addWidget(new_frame)
