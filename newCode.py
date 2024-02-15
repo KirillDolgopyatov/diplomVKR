@@ -520,7 +520,7 @@ class MainWindow(QMainWindow):
             datetime_edit.setStyleSheet("background-color: white")
             datetime_edit.setDateTime(QDateTime.currentDateTime())
 
-            time_left_label = QLabel("Оставшееся время: ", new_frame)
+            time_left_label = QLabel("", new_frame)
             time_left_label.setStyleSheet('color:white; font: 8pt;')
 
             if not hasattr(self, 'task_time_labels'):
@@ -546,11 +546,27 @@ class MainWindow(QMainWindow):
     def update_time_left(datetime_edit, time_left_label):
         current_time = QDateTime.currentDateTime()
         selected_time = datetime_edit.dateTime()
-        time_diff = current_time.secsTo(selected_time)
-        days_left = time_diff // (60 * 60 * 24)
-        hours_left = (time_diff % (60 * 60 * 24)) // (60 * 60)
-        minutes_left = (time_diff % (60 * 60)) // 60
-        time_left_label.setText(f"Срок выполнения: {days_left} д. {hours_left} ч. {minutes_left} м.")
+
+        if abs(current_time.secsTo(selected_time)) > 5:
+            time_diff = current_time.secsTo(selected_time)
+
+            # Проверяем, просрочена ли задача (если time_diff отрицательный)
+            is_overdue = time_diff < 0
+            abs_time_diff = abs(time_diff)
+
+            days_left = abs_time_diff // (60 * 60 * 24)
+            hours_left = (abs_time_diff % (60 * 60 * 24)) // (60 * 60)
+            minutes_left = (abs_time_diff % (60 * 60)) // 60
+
+        # Форматируем строку в зависимости от того, просрочена ли задача
+            if is_overdue:
+                time_left_label.setStyleSheet('color: red')
+                time_left_str = f"Просрочено: {days_left} д. {hours_left} ч. {minutes_left} м."
+            else:
+                time_left_label.setStyleSheet('color: green')
+                time_left_str = f"Срок выполнения: {days_left} д. {hours_left} ч. {minutes_left} м."
+
+            time_left_label.setText(time_left_str)
 
     def update_all_time_left_labels(self):
         """Update all time left labels with the current remaining time."""
