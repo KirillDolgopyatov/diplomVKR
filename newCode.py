@@ -1,3 +1,4 @@
+import datetime
 import json
 import pickle
 import sys
@@ -101,6 +102,7 @@ class MainWindow(QMainWindow):
         self.update_timer.start(1000)  # Update every second
 
         self.ui.dateTimeEdit.setCalendarPopup(True)
+        self.ui.dateTimeEdit.setDateTime(PyQt5.QtCore.QDateTime.currentDateTime())
     ####################################################################################################################
 
     def table_widget(self):  # создание таблиц
@@ -483,7 +485,7 @@ class MainWindow(QMainWindow):
     def addTask(self):
         if self.ui.le_write_task.text() != '':
             task_text = self.ui.le_write_task.text()
-            datetime_edit = self.datetime_edit.dateTime()
+            datetime_edit = self.ui.dateTimeEdit.dateTime()
             new_frame = QFrame(self.ui.frame_12)
             new_frame.setFrameShape(QFrame.StyledPanel)
             new_frame.setFrameShadow(QFrame.Raised)
@@ -528,12 +530,12 @@ class MainWindow(QMainWindow):
             self.ui.le_write_task.clear()
 
             # Вызываем update_time_left вручную, чтобы инициализировать отображение оставшегося времени
-            self.update_time_left(datetime_edit, time_left_label)
+            self.update_time_left(self, time_left_label)
 
     @staticmethod
-    def update_time_left(datetime_edit, time_left_label):
+    def update_time_left(self, time_left_label):
         current_time = QDateTime.currentDateTime()
-        selected_time = datetime_edit.dateTime()
+        selected_time = self.ui.dateTimeEdit.dateTime()
 
         if abs(current_time.secsTo(selected_time)) > 5:
             time_diff = current_time.secsTo(selected_time)
