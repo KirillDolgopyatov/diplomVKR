@@ -4,6 +4,7 @@ import sys
 
 import PyQt5
 from PyQt5 import QtCore
+from PyQt5.QtCore import QTimer
 from PyQt5.QtCore import Qt, QPropertyAnimation, QSize, QDateTime
 from PyQt5.QtGui import QIcon
 from PyQt5.QtWidgets import (QWidget, QApplication, QMainWindow, QTableWidgetItem, QHeaderView, QMessageBox,
@@ -95,6 +96,9 @@ class MainWindow(QMainWindow):
 
         self.task_counter = 0
         self.ui.btn_new_task.clicked.connect(self.addTask)
+        self.update_timer = QTimer(self)
+        self.update_timer.timeout.connect(self.update_all_time_left_labels)
+        self.update_timer.start(1000)  # Update every second
 
     ####################################################################################################################
 
@@ -490,11 +494,22 @@ class MainWindow(QMainWindow):
 
             task_but = QPushButton(new_frame)
             task_but.setFixedSize(25, 25)
-            task_but.setStyleSheet("background-color: white")
-            task_but.setIcon(QIcon("icons/ready.png."))
+            task_but.setIconSize(QSize(20, 20))
+            task_but.setStyleSheet("""
+                QPushButton {
+                    border-radius: 12px;
+                    border: 2px solid white;
+                }
+                QPushButton:hover {
+                    icon: url('icons/galka.png');
+                    icon-size: 20px;
+                }
+                QPushButton:pressed {
+                    icon: url('icons/galka.png');
+                    border: 2px solid grey;
 
-            task_but.setIconSize(QSize(24, 24))
-            task_but.setStyleSheet('border-radius: 12px; background-color: white}')
+                }
+            """)
 
             task_line_edit = QLineEdit(new_frame)
             task_line_edit.setStyleSheet("")
@@ -507,6 +522,10 @@ class MainWindow(QMainWindow):
 
             time_left_label = QLabel("Оставшееся время: ", new_frame)
             time_left_label.setStyleSheet('color:white; font: 8pt;')
+
+            if not hasattr(self, 'task_time_labels'):
+                self.task_time_labels = []
+            self.task_time_labels.append((datetime_edit, time_left_label))
 
             # Подключаем сигнал dateTimeChanged к слоту для обновления QLabel
             datetime_edit.dateTimeChanged.connect(lambda: self.update_time_left(datetime_edit, time_left_label))
@@ -531,7 +550,13 @@ class MainWindow(QMainWindow):
         days_left = time_diff // (60 * 60 * 24)
         hours_left = (time_diff % (60 * 60 * 24)) // (60 * 60)
         minutes_left = (time_diff % (60 * 60)) // 60
-        time_left_label.setText(f"Срок выполнения: {days_left} д. {hours_left} ч. {minutes_left} м")
+        time_left_label.setText(f"Срок выполнения: {days_left} д. {hours_left} ч. {minutes_left} м.")
+
+    def update_all_time_left_labels(self):
+        """Update all time left labels with the current remaining time."""
+        if hasattr(self, 'task_time_labels'):
+            for datetime_edit, time_left_label in self.task_time_labels:
+                self.update_time_left(datetime_edit, time_left_label)
 
     ####################################################################################################################
     def closeEvent(self, event):
