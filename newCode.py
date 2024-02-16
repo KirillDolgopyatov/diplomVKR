@@ -104,7 +104,7 @@ class MainWindow(QMainWindow):
 
         self.ui.dateTimeEdit.setCalendarPopup(True)
         self.ui.dateTimeEdit.setDateTime(PyQt5.QtCore.QDateTime.currentDateTime())
-
+        self.ui.scrollAreaWC.setLayout(QVBoxLayout())
     ####################################################################################################################
 
     def table_widget(self):  # создание таблиц
@@ -488,7 +488,7 @@ class MainWindow(QMainWindow):
         if self.ui.le_write_task.text() != '':
             task_text = self.ui.le_write_task.text()
             datetime_edit = self.ui.dateTimeEdit.dateTime()
-            new_frame = QFrame(self.ui.scrollArea_2)
+            new_frame = QFrame(self.ui.scrollAreaWC)  # Изменено на scrollAreaWC
             new_frame.setFrameShape(QFrame.StyledPanel)
             new_frame.setFrameShadow(QFrame.Raised)
             new_frame.setStyleSheet("background-color: rgb(45, 45, 45);")
@@ -529,26 +529,27 @@ class MainWindow(QMainWindow):
             frame_layout.addWidget(task_line_edit)
             frame_layout.addWidget(time_left_label)
 
-            # Изменение здесь: используем insertWidget с индексом 0 для добавления в начало layout
-            self.ui.frame_12.layout().insertWidget(0, new_frame)
+            # Измените следующую строку, чтобы добавить new_frame в layout, который принадлежит scrollAreaWC
+            self.ui.scrollAreaWC.layout().insertWidget(0, new_frame)  # Изменено для добавления в scrollAreaWC
             self.ui.le_write_task.clear()
 
             # Add the task's datetime and its label to the tracking list
             self.task_time_labels.append((datetime_edit, time_left_label))
 
     def update_all_time_left_labels(self):
+
         current_time = QDateTime.currentDateTime()
         for datetime_edit, time_left_label in self.task_time_labels:
             time_diff = current_time.secsTo(datetime_edit)
             is_overdue = time_diff < 0
             abs_time_diff = abs(time_diff)
-
             days_left = abs_time_diff // (60 * 60 * 24)
             hours_left = (abs_time_diff % (60 * 60 * 24)) // (60 * 60)
             minutes_left = (abs_time_diff % (60 * 60)) // 60
 
             if is_overdue:
                 time_left_label.setStyleSheet('color: red')
+
                 time_left_str = f"Просрочено: {days_left} д. {hours_left} ч. {minutes_left} м."
             else:
                 time_left_label.setStyleSheet('color: green')
