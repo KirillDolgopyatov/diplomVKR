@@ -537,6 +537,7 @@ class MainWindow(QMainWindow):
             self.task_time_labels.append((datetime_edit, time_left_label))
 
     def update_all_time_left_labels(self):
+
         current_time = QDateTime.currentDateTime()
         for datetime_edit, time_left_label in self.task_time_labels:
             time_diff = current_time.secsTo(datetime_edit)
