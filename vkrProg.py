@@ -8,7 +8,6 @@ from PyQt5.QtCore import Qt, QPropertyAnimation, QSize
 from PyQt5.QtGui import QIcon
 from PyQt5.QtWidgets import (QWidget, QApplication, QMainWindow, QTableWidgetItem, QHeaderView, QMessageBox,
                              QPushButton, QLineEdit, QGridLayout, QLabel, QVBoxLayout, QFrame)
-
 from Designer.designerVKR import Ui_MainWindow
 from Designer.loginVKR import Ui_Form
 

@@ -488,11 +488,12 @@ class MainWindow(QMainWindow):
         if self.ui.le_write_task.text() != '':
             task_text = self.ui.le_write_task.text()
             datetime_edit = self.ui.dateTimeEdit.dateTime()
-            new_frame = QFrame(self.ui.frame_12)
+            new_frame = QFrame(self.ui.scrollArea_2)
             new_frame.setFrameShape(QFrame.StyledPanel)
             new_frame.setFrameShadow(QFrame.Raised)
             new_frame.setStyleSheet("background-color: rgb(45, 45, 45);")
             new_frame.setFixedHeight(50)
+
             frame_layout = QHBoxLayout(new_frame)
 
             task_label = QLabel(task_text, new_frame)
@@ -527,7 +528,9 @@ class MainWindow(QMainWindow):
             frame_layout.addWidget(task_label)
             frame_layout.addWidget(task_line_edit)
             frame_layout.addWidget(time_left_label)
-            self.ui.frame_12.layout().addWidget(new_frame)
+
+            # Изменение здесь: используем insertWidget с индексом 0 для добавления в начало layout
+            self.ui.frame_12.layout().insertWidget(0, new_frame)
             self.ui.le_write_task.clear()
 
             # Add the task's datetime and its label to the tracking list
@@ -547,18 +550,12 @@ class MainWindow(QMainWindow):
 
             if is_overdue:
                 time_left_label.setStyleSheet('color: red')
-                time_left_str = f"Overdue: {days_left} d. {hours_left} h. {minutes_left} m."
+                time_left_str = f"Просрочено: {days_left} д. {hours_left} ч. {minutes_left} м."
             else:
                 time_left_label.setStyleSheet('color: green')
-                time_left_str = f"Time left: {days_left} d. {hours_left} h. {minutes_left} m."
+                time_left_str = f"Срок выполнения: {days_left} д. {hours_left} ч. {minutes_left} м."
 
             time_left_label.setText(time_left_str)
-
-    def update_all_time_left_labels(self):
-        """Update all time left labels with the current remaining time."""
-        if hasattr(self, 'task_time_labels'):
-            for datetime_edit, time_left_label in self.task_time_labels:
-                self.update_all_time_left_labels(datetime_edit, time_left_label)
 
     ####################################################################################################################
     def closeEvent(self, event):
