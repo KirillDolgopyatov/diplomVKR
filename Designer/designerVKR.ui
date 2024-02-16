@@ -821,7 +821,7 @@ QPushButton:Pressed {
                       </property>
                       <property name="styleSheet">
                        <string notr="true">QPushButton {
-  
+
 	background-color: rgb(213, 203, 203);
 }
 
@@ -1031,15 +1031,15 @@ background-color: rgb(28, 28, 28)</string>
     color: black;
 
 	background-color: rgb(173, 142, 57);
-    
+
 
 padding-left: 5px;
 padding-right: 5px;
     }
 QTableWidget::item {
 		color:black;
-	    
-	
+
+
 	background-color: rgb(217, 217, 217);
 
     }</string>
@@ -1341,15 +1341,15 @@ background-color: rgb(28, 28, 28)</string>
     color: black;
 
 	background-color: rgb(173, 142, 57);
-    
+
 
 padding-left: 5px;
 padding-right: 5px;
     }
 QTableWidget::item {
 		color:black;
-	    
-	
+
+
 	background-color: rgb(217, 217, 217);
 
     }</string>
@@ -1770,8 +1770,8 @@ background-color: rgb(255,255,255)
                   <rect>
                    <x>0</x>
                    <y>0</y>
-                   <width>100</width>
-                   <height>30</height>
+                   <width>83</width>
+                   <height>16</height>
                   </rect>
                  </property>
                  <layout class="QVBoxLayout" name="verticalLayout_23">
@@ -2047,15 +2047,15 @@ color: rgb(139, 211, 206);
     color: black;
 
 	background-color: rgb(173, 142, 57);
-    
+
 
 padding-left: 5px;
 padding-right: 5px;
     }
 QTableWidget::item {
 		color:black;
-	    
-	
+
+
 	background-color: rgb(217, 217, 217);
 
     }</string>
@@ -2078,24 +2078,29 @@ QTableWidget::item {
                          <x>0</x>
                          <y>0</y>
                          <width>767</width>
-                         <height>233</height>
+                         <height>472</height>
                         </rect>
                        </property>
+                       <layout class="QVBoxLayout" name="verticalLayout_24">
+                        <item>
+                         <spacer name="verticalSpacer_2">
+                          <property name="orientation">
+                           <enum>Qt::Vertical</enum>
+                          </property>
+                          <property name="sizeType">
+                           <enum>QSizePolicy::Expanding</enum>
+                          </property>
+                          <property name="sizeHint" stdset="0">
+                           <size>
+                            <width>10</width>
+                            <height>451</height>
+                           </size>
+                          </property>
+                         </spacer>
+                        </item>
+                       </layout>
                       </widget>
                      </widget>
-                    </item>
-                    <item>
-                     <spacer name="verticalSpacer_2">
-                      <property name="orientation">
-                       <enum>Qt::Vertical</enum>
-                      </property>
-                      <property name="sizeHint" stdset="0">
-                       <size>
-                        <width>20</width>
-                        <height>0</height>
-                       </size>
-                      </property>
-                     </spacer>
                     </item>
                    </layout>
                   </widget>

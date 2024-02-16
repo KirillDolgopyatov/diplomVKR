@@ -367,7 +367,7 @@ class Ui_MainWindow(object):
         sizePolicy.setHeightForWidth(self.btnCreateTask.sizePolicy().hasHeightForWidth())
         self.btnCreateTask.setSizePolicy(sizePolicy)
         self.btnCreateTask.setStyleSheet("QPushButton {\n"
-"  \n"
+"\n"
 "    background-color: rgb(213, 203, 203);\n"
 "}\n"
 "\n"
@@ -472,15 +472,15 @@ class Ui_MainWindow(object):
 "    color: black;\n"
 "\n"
 "    background-color: rgb(173, 142, 57);\n"
-"    \n"
+"\n"
 "\n"
 "padding-left: 5px;\n"
 "padding-right: 5px;\n"
 "    }\n"
 "QTableWidget::item {\n"
 "        color:black;\n"
-"        \n"
-"    \n"
+"\n"
+"\n"
 "    background-color: rgb(217, 217, 217);\n"
 "\n"
 "    }")
@@ -630,15 +630,15 @@ class Ui_MainWindow(object):
 "    color: black;\n"
 "\n"
 "    background-color: rgb(173, 142, 57);\n"
-"    \n"
+"\n"
 "\n"
 "padding-left: 5px;\n"
 "padding-right: 5px;\n"
 "    }\n"
 "QTableWidget::item {\n"
 "        color:black;\n"
-"        \n"
-"    \n"
+"\n"
+"\n"
 "    background-color: rgb(217, 217, 217);\n"
 "\n"
 "    }")
@@ -842,7 +842,7 @@ class Ui_MainWindow(object):
         self.scrollArea.setWidgetResizable(True)
         self.scrollArea.setObjectName("scrollArea")
         self.scrollAreaWidgetContents = QtWidgets.QWidget()
-        self.scrollAreaWidgetContents.setGeometry(QtCore.QRect(0, 0, 100, 30))
+        self.scrollAreaWidgetContents.setGeometry(QtCore.QRect(0, 0, 83, 16))
         self.scrollAreaWidgetContents.setObjectName("scrollAreaWidgetContents")
         self.verticalLayout_23 = QtWidgets.QVBoxLayout(self.scrollAreaWidgetContents)
         self.verticalLayout_23.setContentsMargins(0, 0, 0, 0)
@@ -986,15 +986,15 @@ class Ui_MainWindow(object):
 "    color: black;\n"
 "\n"
 "    background-color: rgb(173, 142, 57);\n"
-"    \n"
+"\n"
 "\n"
 "padding-left: 5px;\n"
 "padding-right: 5px;\n"
 "    }\n"
 "QTableWidget::item {\n"
 "        color:black;\n"
-"        \n"
-"    \n"
+"\n"
+"\n"
 "    background-color: rgb(217, 217, 217);\n"
 "\n"
 "    }")
@@ -1007,12 +1007,14 @@ class Ui_MainWindow(object):
         self.scrollArea_2.setWidgetResizable(True)
         self.scrollArea_2.setObjectName("scrollArea_2")
         self.scrollAreaWC = QtWidgets.QWidget()
-        self.scrollAreaWC.setGeometry(QtCore.QRect(0, 0, 767, 233))
+        self.scrollAreaWC.setGeometry(QtCore.QRect(0, 0, 767, 472))
         self.scrollAreaWC.setObjectName("scrollAreaWC")
+        self.verticalLayout_24 = QtWidgets.QVBoxLayout(self.scrollAreaWC)
+        self.verticalLayout_24.setObjectName("verticalLayout_24")
+        spacerItem1 = QtWidgets.QSpacerItem(10, 451, QtWidgets.QSizePolicy.Minimum, QtWidgets.QSizePolicy.Expanding)
+        self.verticalLayout_24.addItem(spacerItem1)
         self.scrollArea_2.setWidget(self.scrollAreaWC)
         self.verticalLayout_17.addWidget(self.scrollArea_2)
-        spacerItem1 = QtWidgets.QSpacerItem(20, 0, QtWidgets.QSizePolicy.Minimum, QtWidgets.QSizePolicy.Expanding)
-        self.verticalLayout_17.addItem(spacerItem1)
         self.verticalLayout_15.addWidget(self.frame_12)
         self.frame_14 = QtWidgets.QFrame(self.frame_11)
         self.frame_14.setFrameShape(QtWidgets.QFrame.StyledPanel)
