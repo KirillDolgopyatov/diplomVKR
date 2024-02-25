@@ -1079,4 +1079,5 @@ class Ui_MainWindow(object):
         self.le_write_task.setPlaceholderText(_translate("MainWindow", "Добавить задачу"))
         self.btn_new_task.setShortcut(_translate("MainWindow", "Return"))
         self.label_3.setText(_translate("MainWindow", "Введите сроки выполнения задачи"))
+
 import Designer.res_rc
