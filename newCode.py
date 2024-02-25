@@ -2,7 +2,7 @@ import sqlite3  # Импорт модуля для работы с SQLite
 import sys  # Импорт системного модуля
 
 from PyQt5.QtWidgets import QApplication, QMainWindow, QTableWidgetItem, QHeaderView, \
-    QMessageBox, QCompleter  # Импорт необходимых классов из PyQt5
+    QMessageBox, QCompleter, QTableWidget  # Импорт необходимых классов из PyQt5
 
 from Designer.des import Ui_MainWindow  # Импорт дизайна интерфейса, созданного в Qt Designer
 
@@ -16,14 +16,37 @@ class MainWindow(QMainWindow):  # Определение класса MainWindow
         self.function_switch_between_stack_widgets()  # Инициализация переключения между виджетами
         self.function_add_table_personnel()  # Инициализация функционала таблицы персонала
 
-        self.db_connection = sqlite3.connect('personnel.db')  # Подключение к базе данных SQLite
+        self.db_connection = sqlite3.connect('saveData/personnel.db')  # Подключение к базе данных SQLite
         self.cursor = self.db_connection.cursor()  # Создание курсора для работы с базой данных
         self.load_data_from_sqlite()  # Загрузка данных из базы данных при запуске приложения
 
-        self.ui.table_personnel.itemChanged.connect(
-            self.save_data_to_sqlite)  # Подключение сигнала изменения элемента таблицы к методу сохранения данных
+        self.ui.table_personnel.itemChanged.connect(self.save_data_to_sqlite)
 
-    def setupCompleterForFio(self):
+        self.setup_completer()
+        self.create_tables_in_toolbox()
+
+    def load_data_from_first_column(self):
+        """Загрузка данных из первого столбца таблицы базы данных."""
+        self.cursor.execute("SELECT DISTINCT fio FROM personnel")
+        return [item[0] for item in self.cursor.fetchall()]
+
+    def create_tables_in_toolbox(self):
+        """Создание таблиц в каждой странице QToolBox с данными из первого столбца."""
+        data = self.load_data_from_first_column()
+
+        for i in range(self.ui.toolBox.count()):
+            page = self.ui.toolBox.widget(i)
+            tableWidget = QTableWidget(len(data), 1)  # Создаем таблицу с одним столбцом
+            tableWidget.setStyleSheet("color:black;")
+            tableWidget.setHorizontalHeaderLabels(['Обучаемые'])
+
+            for row, item in enumerate(data):
+                tableWidget.setItem(row, 0, QTableWidgetItem(item))
+
+            # Добавляем созданную таблицу на страницу
+            page.layout().addWidget(tableWidget)
+
+    def setup_completer(self):
         # Получение всех уникальных значений из первого столбца таблицы
         list_fio = set()
         for i in range(self.ui.table_personnel.rowCount()):
@@ -68,7 +91,7 @@ class MainWindow(QMainWindow):  # Определение класса MainWindow
 
     def save_data_to_sqlite(self):
         # Метод для сохранения данных из таблицы в базу данных SQLite
-        conn = sqlite3.connect('personnel.db')  # Подключение к базе данных
+        conn = sqlite3.connect('saveData/personnel.db')  # Подключение к базе данных
         cursor = conn.cursor()  # Создание курсора
 
         # Создание таблицы, если она не существует
@@ -94,11 +117,9 @@ class MainWindow(QMainWindow):  # Определение класса MainWindow
         conn.commit()  # Подтверждение изменений в базе данных
         conn.close()  # Закрытие соединения с базой данных
 
-        self.setupCompleterForFio()
-
     def load_data_from_sqlite(self):
         # Метод для загрузки данных из базы данных SQLite в таблицу интерфейса
-        conn = sqlite3.connect('personnel.db')  # Подключение к базе данных
+        conn = sqlite3.connect('saveData/personnel.db')  # Подключение к базе данных
         cursor = conn.cursor()  # Создание курсора
 
         # Создание таблицы, если она не существует
