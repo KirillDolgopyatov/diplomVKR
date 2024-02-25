@@ -4,10 +4,10 @@ import sys
 
 import PyQt5
 from PyQt5 import QtCore
-from PyQt5.QtCore import Qt, QPropertyAnimation, QSize
+from PyQt5.QtCore import Qt, QPropertyAnimation, QSize, QDateTime, QTimer
 from PyQt5.QtGui import QIcon
 from PyQt5.QtWidgets import (QWidget, QApplication, QMainWindow, QTableWidgetItem, QHeaderView, QMessageBox,
-                             QPushButton, QLineEdit, QGridLayout, QLabel, QVBoxLayout, QFrame)
+                             QPushButton, QLineEdit, QGridLayout, QLabel, QVBoxLayout, QFrame, QHBoxLayout)
 from Designer.designerVKR import Ui_MainWindow
 from Designer.loginVKR import Ui_Form
 
@@ -91,7 +91,17 @@ class MainWindow(QMainWindow):
 
         self.load_layout()
 
+        self.task_counter = 0
+        self.task_time_labels = []
+
         self.ui.btn_new_task.clicked.connect(self.addTask)
+        self.update_timer = QTimer(self)
+        self.update_timer.timeout.connect(self.update_all_time)
+        self.update_timer.start(1000)  # Update every second
+
+        self.ui.dateTimeEdit.setCalendarPopup(True)
+        self.ui.dateTimeEdit.setDateTime(PyQt5.QtCore.QDateTime.currentDateTime())
+        self.ui.scrollAreaWC.setLayout(QVBoxLayout())
 
     ####################################################################################################################
 
@@ -99,7 +109,7 @@ class MainWindow(QMainWindow):
         # таблица личного состава
         self.ui.tableWidget_2.setRowCount(1)
         self.ui.tableWidget_2.setColumnCount(3)
-        self.ui.tableWidget_2.setHorizontalHeaderLabels(('ФИО', '№ группы', 'Средний балл'))
+        self.ui.tableWidget_2.setHorizontalHeaderLabels(('ФИО', 'В/зв', 'Подразделение', 'Должность'))
         self.ui.tableWidget_2.horizontalHeader().setSectionResizeMode(QHeaderView.Stretch)
 
         ###########
@@ -473,29 +483,75 @@ class MainWindow(QMainWindow):
     ####################################################################################################################
 
     def addTask(self):
-        # Получаем текст из QLineEdit
-        task_text = self.ui.le_write_task.text()
+        if self.ui.le_write_task.text() != '':
+            task_text = self.ui.le_write_task.text()
+            datetime_edit = self.ui.dateTimeEdit.dateTime()
+            new_frame = QFrame(self.ui.scrollAreaWC)  # Изменено на scrollAreaWC
+            new_frame.setFrameShape(QFrame.StyledPanel)
+            new_frame.setFrameShadow(QFrame.Raised)
+            new_frame.setStyleSheet("background-color: rgb(45, 45, 45);")
+            new_frame.setFixedHeight(50)
 
-        # Создаем новый фрейм и настраиваем его
-        new_frame = QFrame(self.ui.frame_12)
-        new_frame.setFrameShape(QFrame.StyledPanel)
-        new_frame.setFrameShadow(QFrame.Raised)
+            frame_layout = QHBoxLayout(new_frame)
 
-        # Создаем QLabel и QLineEdit для новой задачи
-        task_label = QLabel(task_text, new_frame)
-        task_line_edit = QLineEdit(new_frame)
-        task_line_edit.setStyleSheet("background-color: white")
+            task_label = QLabel(task_text, new_frame)
+            task_label.setStyleSheet("color: white; font: 12pt;")
 
-        # Создаем layout для фрейма и добавляем в него label и lineedit
-        frame_layout = QVBoxLayout(new_frame)
-        frame_layout.addWidget(task_label)
-        frame_layout.addWidget(task_line_edit)
+            task_but = QPushButton(new_frame)
+            task_but.setFixedSize(25, 25)
+            task_but.setIconSize(QSize(20, 20))
+            task_but.setStyleSheet("""
+                   QPushButton {
+                       border-radius: 12px;
+                       border: 2px solid white;
+                   }
+                   QPushButton:hover {
+                       icon: url('icons/galka.png');
+                       icon-size: 20px;
+                   }
+                   QPushButton:pressed {
+                       icon: url('icons/galka.png');
+                       border: 2px solid grey;
 
-        # Добавляем новый фрейм в QVBoxLayout, который находится в self.ui.frame_12
-        self.ui.frame_12.layout().addWidget(new_frame)
+                   }
+               """)
 
-        # Очищаем QLineEdit после добавления задачи
-        self.ui.le_write_task.clear()
+            task_line_edit = QLineEdit(new_frame)
+            task_line_edit.setStyleSheet("color: yellow; font: 10 pt;")
+
+            time_left_label = QLabel("", new_frame)
+            time_left_label.setStyleSheet('color:white; font: 8pt;')
+
+            frame_layout.addWidget(task_but)
+            frame_layout.addWidget(task_label)
+            frame_layout.addWidget(task_line_edit)
+            frame_layout.addWidget(time_left_label)
+
+            # Измените следующую строку, чтобы добавить new_frame в layout, который принадлежит scrollAreaWC
+            self.ui.scrollAreaWC.layout().insertWidget(0, new_frame)
+            self.ui.le_write_task.clear()
+
+            self.task_time_labels.append((datetime_edit, time_left_label))
+
+    def update_all_time(self):
+        current_time = QDateTime.currentDateTime()
+        for datetime_edit, time_left_label in self.task_time_labels:
+            time_diff = current_time.secsTo(datetime_edit)
+            is_overdue = time_diff < 0
+            abs_time_diff = abs(time_diff)
+            days_left = abs_time_diff // (60 * 60 * 24)
+            hours_left = (abs_time_diff % (60 * 60 * 24)) // (60 * 60)
+            minutes_left = (abs_time_diff % (60 * 60)) // 60
+
+            if is_overdue:
+                time_left_label.setStyleSheet('color: red')
+
+                time_left_str = f"Просрочено: {days_left} д. {hours_left} ч. {minutes_left} м."
+            else:
+                time_left_label.setStyleSheet('color: green')
+                time_left_str = f"Срок выполнения: {days_left} д. {hours_left} ч. {minutes_left} м."
+
+            time_left_label.setText(time_left_str)
 
     ####################################################################################################################
     def closeEvent(self, event):

@@ -960,320 +960,6 @@ background-color: rgb(28, 28, 28);}</string>
               <property name="bottomMargin">
                <number>0</number>
               </property>
-              <item>
-               <widget class="QFrame" name="frame_4">
-                <property name="styleSheet">
-                 <string notr="true">color: white;
-background-color: rgb(28, 28, 28)</string>
-                </property>
-                <property name="frameShape">
-                 <enum>QFrame::StyledPanel</enum>
-                </property>
-                <property name="frameShadow">
-                 <enum>QFrame::Raised</enum>
-                </property>
-                <layout class="QGridLayout" name="gridLayout">
-                 <property name="leftMargin">
-                  <number>3</number>
-                 </property>
-                 <property name="topMargin">
-                  <number>3</number>
-                 </property>
-                 <property name="rightMargin">
-                  <number>3</number>
-                 </property>
-                 <property name="bottomMargin">
-                  <number>0</number>
-                 </property>
-                 <property name="spacing">
-                  <number>0</number>
-                 </property>
-                 <item row="0" column="0">
-                  <widget class="QFrame" name="frame_23">
-                   <property name="sizePolicy">
-                    <sizepolicy hsizetype="Expanding" vsizetype="Expanding">
-                     <horstretch>0</horstretch>
-                     <verstretch>0</verstretch>
-                    </sizepolicy>
-                   </property>
-                   <property name="styleSheet">
-                    <string notr="true">color: white;
-background-color: rgb(28, 28, 28)</string>
-                   </property>
-                   <property name="frameShape">
-                    <enum>QFrame::StyledPanel</enum>
-                   </property>
-                   <property name="frameShadow">
-                    <enum>QFrame::Raised</enum>
-                   </property>
-                   <layout class="QVBoxLayout" name="verticalLayout_25">
-                    <property name="spacing">
-                     <number>0</number>
-                    </property>
-                    <property name="leftMargin">
-                     <number>0</number>
-                    </property>
-                    <property name="topMargin">
-                     <number>0</number>
-                    </property>
-                    <property name="rightMargin">
-                     <number>0</number>
-                    </property>
-                    <property name="bottomMargin">
-                     <number>0</number>
-                    </property>
-                    <item>
-                     <widget class="QTableWidget" name="tableWidget_1">
-                      <property name="styleSheet">
-                       <string notr="true"> QTableWidget {
-    }
-    QTableWidget QHeaderView::section {
-    color: black;
-
-	background-color: rgb(173, 142, 57);
-
-
-padding-left: 5px;
-padding-right: 5px;
-    }
-QTableWidget::item {
-		color:black;
-
-
-	background-color: rgb(217, 217, 217);
-
-    }</string>
-                      </property>
-                      <property name="alternatingRowColors">
-                       <bool>false</bool>
-                      </property>
-                     </widget>
-                    </item>
-                   </layout>
-                  </widget>
-                 </item>
-                 <item row="0" column="1" alignment="Qt::AlignRight|Qt::AlignTop">
-                  <widget class="QFrame" name="frame_21">
-                   <property name="styleSheet">
-                    <string notr="true"/>
-                   </property>
-                   <property name="frameShape">
-                    <enum>QFrame::StyledPanel</enum>
-                   </property>
-                   <property name="frameShadow">
-                    <enum>QFrame::Raised</enum>
-                   </property>
-                   <layout class="QHBoxLayout" name="horizontalLayout_3">
-                    <property name="spacing">
-                     <number>3</number>
-                    </property>
-                    <property name="leftMargin">
-                     <number>5</number>
-                    </property>
-                    <property name="topMargin">
-                     <number>0</number>
-                    </property>
-                    <property name="rightMargin">
-                     <number>3</number>
-                    </property>
-                    <property name="bottomMargin">
-                     <number>5</number>
-                    </property>
-                    <item>
-                     <widget class="QPushButton" name="btnAdd_row">
-                      <property name="toolTip">
-                       <string>Удаляет выбранную строк</string>
-                      </property>
-                      <property name="styleSheet">
-                       <string notr="true">QPushButton {
-padding: 3px;
-border-radius: 5px;
-background-color: rgba(255,255,255,100)
-}
-
-QPushButton:hover {
-background-color: rgb(50, 50, 50);
-background-color: rgba(255,255,255,150)
-}
-
-QPushButton:Pressed {
-background-color: rgb(255,255,255)
-}
-</string>
-                      </property>
-                      <property name="text">
-                       <string/>
-                      </property>
-                      <property name="icon">
-                       <iconset resource="res_rc.qrc">
-                        <normaloff>:/icons/icons/plus.svg</normaloff>:/icons/icons/plus.svg</iconset>
-                      </property>
-                      <property name="iconSize">
-                       <size>
-                        <width>14</width>
-                        <height>14</height>
-                       </size>
-                      </property>
-                     </widget>
-                    </item>
-                    <item>
-                     <widget class="QPushButton" name="btnDelete_row">
-                      <property name="baseSize">
-                       <size>
-                        <width>0</width>
-                        <height>0</height>
-                       </size>
-                      </property>
-                      <property name="font">
-                       <font>
-                        <pointsize>9</pointsize>
-                       </font>
-                      </property>
-                      <property name="toolTip">
-                       <string>Удаляет выбранную строк</string>
-                      </property>
-                      <property name="styleSheet">
-                       <string notr="true">QPushButton {
-padding: 3px;
-border-radius: 5px;
-background-color: rgba(255,255,255,100)
-}
-
-QPushButton:hover {
-background-color: rgb(50, 50, 50);
-background-color: rgba(255,255,255,150)
-}
-
-QPushButton:Pressed {
-background-color: rgb(255,255,255)
-}
-</string>
-                      </property>
-                      <property name="text">
-                       <string/>
-                      </property>
-                      <property name="icon">
-                       <iconset resource="res_rc.qrc">
-                        <normaloff>:/icons/icons/minus.svg</normaloff>:/icons/icons/minus.svg</iconset>
-                      </property>
-                      <property name="iconSize">
-                       <size>
-                        <width>14</width>
-                        <height>14</height>
-                       </size>
-                      </property>
-                     </widget>
-                    </item>
-                   </layout>
-                  </widget>
-                 </item>
-                 <item row="1" column="0" colspan="2" alignment="Qt::AlignLeft|Qt::AlignBottom">
-                  <widget class="QFrame" name="frame_3">
-                   <property name="styleSheet">
-                    <string notr="true"/>
-                   </property>
-                   <property name="frameShape">
-                    <enum>QFrame::StyledPanel</enum>
-                   </property>
-                   <property name="frameShadow">
-                    <enum>QFrame::Raised</enum>
-                   </property>
-                   <layout class="QVBoxLayout" name="verticalLayout_19">
-                    <property name="spacing">
-                     <number>3</number>
-                    </property>
-                    <property name="leftMargin">
-                     <number>0</number>
-                    </property>
-                    <property name="topMargin">
-                     <number>5</number>
-                    </property>
-                    <property name="rightMargin">
-                     <number>5</number>
-                    </property>
-                    <property name="bottomMargin">
-                     <number>3</number>
-                    </property>
-                    <item>
-                     <widget class="QPushButton" name="btnAdd_column">
-                      <property name="toolTip">
-                       <string>Удаляет выбранную строк</string>
-                      </property>
-                      <property name="styleSheet">
-                       <string notr="true">QPushButton {
-padding: 3px;
-border-radius: 5px;
-background-color: rgba(255,255,255,100)
-}
-
-QPushButton:hover {
-background-color: rgb(50, 50, 50);
-background-color: rgba(255,255,255,150)
-}
-
-QPushButton:Pressed {
-background-color: rgb(255,255,255)
-}
-</string>
-                      </property>
-                      <property name="text">
-                       <string/>
-                      </property>
-                      <property name="icon">
-                       <iconset resource="res_rc.qrc">
-                        <normaloff>:/icons/icons/plus.svg</normaloff>:/icons/icons/plus.svg</iconset>
-                      </property>
-                      <property name="iconSize">
-                       <size>
-                        <width>14</width>
-                        <height>14</height>
-                       </size>
-                      </property>
-                     </widget>
-                    </item>
-                    <item>
-                     <widget class="QPushButton" name="btnDelete_column">
-                      <property name="toolTip">
-                       <string>Удаляет выбранную строк</string>
-                      </property>
-                      <property name="styleSheet">
-                       <string notr="true">QPushButton {
-padding: 3px;
-border-radius: 5px;
-background-color: rgba(255,255,255,100)
-}
-
-QPushButton:hover {
-background-color: rgb(50, 50, 50);
-background-color: rgba(255,255,255,150)
-}
-
-QPushButton:Pressed {
-background-color: rgb(255,255,255)
-}
-</string>
-                      </property>
-                      <property name="text">
-                       <string/>
-                      </property>
-                      <property name="icon">
-                       <iconset resource="res_rc.qrc">
-                        <normaloff>:/icons/icons/minus.svg</normaloff>:/icons/icons/minus.svg</iconset>
-                      </property>
-                      <property name="iconSize">
-                       <size>
-                        <width>14</width>
-                        <height>14</height>
-                       </size>
-                      </property>
-                     </widget>
-                    </item>
-                   </layout>
-                  </widget>
-                 </item>
-                </layout>
-               </widget>
-              </item>
              </layout>
             </widget>
             <widget class="QWidget" name="page_22">
@@ -1328,12 +1014,7 @@ background-color: rgb(28, 28, 28)</string>
                   <number>0</number>
                  </property>
                  <item>
-                  <widget class="QTableWidget" name="tableWidget_2">
-                   <property name="font">
-                    <font>
-                     <hintingpreference>PreferDefaultHinting</hintingpreference>
-                    </font>
-                   </property>
+                  <widget class="QTableWidget" name="table_personnel">
                    <property name="styleSheet">
                     <string notr="true"> QTableWidget {
     }
@@ -1503,7 +1184,7 @@ background-color: rgb(28, 28, 28)</string>
                            <number>0</number>
                           </property>
                           <item>
-                           <widget class="QLineEdit" name="lineFIO_22">
+                           <widget class="QLineEdit" name="le_fio">
                             <property name="minimumSize">
                              <size>
                               <width>0</width>
@@ -1567,7 +1248,7 @@ QLineEdit:Pressed {
                            <number>0</number>
                           </property>
                           <item>
-                           <widget class="QLineEdit" name="lineGroup_22">
+                           <widget class="QLineEdit" name="le_zvanie">
                             <property name="minimumSize">
                              <size>
                               <width>0</width>
@@ -1604,7 +1285,7 @@ QLineEdit:Pressed {
                            </widget>
                           </item>
                           <item>
-                           <widget class="QLineEdit" name="lineGpa_22">
+                           <widget class="QLineEdit" name="le_subunit">
                             <property name="minimumSize">
                              <size>
                               <width>0</width>
@@ -1641,7 +1322,7 @@ QLineEdit:Pressed {
                            </widget>
                           </item>
                           <item>
-                           <widget class="QLineEdit" name="lineGpa_23">
+                           <widget class="QLineEdit" name="le_duty">
                             <property name="minimumSize">
                              <size>
                               <width>0</width>
@@ -1708,7 +1389,7 @@ QLineEdit:Pressed {
                         <number>0</number>
                        </property>
                        <item>
-                        <widget class="QPushButton" name="btnDeleteFio_22">
+                        <widget class="QPushButton" name="btn_delete_personnel">
                          <property name="minimumSize">
                           <size>
                            <width>100</width>
@@ -1739,7 +1420,7 @@ background-color: rgb(255,255,255)
                         </widget>
                        </item>
                        <item>
-                        <widget class="QPushButton" name="btnSavePerson_22">
+                        <widget class="QPushButton" name="btn_save_personnel">
                          <property name="minimumSize">
                           <size>
                            <width>100</width>
@@ -1807,8 +1488,8 @@ background-color: rgb(255,255,255)
                   <rect>
                    <x>0</x>
                    <y>0</y>
-                   <width>100</width>
-                   <height>30</height>
+                   <width>815</width>
+                   <height>582</height>
                   </rect>
                  </property>
                  <layout class="QVBoxLayout" name="verticalLayout_23">
@@ -1828,7 +1509,88 @@ background-color: rgb(255,255,255)
                    <number>0</number>
                   </property>
                   <item>
-                   <widget class="QWidget" name="widget_2" native="true"/>
+                   <widget class="QWidget" name="widget_2" native="true">
+                    <layout class="QVBoxLayout" name="verticalLayout_19">
+                     <item>
+                      <widget class="QToolBox" name="toolBox">
+                       <property name="styleSheet">
+                        <string notr="true">color: white;
+font: 12pt;
+background-color: rgb(37, 37, 37);</string>
+                       </property>
+                       <property name="currentIndex">
+                        <number>0</number>
+                       </property>
+                       <widget class="QWidget" name="page_3">
+                        <property name="geometry">
+                         <rect>
+                          <x>0</x>
+                          <y>0</y>
+                          <width>797</width>
+                          <height>240</height>
+                         </rect>
+                        </property>
+                        <attribute name="label">
+                         <string>1. Разведывательня подготовка, 4 ч.</string>
+                        </attribute>
+                        <layout class="QHBoxLayout" name="horizontalLayout_3">
+                         <item>
+                          <widget class="QTableWidget" name="table_lesson_1"/>
+                         </item>
+                        </layout>
+                       </widget>
+                       <widget class="QWidget" name="page_5">
+                        <attribute name="label">
+                         <string>2. РХБ защита, 6 ч.</string>
+                        </attribute>
+                       </widget>
+                       <widget class="QWidget" name="page_6">
+                        <attribute name="label">
+                         <string>3. Инженерная защита, 6 ч.</string>
+                        </attribute>
+                       </widget>
+                       <widget class="QWidget" name="page_7">
+                        <attribute name="label">
+                         <string>4. Первая помощь, 60 ч.</string>
+                        </attribute>
+                       </widget>
+                       <widget class="QWidget" name="page_8">
+                        <attribute name="label">
+                         <string>5 Военная топография, 4 ч.</string>
+                        </attribute>
+                       </widget>
+                       <widget class="QWidget" name="page_9">
+                        <attribute name="label">
+                         <string>6. Мобилизационная подготовка, 40 ч.</string>
+                        </attribute>
+                       </widget>
+                       <widget class="QWidget" name="page_10">
+                        <attribute name="label">
+                         <string>7. Методическая подготовка, 6 ч.</string>
+                        </attribute>
+                       </widget>
+                       <widget class="QWidget" name="page_12">
+                        <attribute name="label">
+                         <string>8. Вождение, 4 ч.</string>
+                        </attribute>
+                       </widget>
+                       <widget class="QWidget" name="page_4">
+                        <property name="geometry">
+                         <rect>
+                          <x>0</x>
+                          <y>0</y>
+                          <width>797</width>
+                          <height>240</height>
+                         </rect>
+                        </property>
+                        <attribute name="label">
+                         <string>9. Психологическая подготока, 20 ч.</string>
+                        </attribute>
+                       </widget>
+                      </widget>
+                     </item>
+                    </layout>
+                   </widget>
                   </item>
                  </layout>
                 </widget>
@@ -2114,8 +1876,8 @@ QTableWidget::item {
                         <rect>
                          <x>0</x>
                          <y>0</y>
-                         <width>100</width>
-                         <height>30</height>
+                         <width>767</width>
+                         <height>464</height>
                         </rect>
                        </property>
                        <layout class="QVBoxLayout" name="verticalLayout_24">

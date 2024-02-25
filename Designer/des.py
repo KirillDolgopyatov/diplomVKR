@@ -1,6 +1,6 @@
 # -*- coding: utf-8 -*-
 
-# Form implementation generated from reading ui file 'Designer/designerVKR.ui'
+# Form implementation generated from reading ui file 'Designer/des.ui'
 #
 # Created by: PyQt5 UI code generator 5.15.10
 #
@@ -440,169 +440,6 @@ class Ui_MainWindow(object):
         self.verticalLayout_11.setContentsMargins(0, 0, 0, 0)
         self.verticalLayout_11.setSpacing(0)
         self.verticalLayout_11.setObjectName("verticalLayout_11")
-        self.frame_4 = QtWidgets.QFrame(self.page_11)
-        self.frame_4.setStyleSheet("color: white;\n"
-"background-color: rgb(28, 28, 28)")
-        self.frame_4.setFrameShape(QtWidgets.QFrame.StyledPanel)
-        self.frame_4.setFrameShadow(QtWidgets.QFrame.Raised)
-        self.frame_4.setObjectName("frame_4")
-        self.gridLayout = QtWidgets.QGridLayout(self.frame_4)
-        self.gridLayout.setContentsMargins(3, 3, 3, 0)
-        self.gridLayout.setSpacing(0)
-        self.gridLayout.setObjectName("gridLayout")
-        self.frame_23 = QtWidgets.QFrame(self.frame_4)
-        sizePolicy = QtWidgets.QSizePolicy(QtWidgets.QSizePolicy.Expanding, QtWidgets.QSizePolicy.Expanding)
-        sizePolicy.setHorizontalStretch(0)
-        sizePolicy.setVerticalStretch(0)
-        sizePolicy.setHeightForWidth(self.frame_23.sizePolicy().hasHeightForWidth())
-        self.frame_23.setSizePolicy(sizePolicy)
-        self.frame_23.setStyleSheet("color: white;\n"
-"background-color: rgb(28, 28, 28)")
-        self.frame_23.setFrameShape(QtWidgets.QFrame.StyledPanel)
-        self.frame_23.setFrameShadow(QtWidgets.QFrame.Raised)
-        self.frame_23.setObjectName("frame_23")
-        self.verticalLayout_25 = QtWidgets.QVBoxLayout(self.frame_23)
-        self.verticalLayout_25.setContentsMargins(0, 0, 0, 0)
-        self.verticalLayout_25.setSpacing(0)
-        self.verticalLayout_25.setObjectName("verticalLayout_25")
-        self.tableWidget_1 = QtWidgets.QTableWidget(self.frame_23)
-        self.tableWidget_1.setStyleSheet(" QTableWidget {\n"
-"    }\n"
-"    QTableWidget QHeaderView::section {\n"
-"    color: black;\n"
-"\n"
-"    background-color: rgb(173, 142, 57);\n"
-"\n"
-"\n"
-"padding-left: 5px;\n"
-"padding-right: 5px;\n"
-"    }\n"
-"QTableWidget::item {\n"
-"        color:black;\n"
-"\n"
-"\n"
-"    background-color: rgb(217, 217, 217);\n"
-"\n"
-"    }")
-        self.tableWidget_1.setAlternatingRowColors(False)
-        self.tableWidget_1.setObjectName("tableWidget_1")
-        self.tableWidget_1.setColumnCount(0)
-        self.tableWidget_1.setRowCount(0)
-        self.verticalLayout_25.addWidget(self.tableWidget_1)
-        self.gridLayout.addWidget(self.frame_23, 0, 0, 1, 1)
-        self.frame_21 = QtWidgets.QFrame(self.frame_4)
-        self.frame_21.setStyleSheet("")
-        self.frame_21.setFrameShape(QtWidgets.QFrame.StyledPanel)
-        self.frame_21.setFrameShadow(QtWidgets.QFrame.Raised)
-        self.frame_21.setObjectName("frame_21")
-        self.horizontalLayout_3 = QtWidgets.QHBoxLayout(self.frame_21)
-        self.horizontalLayout_3.setContentsMargins(5, 0, 3, 5)
-        self.horizontalLayout_3.setSpacing(3)
-        self.horizontalLayout_3.setObjectName("horizontalLayout_3")
-        self.btnAdd_row = QtWidgets.QPushButton(self.frame_21)
-        self.btnAdd_row.setStyleSheet("QPushButton {\n"
-"padding: 3px;\n"
-"border-radius: 5px;\n"
-"background-color: rgba(255,255,255,100)\n"
-"}\n"
-"\n"
-"QPushButton:hover {\n"
-"background-color: rgb(50, 50, 50);\n"
-"background-color: rgba(255,255,255,150)\n"
-"}\n"
-"\n"
-"QPushButton:Pressed {\n"
-"background-color: rgb(255,255,255)\n"
-"}\n"
-"")
-        self.btnAdd_row.setText("")
-        icon9 = QtGui.QIcon()
-        icon9.addPixmap(QtGui.QPixmap(":/icons/icons/plus.svg"), QtGui.QIcon.Normal, QtGui.QIcon.Off)
-        self.btnAdd_row.setIcon(icon9)
-        self.btnAdd_row.setIconSize(QtCore.QSize(14, 14))
-        self.btnAdd_row.setObjectName("btnAdd_row")
-        self.horizontalLayout_3.addWidget(self.btnAdd_row)
-        self.btnDelete_row = QtWidgets.QPushButton(self.frame_21)
-        self.btnDelete_row.setBaseSize(QtCore.QSize(0, 0))
-        font = QtGui.QFont()
-        font.setPointSize(9)
-        self.btnDelete_row.setFont(font)
-        self.btnDelete_row.setStyleSheet("QPushButton {\n"
-"padding: 3px;\n"
-"border-radius: 5px;\n"
-"background-color: rgba(255,255,255,100)\n"
-"}\n"
-"\n"
-"QPushButton:hover {\n"
-"background-color: rgb(50, 50, 50);\n"
-"background-color: rgba(255,255,255,150)\n"
-"}\n"
-"\n"
-"QPushButton:Pressed {\n"
-"background-color: rgb(255,255,255)\n"
-"}\n"
-"")
-        self.btnDelete_row.setText("")
-        icon10 = QtGui.QIcon()
-        icon10.addPixmap(QtGui.QPixmap(":/icons/icons/minus.svg"), QtGui.QIcon.Normal, QtGui.QIcon.Off)
-        self.btnDelete_row.setIcon(icon10)
-        self.btnDelete_row.setIconSize(QtCore.QSize(14, 14))
-        self.btnDelete_row.setObjectName("btnDelete_row")
-        self.horizontalLayout_3.addWidget(self.btnDelete_row)
-        self.gridLayout.addWidget(self.frame_21, 0, 1, 1, 1, QtCore.Qt.AlignRight|QtCore.Qt.AlignTop)
-        self.frame_3 = QtWidgets.QFrame(self.frame_4)
-        self.frame_3.setStyleSheet("")
-        self.frame_3.setFrameShape(QtWidgets.QFrame.StyledPanel)
-        self.frame_3.setFrameShadow(QtWidgets.QFrame.Raised)
-        self.frame_3.setObjectName("frame_3")
-        self.verticalLayout_19 = QtWidgets.QVBoxLayout(self.frame_3)
-        self.verticalLayout_19.setContentsMargins(0, 5, 5, 3)
-        self.verticalLayout_19.setSpacing(3)
-        self.verticalLayout_19.setObjectName("verticalLayout_19")
-        self.btnAdd_column = QtWidgets.QPushButton(self.frame_3)
-        self.btnAdd_column.setStyleSheet("QPushButton {\n"
-"padding: 3px;\n"
-"border-radius: 5px;\n"
-"background-color: rgba(255,255,255,100)\n"
-"}\n"
-"\n"
-"QPushButton:hover {\n"
-"background-color: rgb(50, 50, 50);\n"
-"background-color: rgba(255,255,255,150)\n"
-"}\n"
-"\n"
-"QPushButton:Pressed {\n"
-"background-color: rgb(255,255,255)\n"
-"}\n"
-"")
-        self.btnAdd_column.setText("")
-        self.btnAdd_column.setIcon(icon9)
-        self.btnAdd_column.setIconSize(QtCore.QSize(14, 14))
-        self.btnAdd_column.setObjectName("btnAdd_column")
-        self.verticalLayout_19.addWidget(self.btnAdd_column)
-        self.btnDelete_column = QtWidgets.QPushButton(self.frame_3)
-        self.btnDelete_column.setStyleSheet("QPushButton {\n"
-"padding: 3px;\n"
-"border-radius: 5px;\n"
-"background-color: rgba(255,255,255,100)\n"
-"}\n"
-"\n"
-"QPushButton:hover {\n"
-"background-color: rgb(50, 50, 50);\n"
-"background-color: rgba(255,255,255,150)\n"
-"}\n"
-"\n"
-"QPushButton:Pressed {\n"
-"background-color: rgb(255,255,255)\n"
-"}\n"
-"")
-        self.btnDelete_column.setText("")
-        self.btnDelete_column.setIcon(icon10)
-        self.btnDelete_column.setIconSize(QtCore.QSize(14, 14))
-        self.btnDelete_column.setObjectName("btnDelete_column")
-        self.verticalLayout_19.addWidget(self.btnDelete_column)
-        self.gridLayout.addWidget(self.frame_3, 1, 0, 1, 2, QtCore.Qt.AlignLeft|QtCore.Qt.AlignBottom)
-        self.verticalLayout_11.addWidget(self.frame_4)
         self.MainStack.addWidget(self.page_11)
         self.page_22 = QtWidgets.QWidget()
         self.page_22.setObjectName("page_22")
@@ -621,10 +458,8 @@ class Ui_MainWindow(object):
         self.verticalLayout_20.setContentsMargins(3, 3, 3, 0)
         self.verticalLayout_20.setSpacing(0)
         self.verticalLayout_20.setObjectName("verticalLayout_20")
-        self.tableWidget_2 = QtWidgets.QTableWidget(self.frame_15)
-        font = QtGui.QFont()
-        self.tableWidget_2.setFont(font)
-        self.tableWidget_2.setStyleSheet(" QTableWidget {\n"
+        self.table_personnel = QtWidgets.QTableWidget(self.frame_15)
+        self.table_personnel.setStyleSheet(" QTableWidget {\n"
 "    }\n"
 "    QTableWidget QHeaderView::section {\n"
 "    color: black;\n"
@@ -642,10 +477,10 @@ class Ui_MainWindow(object):
 "    background-color: rgb(217, 217, 217);\n"
 "\n"
 "    }")
-        self.tableWidget_2.setObjectName("tableWidget_2")
-        self.tableWidget_2.setColumnCount(0)
-        self.tableWidget_2.setRowCount(0)
-        self.verticalLayout_20.addWidget(self.tableWidget_2)
+        self.table_personnel.setObjectName("table_personnel")
+        self.table_personnel.setColumnCount(0)
+        self.table_personnel.setRowCount(0)
+        self.verticalLayout_20.addWidget(self.table_personnel)
         self.verticalLayout_12.addWidget(self.frame_15)
         self.frame_19 = QtWidgets.QFrame(self.page_22)
         self.frame_19.setMinimumSize(QtCore.QSize(0, 40))
@@ -697,13 +532,13 @@ class Ui_MainWindow(object):
         self.horizontalLayout_7.setContentsMargins(0, 0, 0, 0)
         self.horizontalLayout_7.setSpacing(0)
         self.horizontalLayout_7.setObjectName("horizontalLayout_7")
-        self.lineFIO_22 = QtWidgets.QLineEdit(self.frame_22)
-        self.lineFIO_22.setMinimumSize(QtCore.QSize(0, 40))
+        self.le_fio = QtWidgets.QLineEdit(self.frame_22)
+        self.le_fio.setMinimumSize(QtCore.QSize(0, 40))
         font = QtGui.QFont()
         font.setFamily("Segoe UI Light")
         font.setPointSize(11)
-        self.lineFIO_22.setFont(font)
-        self.lineFIO_22.setStyleSheet("QLineEdit {\n"
+        self.le_fio.setFont(font)
+        self.le_fio.setStyleSheet("QLineEdit {\n"
 "background-color: rgb(37, 37, 37);\n"
 "border-radius: 5px;\n"
 "border-style: solid;\n"
@@ -719,8 +554,8 @@ class Ui_MainWindow(object):
 "    background-color: rgb(120, 120, 120);\n"
 "}\n"
 "")
-        self.lineFIO_22.setObjectName("lineFIO_22")
-        self.horizontalLayout_7.addWidget(self.lineFIO_22)
+        self.le_fio.setObjectName("le_fio")
+        self.horizontalLayout_7.addWidget(self.le_fio)
         self.verticalLayout_21.addWidget(self.frame_22)
         self.frame_16 = QtWidgets.QFrame(self.frame_17)
         self.frame_16.setFrameShape(QtWidgets.QFrame.StyledPanel)
@@ -730,13 +565,13 @@ class Ui_MainWindow(object):
         self.horizontalLayout_10.setContentsMargins(0, 0, 0, 0)
         self.horizontalLayout_10.setSpacing(10)
         self.horizontalLayout_10.setObjectName("horizontalLayout_10")
-        self.lineGroup_22 = QtWidgets.QLineEdit(self.frame_16)
-        self.lineGroup_22.setMinimumSize(QtCore.QSize(0, 30))
+        self.le_zvanie = QtWidgets.QLineEdit(self.frame_16)
+        self.le_zvanie.setMinimumSize(QtCore.QSize(0, 30))
         font = QtGui.QFont()
         font.setFamily("Segoe UI Light")
         font.setPointSize(11)
-        self.lineGroup_22.setFont(font)
-        self.lineGroup_22.setStyleSheet("QLineEdit {\n"
+        self.le_zvanie.setFont(font)
+        self.le_zvanie.setStyleSheet("QLineEdit {\n"
 "background-color: rgb(37, 37, 37);\n"
 "border-radius: 5px;\n"
 "border-style: solid;\n"
@@ -752,15 +587,15 @@ class Ui_MainWindow(object):
 "    background-color: rgb(120, 120, 120);\n"
 "}\n"
 "")
-        self.lineGroup_22.setObjectName("lineGroup_22")
-        self.horizontalLayout_10.addWidget(self.lineGroup_22)
-        self.lineGpa_22 = QtWidgets.QLineEdit(self.frame_16)
-        self.lineGpa_22.setMinimumSize(QtCore.QSize(0, 30))
+        self.le_zvanie.setObjectName("le_zvanie")
+        self.horizontalLayout_10.addWidget(self.le_zvanie)
+        self.le_subunit = QtWidgets.QLineEdit(self.frame_16)
+        self.le_subunit.setMinimumSize(QtCore.QSize(0, 30))
         font = QtGui.QFont()
         font.setFamily("Segoe UI Light")
         font.setPointSize(11)
-        self.lineGpa_22.setFont(font)
-        self.lineGpa_22.setStyleSheet("QLineEdit {\n"
+        self.le_subunit.setFont(font)
+        self.le_subunit.setStyleSheet("QLineEdit {\n"
 "background-color: rgb(37, 37, 37);\n"
 "border-radius: 5px;\n"
 "border-style: solid;\n"
@@ -776,8 +611,32 @@ class Ui_MainWindow(object):
 "    background-color: rgb(120, 120, 120);\n"
 "}\n"
 "")
-        self.lineGpa_22.setObjectName("lineGpa_22")
-        self.horizontalLayout_10.addWidget(self.lineGpa_22)
+        self.le_subunit.setObjectName("le_subunit")
+        self.horizontalLayout_10.addWidget(self.le_subunit)
+        self.le_duty = QtWidgets.QLineEdit(self.frame_16)
+        self.le_duty.setMinimumSize(QtCore.QSize(0, 30))
+        font = QtGui.QFont()
+        font.setFamily("Segoe UI Light")
+        font.setPointSize(11)
+        self.le_duty.setFont(font)
+        self.le_duty.setStyleSheet("QLineEdit {\n"
+"background-color: rgb(37, 37, 37);\n"
+"border-radius: 5px;\n"
+"border-style: solid;\n"
+"border-width: 0.5px;\n"
+"padding-left: 15px;\n"
+"color: rgb(255, 255, 255);\n"
+"border: none;\n"
+"}\n"
+"QLineEdit:hover {\n"
+"    background-color: rgb(55, 55, 55);\n"
+"}\n"
+"QLineEdit:Pressed {\n"
+"    background-color: rgb(120, 120, 120);\n"
+"}\n"
+"")
+        self.le_duty.setObjectName("le_duty")
+        self.horizontalLayout_10.addWidget(self.le_duty)
         self.verticalLayout_21.addWidget(self.frame_16)
         self.horizontalLayout_11.addWidget(self.frame_17)
         self.frame_18 = QtWidgets.QFrame(self.frame_6)
@@ -788,9 +647,9 @@ class Ui_MainWindow(object):
         self.verticalLayout_16.setContentsMargins(10, 10, 0, 0)
         self.verticalLayout_16.setSpacing(10)
         self.verticalLayout_16.setObjectName("verticalLayout_16")
-        self.btnDeleteFio_22 = QtWidgets.QPushButton(self.frame_18)
-        self.btnDeleteFio_22.setMinimumSize(QtCore.QSize(100, 30))
-        self.btnDeleteFio_22.setStyleSheet("QPushButton {\n"
+        self.btn_delete_personnel = QtWidgets.QPushButton(self.frame_18)
+        self.btn_delete_personnel.setMinimumSize(QtCore.QSize(100, 30))
+        self.btn_delete_personnel.setStyleSheet("QPushButton {\n"
 "color: white;\n"
 "padding: 5px;\n"
 "border-radius: 5px;\n"
@@ -806,11 +665,11 @@ class Ui_MainWindow(object):
 "background-color: rgb(255,255,255)\n"
 "}\n"
 "")
-        self.btnDeleteFio_22.setObjectName("btnDeleteFio_22")
-        self.verticalLayout_16.addWidget(self.btnDeleteFio_22)
-        self.btnSavePerson_22 = QtWidgets.QPushButton(self.frame_18)
-        self.btnSavePerson_22.setMinimumSize(QtCore.QSize(100, 30))
-        self.btnSavePerson_22.setStyleSheet("QPushButton {\n"
+        self.btn_delete_personnel.setObjectName("btn_delete_personnel")
+        self.verticalLayout_16.addWidget(self.btn_delete_personnel)
+        self.btn_save_personnel = QtWidgets.QPushButton(self.frame_18)
+        self.btn_save_personnel.setMinimumSize(QtCore.QSize(100, 30))
+        self.btn_save_personnel.setStyleSheet("QPushButton {\n"
 "color: white;\n"
 "padding: 5px;\n"
 "border-radius: 5px;\n"
@@ -826,8 +685,8 @@ class Ui_MainWindow(object):
 "background-color: rgb(255,255,255)\n"
 "}\n"
 "")
-        self.btnSavePerson_22.setObjectName("btnSavePerson_22")
-        self.verticalLayout_16.addWidget(self.btnSavePerson_22)
+        self.btn_save_personnel.setObjectName("btn_save_personnel")
+        self.verticalLayout_16.addWidget(self.btn_save_personnel)
         self.horizontalLayout_11.addWidget(self.frame_18)
         self.verticalLayout_22.addWidget(self.frame_6)
         self.verticalLayout_12.addWidget(self.frame_19)
@@ -842,7 +701,7 @@ class Ui_MainWindow(object):
         self.scrollArea.setWidgetResizable(True)
         self.scrollArea.setObjectName("scrollArea")
         self.scrollAreaWidgetContents = QtWidgets.QWidget()
-        self.scrollAreaWidgetContents.setGeometry(QtCore.QRect(0, 0, 100, 30))
+        self.scrollAreaWidgetContents.setGeometry(QtCore.QRect(0, 0, 815, 582))
         self.scrollAreaWidgetContents.setObjectName("scrollAreaWidgetContents")
         self.verticalLayout_23 = QtWidgets.QVBoxLayout(self.scrollAreaWidgetContents)
         self.verticalLayout_23.setContentsMargins(0, 0, 0, 0)
@@ -850,6 +709,50 @@ class Ui_MainWindow(object):
         self.verticalLayout_23.setObjectName("verticalLayout_23")
         self.widget_2 = QtWidgets.QWidget(self.scrollAreaWidgetContents)
         self.widget_2.setObjectName("widget_2")
+        self.verticalLayout_19 = QtWidgets.QVBoxLayout(self.widget_2)
+        self.verticalLayout_19.setObjectName("verticalLayout_19")
+        self.toolBox = QtWidgets.QToolBox(self.widget_2)
+        self.toolBox.setStyleSheet("color: white;\n"
+"font: 12pt;\n"
+"background-color: rgb(37, 37, 37);")
+        self.toolBox.setObjectName("toolBox")
+        self.page_3 = QtWidgets.QWidget()
+        self.page_3.setGeometry(QtCore.QRect(0, 0, 797, 240))
+        self.page_3.setObjectName("page_3")
+        self.horizontalLayout_3 = QtWidgets.QHBoxLayout(self.page_3)
+        self.horizontalLayout_3.setObjectName("horizontalLayout_3")
+        self.table_lesson_1 = QtWidgets.QTableWidget(self.page_3)
+        self.table_lesson_1.setObjectName("table_lesson_1")
+        self.table_lesson_1.setColumnCount(0)
+        self.table_lesson_1.setRowCount(0)
+        self.horizontalLayout_3.addWidget(self.table_lesson_1)
+        self.toolBox.addItem(self.page_3, "")
+        self.page_5 = QtWidgets.QWidget()
+        self.page_5.setObjectName("page_5")
+        self.toolBox.addItem(self.page_5, "")
+        self.page_6 = QtWidgets.QWidget()
+        self.page_6.setObjectName("page_6")
+        self.toolBox.addItem(self.page_6, "")
+        self.page_7 = QtWidgets.QWidget()
+        self.page_7.setObjectName("page_7")
+        self.toolBox.addItem(self.page_7, "")
+        self.page_8 = QtWidgets.QWidget()
+        self.page_8.setObjectName("page_8")
+        self.toolBox.addItem(self.page_8, "")
+        self.page_9 = QtWidgets.QWidget()
+        self.page_9.setObjectName("page_9")
+        self.toolBox.addItem(self.page_9, "")
+        self.page_10 = QtWidgets.QWidget()
+        self.page_10.setObjectName("page_10")
+        self.toolBox.addItem(self.page_10, "")
+        self.page_12 = QtWidgets.QWidget()
+        self.page_12.setObjectName("page_12")
+        self.toolBox.addItem(self.page_12, "")
+        self.page_4 = QtWidgets.QWidget()
+        self.page_4.setGeometry(QtCore.QRect(0, 0, 797, 240))
+        self.page_4.setObjectName("page_4")
+        self.toolBox.addItem(self.page_4, "")
+        self.verticalLayout_19.addWidget(self.toolBox)
         self.verticalLayout_23.addWidget(self.widget_2)
         self.scrollArea.setWidget(self.scrollAreaWidgetContents)
         self.verticalLayout_13.addWidget(self.scrollArea)
@@ -968,9 +871,9 @@ class Ui_MainWindow(object):
         self.pushButton_2.setStyleSheet("text-align: left;\n"
 "color: rgb(139, 211, 206);\n"
 "")
-        icon11 = QtGui.QIcon()
-        icon11.addPixmap(QtGui.QPixmap(":/icons/icons/title.png"), QtGui.QIcon.Normal, QtGui.QIcon.Off)
-        self.pushButton_2.setIcon(icon11)
+        icon9 = QtGui.QIcon()
+        icon9.addPixmap(QtGui.QPixmap(":/icons/icons/title.png"), QtGui.QIcon.Normal, QtGui.QIcon.Off)
+        self.pushButton_2.setIcon(icon9)
         self.pushButton_2.setIconSize(QtCore.QSize(40, 40))
         self.pushButton_2.setObjectName("pushButton_2")
         self.verticalLayout_15.addWidget(self.pushButton_2)
@@ -1007,7 +910,7 @@ class Ui_MainWindow(object):
         self.scrollArea_2.setWidgetResizable(True)
         self.scrollArea_2.setObjectName("scrollArea_2")
         self.scrollAreaWC = QtWidgets.QWidget()
-        self.scrollAreaWC.setGeometry(QtCore.QRect(0, 0, 767, 472))
+        self.scrollAreaWC.setGeometry(QtCore.QRect(0, 0, 767, 464))
         self.scrollAreaWC.setObjectName("scrollAreaWC")
         self.verticalLayout_24 = QtWidgets.QVBoxLayout(self.scrollAreaWC)
         self.verticalLayout_24.setObjectName("verticalLayout_24")
@@ -1081,7 +984,9 @@ class Ui_MainWindow(object):
 "}\n"
 "")
         self.btn_new_task.setText("")
-        self.btn_new_task.setIcon(icon9)
+        icon10 = QtGui.QIcon()
+        icon10.addPixmap(QtGui.QPixmap(":/icons/icons/plus.svg"), QtGui.QIcon.Normal, QtGui.QIcon.Off)
+        self.btn_new_task.setIcon(icon10)
         self.btn_new_task.setIconSize(QtCore.QSize(30, 30))
         self.btn_new_task.setObjectName("btn_new_task")
         self.horizontalLayout_5.addWidget(self.btn_new_task)
@@ -1128,7 +1033,8 @@ class Ui_MainWindow(object):
 
         self.retranslateUi(MainWindow)
         self.stackedWidgetLeftMenu.setCurrentIndex(0)
-        self.MainStack.setCurrentIndex(3)
+        self.MainStack.setCurrentIndex(1)
+        self.toolBox.setCurrentIndex(0)
         QtCore.QMetaObject.connectSlotsByName(MainWindow)
 
     def retranslateUi(self, MainWindow):
@@ -1148,15 +1054,21 @@ class Ui_MainWindow(object):
         self.btnTask.setText(_translate("MainWindow", "Задачи"))
         self.btnCreateTask.setText(_translate("MainWindow", "Создать"))
         self.btnDeleteTask.setText(_translate("MainWindow", "Удалить"))
-        self.btnAdd_row.setToolTip(_translate("MainWindow", "Удаляет выбранную строк"))
-        self.btnDelete_row.setToolTip(_translate("MainWindow", "Удаляет выбранную строк"))
-        self.btnAdd_column.setToolTip(_translate("MainWindow", "Удаляет выбранную строк"))
-        self.btnDelete_column.setToolTip(_translate("MainWindow", "Удаляет выбранную строк"))
-        self.lineFIO_22.setPlaceholderText(_translate("MainWindow", "Фамилия Имя Отчество"))
-        self.lineGroup_22.setPlaceholderText(_translate("MainWindow", "№ группы"))
-        self.lineGpa_22.setPlaceholderText(_translate("MainWindow", "Средний балл"))
-        self.btnDeleteFio_22.setText(_translate("MainWindow", "Удалить"))
-        self.btnSavePerson_22.setText(_translate("MainWindow", "Сохранить"))
+        self.le_fio.setPlaceholderText(_translate("MainWindow", "Фамилия Имя Отчество"))
+        self.le_zvanie.setPlaceholderText(_translate("MainWindow", "Воинское звание"))
+        self.le_subunit.setPlaceholderText(_translate("MainWindow", "Подразделение"))
+        self.le_duty.setPlaceholderText(_translate("MainWindow", "Должность"))
+        self.btn_delete_personnel.setText(_translate("MainWindow", "Удалить"))
+        self.btn_save_personnel.setText(_translate("MainWindow", "Сохранить"))
+        self.toolBox.setItemText(self.toolBox.indexOf(self.page_3), _translate("MainWindow", "1. Разведывательня подготовка, 4 ч."))
+        self.toolBox.setItemText(self.toolBox.indexOf(self.page_5), _translate("MainWindow", "2. РХБ защита, 6 ч."))
+        self.toolBox.setItemText(self.toolBox.indexOf(self.page_6), _translate("MainWindow", "3. Инженерная защита, 6 ч."))
+        self.toolBox.setItemText(self.toolBox.indexOf(self.page_7), _translate("MainWindow", "4. Первая помощь, 60 ч."))
+        self.toolBox.setItemText(self.toolBox.indexOf(self.page_8), _translate("MainWindow", "5 Военная топография, 4 ч."))
+        self.toolBox.setItemText(self.toolBox.indexOf(self.page_9), _translate("MainWindow", "6. Мобилизационная подготовка, 40 ч."))
+        self.toolBox.setItemText(self.toolBox.indexOf(self.page_10), _translate("MainWindow", "7. Методическая подготовка, 6 ч."))
+        self.toolBox.setItemText(self.toolBox.indexOf(self.page_12), _translate("MainWindow", "8. Вождение, 4 ч."))
+        self.toolBox.setItemText(self.toolBox.indexOf(self.page_4), _translate("MainWindow", "9. Психологическая подготока, 20 ч."))
         self.lineTopic.setPlaceholderText(_translate("MainWindow", "Введите тему, которую хотите добавить"))
         self.btnSaveTopic.setText(_translate("MainWindow", "Сохранить"))
         self.btnSaveTopic.setShortcut(_translate("MainWindow", "Return"))
