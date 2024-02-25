@@ -20,7 +20,7 @@ class MainWindow(QMainWindow):
 
         self.db_connection = sqlite3.connect('personnel.db')
         self.cursor = self.db_connection.cursor()
-        self.save_data_to_sqlite()
+        self.load_data_from_sqlite()
 
     ####################################################################################################################
 
@@ -47,6 +47,22 @@ class MainWindow(QMainWindow):
                               VALUES (?, ?, ?, ?)''', (fio, rank, subunit, duty))
 
         conn.commit()
+        conn.close()
+
+    def load_data_from_sqlite(self):
+        conn = sqlite3.connect('your_database_name.db')
+        cursor = conn.cursor()
+
+        cursor.execute('''SELECT fio, rank, subunit, duty FROM personnel''')
+        rows = cursor.fetchall()
+
+        self.ui.table_personnel.setRowCount(0)  # Очистка таблицы перед заполнением
+        for row in rows:
+            rowCount = self.ui.table_personnel.rowCount()
+            self.ui.table_personnel.insertRow(rowCount)
+            for i, value in enumerate(row):
+                self.ui.table_personnel.setItem(rowCount, i, QTableWidgetItem(str(value)))
+
         conn.close()
 
     def function_switch_between_stack_widgets(self):
@@ -115,6 +131,11 @@ class MainWindow(QMainWindow):
                 QMessageBox.warning(None, "Ошибка", "Таблица пустая")
 
     ####################################################################################################################
+    def closeEvent(self, event):
+        # Вызывается при закрытии приложения
+        self.save_data()  # сохраняем данные с таблиц
+        self.save_layout()  # сохраняем данные с виджетов тем
+        event.accept()
 
 
 if __name__ == "__main__":
