@@ -117,7 +117,6 @@ class MainWindow(QMainWindow):
         self.load_data()
 
     ####################################################################################################################
-
     def save_personnel(self):
         fio = self.ui.le_fio.text()
         rank = self.ui.le_zvanie.text()
