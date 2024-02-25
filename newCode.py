@@ -1,15 +1,12 @@
 import sqlite3
 import sys
 
-from PyQt5.QtWidgets import (QApplication, QMainWindow, QTableWidgetItem, QHeaderView, QMessageBox)
+from PyQt5.QtWidgets import QApplication, QMainWindow, QTableWidgetItem, QHeaderView, QMessageBox
 
 from Designer.des import Ui_MainWindow
 
 
-########################################################################################################################
-########################################################################################################################
 class MainWindow(QMainWindow):
-
     def __init__(self):
         super().__init__()
         self.ui = Ui_MainWindow()
@@ -18,17 +15,20 @@ class MainWindow(QMainWindow):
         self.function_switch_between_stack_widgets()
         self.function_add_table_personnel()
 
+        # Corrected the database connection string
         self.db_connection = sqlite3.connect('personnel.db')
         self.cursor = self.db_connection.cursor()
         self.load_data_from_sqlite()
 
-    ####################################################################################################################
+        # Connect the itemChanged signal to save_data_to_sqlite method
+        self.ui.table_personnel.itemChanged.connect(self.save_data_to_sqlite)
 
     def save_data_to_sqlite(self):
-        conn = sqlite3.connect('your_database_name.db')
+        # Use the correct database connection
+        conn = sqlite3.connect('personnel.db')
         cursor = conn.cursor()
 
-        # Создание таблицы, если ее еще нет
+        # Create the table if it doesn't exist
         cursor.execute('''CREATE TABLE IF NOT EXISTS personnel (
                             fio TEXT,
                             rank TEXT,
@@ -36,12 +36,15 @@ class MainWindow(QMainWindow):
                             duty TEXT
                         )''')
 
-        # Получение данных из таблицы и вставка их в базу данных SQLite
+        # Clear existing data to prevent duplication
+        cursor.execute('DELETE FROM personnel')
+
+        # Insert new data from the table
         for i in range(self.ui.table_personnel.rowCount()):
-            fio = self.ui.table_personnel.item(i, 0).text()
-            rank = self.ui.table_personnel.item(i, 1).text()
-            subunit = self.ui.table_personnel.item(i, 2).text()
-            duty = self.ui.table_personnel.item(i, 3).text()
+            fio = self.ui.table_personnel.item(i, 0).text() if self.ui.table_personnel.item(i, 0) else ''
+            rank = self.ui.table_personnel.item(i, 1).text() if self.ui.table_personnel.item(i, 1) else ''
+            subunit = self.ui.table_personnel.item(i, 2).text() if self.ui.table_personnel.item(i, 2) else ''
+            duty = self.ui.table_personnel.item(i, 3).text() if self.ui.table_personnel.item(i, 3) else ''
 
             cursor.execute('''INSERT INTO personnel (fio, rank, subunit, duty)
                               VALUES (?, ?, ?, ?)''', (fio, rank, subunit, duty))
@@ -50,8 +53,16 @@ class MainWindow(QMainWindow):
         conn.close()
 
     def load_data_from_sqlite(self):
-        conn = sqlite3.connect('your_database_name.db')
+        conn = sqlite3.connect('personnel.db')  # Убедитесь, что используете правильное имя файла базы данных
         cursor = conn.cursor()
+
+        # Создаем таблицу, если она не существует
+        cursor.execute('''CREATE TABLE IF NOT EXISTS personnel (
+                            fio TEXT,
+                            rank TEXT,
+                            subunit TEXT,
+                            duty TEXT
+                        )''')
 
         cursor.execute('''SELECT fio, rank, subunit, duty FROM personnel''')
         rows = cursor.fetchall()
@@ -82,14 +93,11 @@ class MainWindow(QMainWindow):
 
         self.table_widget()
 
-    def table_widget(self):  # создание таблиц
-        # таблица личного состава
+    def table_widget(self):
         self.ui.table_personnel.setRowCount(1)
         self.ui.table_personnel.setColumnCount(4)
         self.ui.table_personnel.setHorizontalHeaderLabels(['ФИО', 'В/зв', 'Подразделение', 'Должность'])
         self.ui.table_personnel.horizontalHeader().setSectionResizeMode(QHeaderView.Stretch)
-
-    ####################################################################################################################
 
     def save_personnel(self):
         fio = self.ui.le_fio.text()
@@ -131,11 +139,6 @@ class MainWindow(QMainWindow):
                 QMessageBox.warning(None, "Ошибка", "Таблица пустая")
 
     ####################################################################################################################
-    def closeEvent(self, event):
-        # Вызывается при закрытии приложения
-        self.save_data()  # сохраняем данные с таблиц
-        self.save_layout()  # сохраняем данные с виджетов тем
-        event.accept()
 
 
 if __name__ == "__main__":
