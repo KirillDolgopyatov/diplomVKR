@@ -32,7 +32,7 @@ class MainWindow(QMainWindow):  # Определение класса MainWindow
 
     @staticmethod
     def load_count_tem():
-        count_tem = [3, 7, 5]
+        count_tem = [3, 4, 5, 10, 4, 3, 5, 12]
         while True:  # Создаем бесконечный цикл
             for num in count_tem:
                 yield num  # Возвращаем число из списка и приостанавливаем выполнение
@@ -43,13 +43,14 @@ class MainWindow(QMainWindow):  # Определение класса MainWindow
         count_tem = self.load_count_tem()
         for i in range(self.ui.toolBox.count()):
             page = self.ui.toolBox.widget(i)
-            tableWidget = QTableWidget(len(data), int(count_tem))  # Создаем таблицу с одним столбцом
+            num_columns = next(count_tem)  # Получаем количество столбцов из генератора
+            # Увеличиваем количество столбцов на 1 для учета столбца "Обучаемые"
+            tableWidget = QTableWidget(len(data), num_columns + 1)  # Создаем таблицу с нужным количеством столбцов
             tableWidget.setStyleSheet("color:black;")
-            tableWidget.setHorizontalHeaderLabels(['Обучаемые'])
-
+            # Учитываем столбец "Обучаемые" при генерации заголовков
+            tableWidget.setHorizontalHeaderLabels(['Обучаемые'] + [str(i) for i in range(1, num_columns + 1)])
             for row, item in enumerate(data):
                 tableWidget.setItem(row, 0, QTableWidgetItem(item))
-
             # Добавляем созданную таблицу на страницу
             page.layout().addWidget(tableWidget)
 
