@@ -54,6 +54,7 @@ class MainWindow(QMainWindow):  # Определение класса MainWindow
                         data = item.text() if item else ""
                         cursor.execute('''INSERT INTO table_data (page_index, row_index, column_index, data)
                                           VALUES (?, ?, ?, ?)''', (page_index, row, column, data))
+
         self.db_connection.commit()
 
     def load_tables_data(self):
