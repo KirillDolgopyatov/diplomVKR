@@ -941,7 +941,7 @@ QPushButton:Pressed {
 background-color: rgb(28, 28, 28);}</string>
             </property>
             <property name="currentIndex">
-             <number>1</number>
+             <number>2</number>
             </property>
             <widget class="QWidget" name="page_11">
              <layout class="QVBoxLayout" name="verticalLayout_11">
@@ -1020,19 +1020,13 @@ background-color: rgb(28, 28, 28)</string>
     }
     QTableWidget QHeaderView::section {
     color: black;
-
 	background-color: rgb(173, 142, 57);
-
-
 padding-left: 5px;
 padding-right: 5px;
     }
 QTableWidget::item {
 		color:black;
-
-
 	background-color: rgb(217, 217, 217);
-
     }</string>
                    </property>
                   </widget>
@@ -1519,7 +1513,7 @@ font: 12pt;
 background-color: rgb(37, 37, 37);</string>
                        </property>
                        <property name="currentIndex">
-                        <number>0</number>
+                        <number>4</number>
                        </property>
                        <widget class="QWidget" name="page_3">
                         <property name="geometry">
@@ -1535,44 +1529,135 @@ background-color: rgb(37, 37, 37);</string>
                         </attribute>
                         <layout class="QHBoxLayout" name="horizontalLayout_3">
                          <item>
-                          <widget class="QTableWidget" name="table_lesson_1"/>
+                          <layout class="QVBoxLayout" name="verticalLayout_26"/>
                          </item>
                         </layout>
                        </widget>
                        <widget class="QWidget" name="page_5">
+                        <property name="geometry">
+                         <rect>
+                          <x>0</x>
+                          <y>0</y>
+                          <width>797</width>
+                          <height>240</height>
+                         </rect>
+                        </property>
                         <attribute name="label">
                          <string>2. РХБ защита, 6 ч.</string>
                         </attribute>
+                        <layout class="QHBoxLayout" name="horizontalLayout_12">
+                         <item>
+                          <layout class="QVBoxLayout" name="verticalLayout_27"/>
+                         </item>
+                        </layout>
                        </widget>
                        <widget class="QWidget" name="page_6">
+                        <property name="geometry">
+                         <rect>
+                          <x>0</x>
+                          <y>0</y>
+                          <width>797</width>
+                          <height>240</height>
+                         </rect>
+                        </property>
                         <attribute name="label">
                          <string>3. Инженерная защита, 6 ч.</string>
                         </attribute>
+                        <layout class="QHBoxLayout" name="horizontalLayout_17">
+                         <item>
+                          <layout class="QVBoxLayout" name="verticalLayout_28"/>
+                         </item>
+                        </layout>
                        </widget>
                        <widget class="QWidget" name="page_7">
+                        <property name="geometry">
+                         <rect>
+                          <x>0</x>
+                          <y>0</y>
+                          <width>797</width>
+                          <height>240</height>
+                         </rect>
+                        </property>
                         <attribute name="label">
                          <string>4. Первая помощь, 60 ч.</string>
                         </attribute>
+                        <layout class="QHBoxLayout" name="horizontalLayout_16">
+                         <item>
+                          <layout class="QVBoxLayout" name="verticalLayout_29"/>
+                         </item>
+                        </layout>
                        </widget>
                        <widget class="QWidget" name="page_8">
+                        <property name="geometry">
+                         <rect>
+                          <x>0</x>
+                          <y>0</y>
+                          <width>797</width>
+                          <height>240</height>
+                         </rect>
+                        </property>
                         <attribute name="label">
-                         <string>5 Военная топография, 4 ч.</string>
+                         <string>5. Военная топография, 4 ч.</string>
                         </attribute>
+                        <layout class="QHBoxLayout" name="horizontalLayout_15">
+                         <item>
+                          <layout class="QVBoxLayout" name="verticalLayout_30"/>
+                         </item>
+                        </layout>
                        </widget>
                        <widget class="QWidget" name="page_9">
+                        <property name="geometry">
+                         <rect>
+                          <x>0</x>
+                          <y>0</y>
+                          <width>797</width>
+                          <height>240</height>
+                         </rect>
+                        </property>
                         <attribute name="label">
                          <string>6. Мобилизационная подготовка, 40 ч.</string>
                         </attribute>
+                        <layout class="QHBoxLayout" name="horizontalLayout_14">
+                         <item>
+                          <layout class="QVBoxLayout" name="verticalLayout_31"/>
+                         </item>
+                        </layout>
                        </widget>
                        <widget class="QWidget" name="page_10">
+                        <property name="geometry">
+                         <rect>
+                          <x>0</x>
+                          <y>0</y>
+                          <width>797</width>
+                          <height>240</height>
+                         </rect>
+                        </property>
                         <attribute name="label">
                          <string>7. Методическая подготовка, 6 ч.</string>
                         </attribute>
+                        <layout class="QHBoxLayout" name="horizontalLayout_13">
+                         <item>
+                          <layout class="QVBoxLayout" name="verticalLayout_25"/>
+                         </item>
+                        </layout>
                        </widget>
                        <widget class="QWidget" name="page_12">
+                        <property name="geometry">
+                         <rect>
+                          <x>0</x>
+                          <y>0</y>
+                          <width>797</width>
+                          <height>240</height>
+                         </rect>
+                        </property>
                         <attribute name="label">
                          <string>8. Вождение, 4 ч.</string>
                         </attribute>
+                        <layout class="QHBoxLayout" name="horizontalLayout_18">
+                         <item>
+                          <layout class="QVBoxLayout" name="verticalLayout_32"/>
+                         </item>
+                        </layout>
                        </widget>
                        <widget class="QWidget" name="page_4">
                         <property name="geometry">
@@ -1586,6 +1671,11 @@ background-color: rgb(37, 37, 37);</string>
                         <attribute name="label">
                          <string>9. Психологическая подготока, 20 ч.</string>
                         </attribute>
+                        <layout class="QHBoxLayout" name="horizontalLayout_19">
+                         <item>
+                          <layout class="QVBoxLayout" name="verticalLayout_33"/>
+                         </item>
+                        </layout>
                        </widget>
                       </widget>
                      </item>
@@ -1876,8 +1966,8 @@ QTableWidget::item {
                         <rect>
                          <x>0</x>
                          <y>0</y>
-                         <width>767</width>
-                         <height>464</height>
+                         <width>52</width>
+                         <height>18</height>
                         </rect>
                        </property>
                        <layout class="QVBoxLayout" name="verticalLayout_24">
@@ -2148,6 +2238,7 @@ background-color: rgb(255,255,255)
  </widget>
  <resources>
   <include location="res_rc.qrc"/>
+  <include location="../../../.designer/backup/res_rc.qrc"/>
  </resources>
  <connections/>
 </ui>
