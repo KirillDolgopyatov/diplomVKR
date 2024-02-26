@@ -36,8 +36,10 @@ class MainWindow(QMainWindow):  # Определение класса MainWindow
 
         for i in range(self.ui.toolBox.count()):
             page = self.ui.toolBox.widget(i)
-            tableWidget = QTableWidget(len(data), 1)  # Создаем таблицу с одним столбцом
+            tableWidget = QTableWidget(len(data), 3)  # Создаем таблицу с одним столбцом
             tableWidget.setStyleSheet("color:black;")
+            tableWidget.setColumnWidth(0, 400)
+
             tableWidget.setHorizontalHeaderLabels(['Обучаемые'])
 
             for row, item in enumerate(data):
@@ -193,7 +195,7 @@ class MainWindow(QMainWindow):  # Определение класса MainWindow
     def delete_personnel(self):
         selected_ranges = self.ui.table_personnel.selectedRanges()
         if len(selected_ranges) > 0:
-            conn = sqlite3.connect('personnel.db')
+            conn = sqlite3.connect('saveData/personnel.db')
             cursor = conn.cursor()
 
             for selected_range in selected_ranges:
