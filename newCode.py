@@ -25,6 +25,69 @@ class MainWindow(QMainWindow):  # Определение класса MainWindow
         self.setup_completer()
         self.create_tables_in_toolbox()
 
+        self.db_connection = sqlite3.connect('saveData/tables_data.db')
+        self.create_tables_database()
+        self.load_tables_data()
+
+    def create_tables_database(self):
+        """Create a database table for storing table data if it doesn't exist."""
+        cursor = self.db_connection.cursor()
+        cursor.execute('''CREATE TABLE IF NOT EXISTS table_data (
+                            page_index INTEGER,
+                            row_index INTEGER,
+                            column_index INTEGER,
+                            data TEXT
+                          )''')
+        self.db_connection.commit()
+
+    def save_tables_data(self):
+        """Save data from all tables in QToolBox to the database."""
+        cursor = self.db_connection.cursor()
+        cursor.execute('DELETE FROM table_data')  # Clear existing data
+        for page_index in range(self.ui.toolBox.count()):
+            page = self.ui.toolBox.widget(page_index)
+            tableWidget = self.find_table_widget(page)
+            if tableWidget:
+                for row in range(tableWidget.rowCount()):
+                    for column in range(tableWidget.columnCount()):
+                        item = tableWidget.item(row, column)
+                        data = item.text() if item else ""
+                        cursor.execute('''INSERT INTO table_data (page_index, row_index, column_index, data)
+                                          VALUES (?, ?, ?, ?)''', (page_index, row, column, data))
+        self.db_connection.commit()
+
+    def load_tables_data(self):
+        """Load table data from the database and populate the tables in QToolBox."""
+        cursor = self.db_connection.cursor()
+        cursor.execute('SELECT page_index, row_index, column_index, data FROM table_data')
+        for page_index, row, column, data in cursor.fetchall():
+            page = self.ui.toolBox.widget(page_index)
+            tableWidget = self.find_table_widget(page)
+            if tableWidget and row < tableWidget.rowCount() and column < tableWidget.columnCount():
+                tableWidget.setItem(row, column, QTableWidgetItem(data))
+
+    @staticmethod
+    def find_table_widget(page):
+        """
+        Находит и возвращает первый найденный QTableWidget на указанной странице QToolBox.
+        :param page: Страница QToolBox, на которой необходимо найти QTableWidget.
+        :return: Экземпляр QTableWidget, если найден, иначе None.
+        """
+        # Проверяем, есть ли у страницы layout
+        if page.layout() is not None:
+            # Проходимся по всем элементам layout
+            for i in range(page.layout().count()):
+                widget = page.layout().itemAt(i).widget()
+                # Если виджет является экземпляром QTableWidget, возвращаем его
+                if isinstance(widget, QTableWidget):
+                    return widget
+        return None
+
+    def closeEvent(self, event):
+        """Override the close event to save table data before closing."""
+        self.save_tables_data()
+        super().closeEvent(event)
+
     def load_data_from_first_column(self):
         """Загрузка данных из первого столбца таблицы базы данных."""
         self.cursor.execute("SELECT DISTINCT fio FROM personnel")
