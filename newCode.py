@@ -2,7 +2,7 @@ import sqlite3  # Импорт модуля для работы с SQLite
 import sys  # Импорт системного модуля
 
 from PyQt5.QtWidgets import QApplication, QMainWindow, QTableWidgetItem, QHeaderView, \
-    QMessageBox, QCompleter, QTableWidget  # Импорт необходимых классов из PyQt5
+    QMessageBox, QCompleter  # Импорт необходимых классов из PyQt5
 
 from Designer.des import Ui_MainWindow  # Импорт дизайна интерфейса, созданного в Qt Designer
 
@@ -23,30 +23,6 @@ class MainWindow(QMainWindow):  # Определение класса MainWindow
         self.ui.table_personnel.itemChanged.connect(self.save_data_to_sqlite)
 
         self.setup_completer()
-        self.create_tables_in_toolbox()
-
-    def load_data_from_first_column(self):
-        """Загрузка данных из первого столбца таблицы базы данных."""
-        self.cursor.execute("SELECT DISTINCT fio FROM personnel")
-        return [item[0] for item in self.cursor.fetchall()]
-
-    def create_tables_in_toolbox(self):
-        """Создание таблиц в каждой странице QToolBox с данными из первого столбца."""
-        data = self.load_data_from_first_column()
-
-        for i in range(self.ui.toolBox.count()):
-            page = self.ui.toolBox.widget(i)
-            tableWidget = QTableWidget(len(data), 3)  # Создаем таблицу с одним столбцом
-            tableWidget.setStyleSheet("color:black;")
-            tableWidget.setColumnWidth(0, 400)
-
-            tableWidget.setHorizontalHeaderLabels(['Обучаемые'])
-
-            for row, item in enumerate(data):
-                tableWidget.setItem(row, 0, QTableWidgetItem(item))
-
-            # Добавляем созданную таблицу на страницу
-            page.layout().addWidget(tableWidget)
 
     def setup_completer(self):
         # Получение всех уникальных значений из первого столбца таблицы
