@@ -24,11 +24,9 @@ class MainWindow(QMainWindow):  # Определение класса MainWindow
 
         self.setup_completer()
         self.create_tables_in_toolbox()
-
-        self.db_connection = sqlite3.connect('saveData/tables_data.db')
         self.create_tables_database()
-        self.load_tables_data()
 
+    ####################################################################################################################
     def create_tables_database(self):
         """Create a database table for storing table data if it doesn't exist."""
         cursor = self.db_connection.cursor()
@@ -57,67 +55,46 @@ class MainWindow(QMainWindow):  # Определение класса MainWindow
 
         self.db_connection.commit()
 
-    def load_tables_data(self):
-        """Load table data from the database and populate the tables in QToolBox."""
-        cursor = self.db_connection.cursor()
-        cursor.execute('SELECT page_index, row_index, column_index, data FROM table_data')
-        for page_index, row, column, data in cursor.fetchall():
-            page = self.ui.toolBox.widget(page_index)
+    def update_toolbox_tables(self):
+        # Получаем данные из table_personnel
+        data = self.load_data_from_first_column()
+        # Обновляем таблицы в QToolBox
+        for i in range(self.ui.toolBox.count()):
+            page = self.ui.toolBox.widget(i)
             tableWidget = self.find_table_widget(page)
-            if tableWidget and row < tableWidget.rowCount() and column < tableWidget.columnCount():
-                tableWidget.setItem(row, column, QTableWidgetItem(data))
-
-    @staticmethod
-    def find_table_widget(page):
-        """
-        Находит и возвращает первый найденный QTableWidget на указанной странице QToolBox.
-        :param page: Страница QToolBox, на которой необходимо найти QTableWidget.
-        :return: Экземпляр QTableWidget, если найден, иначе None.
-        """
-        # Проверяем, есть ли у страницы layout
-        if page.layout() is not None:
-            # Проходимся по всем элементам layout
-            for i in range(page.layout().count()):
-                widget = page.layout().itemAt(i).widget()
-                # Если виджет является экземпляром QTableWidget, возвращаем его
-                if isinstance(widget, QTableWidget):
-                    return widget
-        return None
-
-    def closeEvent(self, event):
-        """Override the close event to save table data before closing."""
-        self.save_tables_data()
-        super().closeEvent(event)
+            if tableWidget:
+                # Очищаем таблицу перед заполнением
+                tableWidget.setRowCount(0)
+                for row_data in data:
+                    row_position = tableWidget.rowCount()
+                    tableWidget.insertRow(row_position)
+                    # Заполняем только первый столбец таблицы
+                    tableWidget.setItem(row_position, 0, QTableWidgetItem(str(row_data)))
 
     def load_data_from_first_column(self):
         """Загрузка данных из первого столбца таблицы базы данных."""
-        self.cursor.execute("SELECT DISTINCT fio FROM personnel")
+        self.cursor.execute("SELECT fio FROM personnel")
         return [item[0] for item in self.cursor.fetchall()]
 
-    @staticmethod
-    def load_count_tem():
-        count_tem = [3, 4, 5, 10, 4, 3, 5, 12]
-        while True:  # Создаем бесконечный цикл
-            for num in count_tem:
-                yield num  # Возвращаем число из списка и приостанавливаем выполнение
-
+    ####################################################################################################################
     def create_tables_in_toolbox(self):
-        """Создание таблиц в каждой странице QToolBox с данными из первого столбца."""
+        """Создание таблиц в каждой странице QToolBox с данными из столбца fio."""
         data = self.load_data_from_first_column()
         count_tem = self.load_count_tem()
         for i in range(self.ui.toolBox.count()):
             page = self.ui.toolBox.widget(i)
-            num_columns = next(count_tem)  # Получаем количество столбцов из генератора
-            # Увеличиваем количество столбцов на 1 для учета столбца "Обучаемые"
+            # Предполагается, что функция load_count_tem возвращает количество столбцов для каждой таблицы
+            num_columns = next(count_tem)   # Получаем количество столбцов из генератора
             tableWidget = QTableWidget(len(data), num_columns + 1)  # Создаем таблицу с нужным количеством столбцов
             tableWidget.setStyleSheet("color:black;")
-            # Учитываем столбец "Обучаемые" при генерации заголовков
-            tableWidget.setHorizontalHeaderLabels(['Обучаемые'] + [str(i) for i in range(1, num_columns + 1)])
+            # Устанавливаем заголовки столбцов, первый столбец - "ФИО", остальные - согласно количеству
+            tableWidget.setHorizontalHeaderLabels(['ФИО'] + [f'Столбец {i}' for i in range(1, num_columns + 1)])
             for row, item in enumerate(data):
                 tableWidget.setItem(row, 0, QTableWidgetItem(item))
             # Добавляем созданную таблицу на страницу
             page.layout().addWidget(tableWidget)
 
+    ####################################################################################################################
     def setup_completer(self):
         # Получение всех уникальных значений из первого столбца таблицы
         list_fio = set()
@@ -161,10 +138,9 @@ class MainWindow(QMainWindow):  # Определение класса MainWindow
         self.ui.le_subunit.setCompleter(completer_subunit)
         self.ui.le_duty.setCompleter(completer_duty)
 
+    ####################################################################################################################
     def save_data_to_sqlite(self):
-        # Метод для сохранения данных из таблицы в базу данных SQLite
-        conn = sqlite3.connect('saveData/personnel.db')  # Подключение к базе данных
-        cursor = conn.cursor()  # Создание курсора
+        cursor = self.db_connection.cursor()  # Создание курсора
 
         # Создание таблицы, если она не существует
         cursor.execute('''CREATE TABLE IF NOT EXISTS personnel (
@@ -186,13 +162,14 @@ class MainWindow(QMainWindow):  # Определение класса MainWindow
             cursor.execute('''INSERT INTO personnel (fio, rank, subunit, duty)
                               VALUES (?, ?, ?, ?)''', (fio, rank, subunit, duty))
 
-        conn.commit()  # Подтверждение изменений в базе данных
-        conn.close()  # Закрытие соединения с базой данных
+        self.db_connection.commit()  # Подтверждение изменений в базе данных
+        self.db_connection.close()  # Закрытие соединения с базой данных
 
+    ####################################################################################################################
     def load_data_from_sqlite(self):
         # Метод для загрузки данных из базы данных SQLite в таблицу интерфейса
-        conn = sqlite3.connect('saveData/personnel.db')  # Подключение к базе данных
-        cursor = conn.cursor()  # Создание курсора
+        cursor = self.db_connection.cursor()  # Создание курсора
+
 
         # Создание таблицы, если она не существует
         cursor.execute('''CREATE TABLE IF NOT EXISTS personnel (
@@ -212,8 +189,9 @@ class MainWindow(QMainWindow):  # Определение класса MainWindow
             for i, value in enumerate(row):
                 self.ui.table_personnel.setItem(rowCount, i, QTableWidgetItem(str(value)))
 
-        conn.close()  # Закрытие соединения с базой данных
+        self.db_connection.close()  # Закрытие соединения с базой данных
 
+    ####################################################################################################################
     def function_switch_between_stack_widgets(self):
         # Метод для инициализации переключения между виджетами
         self.ui.btnHome.clicked.connect(lambda: self.ui.MainStack.setCurrentIndex(0))
@@ -221,6 +199,7 @@ class MainWindow(QMainWindow):  # Определение класса MainWindow
         self.ui.btnTopic.clicked.connect(lambda: self.ui.MainStack.setCurrentIndex(2))
         self.ui.helpBtn.clicked.connect(lambda: self.ui.MainStack.setCurrentIndex(3))
 
+    ####################################################################################################################
     def function_add_table_personnel(self):
         # Метод для инициализации функционала таблицы персонала
         self.ui.le_fio.returnPressed.connect(self.save_personnel)
@@ -233,6 +212,7 @@ class MainWindow(QMainWindow):  # Определение класса MainWindow
 
         self.table_widget()
 
+    ####################################################################################################################
     def table_widget(self):
         # Метод для настройки внешнего вида таблицы
         self.ui.table_personnel.setRowCount(1)
@@ -262,11 +242,13 @@ class MainWindow(QMainWindow):  # Определение класса MainWindow
         else:
             QMessageBox.warning(None, "Ошибка", "Заполните все поля")
 
+        self.update_toolbox_tables()
+
     def delete_personnel(self):
         selected_ranges = self.ui.table_personnel.selectedRanges()
         if len(selected_ranges) > 0:
-            conn = sqlite3.connect('saveData/personnel.db')
-            cursor = conn.cursor()
+            conn = sqlite3.connect('personnel.db')
+            cursor = self.db_connection.cursor()  # Создание курсора
 
             for selected_range in selected_ranges:
                 top_row = selected_range.topRow()
@@ -290,6 +272,39 @@ class MainWindow(QMainWindow):  # Определение класса MainWindow
             conn.close()
         else:
             QMessageBox.warning(None, "Ошибка", "Выберите строки для удаления")
+
+        self.update_toolbox_tables()
+
+    @staticmethod
+    def find_table_widget(page):
+        """
+        Находит и возвращает первый найденный QTableWidget на указанной странице QToolBox.
+        :param page: Страница QToolBox, на которой необходимо найти QTableWidget.
+        :return: Экземпляр QTableWidget, если найден, иначе None.
+        """
+        # Проверяем, есть ли у страницы layout
+        if page.layout() is not None:
+            # Проходимся по всем элементам layout
+            for i in range(page.layout().count()):
+                widget = page.layout().itemAt(i).widget()
+                # Если виджет является экземпляром QTableWidget, возвращаем его
+                if isinstance(widget, QTableWidget):
+                    return widget
+        return None
+    ####################################################################################################################
+
+    @staticmethod
+    def load_count_tem():
+        count_tem = [3, 4, 5, 6, 7]
+        while True:  # Создаем бесконечный цикл
+            for num in count_tem:
+                yield num  # Возвращаем число из списка и приостанавливаем выполнение
+
+    ####################################################################################################################
+    def closeEvent(self, event):
+        """Override the close event to save table data before closing."""
+        self.save_tables_data()
+        super().closeEvent(event)
 
 
 if __name__ == "__main__":
