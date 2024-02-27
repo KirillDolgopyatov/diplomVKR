@@ -140,7 +140,9 @@ class MainWindow(QMainWindow):  # Определение класса MainWindow
 
     ####################################################################################################################
     def save_data_to_sqlite(self):
-        cursor = self.db_connection.cursor()  # Создание курсора
+        # Метод для сохранения данных из таблицы в базу данных SQLite
+        conn = sqlite3.connect('saveData/personnel.db')  # Подключение к базе данных
+        cursor = conn.cursor()  # Создание курсора
 
         # Создание таблицы, если она не существует
         cursor.execute('''CREATE TABLE IF NOT EXISTS personnel (
@@ -162,14 +164,14 @@ class MainWindow(QMainWindow):  # Определение класса MainWindow
             cursor.execute('''INSERT INTO personnel (fio, rank, subunit, duty)
                               VALUES (?, ?, ?, ?)''', (fio, rank, subunit, duty))
 
-        self.db_connection.commit()  # Подтверждение изменений в базе данных
-        self.db_connection.close()  # Закрытие соединения с базой данных
+        conn.commit()  # Подтверждение изменений в базе данных
+        conn.close()  # Закрытие соединения с базой данных
 
     ####################################################################################################################
     def load_data_from_sqlite(self):
         # Метод для загрузки данных из базы данных SQLite в таблицу интерфейса
-        cursor = self.db_connection.cursor()  # Создание курсора
-
+        conn = sqlite3.connect('saveData/personnel.db')  # Подключение к базе данных
+        cursor = conn.cursor()  # Создание курсора
 
         # Создание таблицы, если она не существует
         cursor.execute('''CREATE TABLE IF NOT EXISTS personnel (
@@ -189,7 +191,7 @@ class MainWindow(QMainWindow):  # Определение класса MainWindow
             for i, value in enumerate(row):
                 self.ui.table_personnel.setItem(rowCount, i, QTableWidgetItem(str(value)))
 
-        self.db_connection.close()  # Закрытие соединения с базой данных
+        conn.close()  # Закрытие соединения с базой данных
 
     ####################################################################################################################
     def function_switch_between_stack_widgets(self):
@@ -247,8 +249,8 @@ class MainWindow(QMainWindow):  # Определение класса MainWindow
     def delete_personnel(self):
         selected_ranges = self.ui.table_personnel.selectedRanges()
         if len(selected_ranges) > 0:
-            conn = sqlite3.connect('personnel.db')
-            cursor = self.db_connection.cursor()  # Создание курсора
+            conn = sqlite3.connect('saveData/personnel.db')
+            cursor = conn.cursor()
 
             for selected_range in selected_ranges:
                 top_row = selected_range.topRow()
