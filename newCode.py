@@ -24,8 +24,19 @@ class MainWindow(QMainWindow):  # Определение класса MainWindow
 
         self.setup_completer()
         self.create_tables_in_toolbox()
+        self.load_tables_into_toolbox()
 
     ####################################################################################################################
+    def load_tables_into_toolbox(self):
+        """Load table data from the database and populate the tables in QToolBox."""
+        cursor = self.db_connection.cursor()
+        cursor.execute('SELECT page_index, row_index, column_index, data FROM table_data')
+        for page_index, row, column, data in cursor.fetchall():
+            page = self.ui.toolBox.widget(page_index)
+            tableWidget = self.find_table_widget(page)
+            if tableWidget and row < tableWidget.rowCount() and column < tableWidget.columnCount():
+                tableWidget.setItem(row, column, QTableWidgetItem(data))
+
     def save_tables_data(self):
         cursor = self.db_connection.cursor()
         # Предполагаем, что у нас есть отдельные таблицы для каждой страницы в QToolBox
@@ -83,7 +94,7 @@ class MainWindow(QMainWindow):  # Определение класса MainWindow
         for i in range(self.ui.toolBox.count()):
             page = self.ui.toolBox.widget(i)
             # Предполагается, что функция load_count_tem возвращает количество столбцов для каждой таблицы
-            num_columns = next(count_tem)   # Получаем количество столбцов из генератора
+            num_columns = next(count_tem)  # Получаем количество столбцов из генератора
             tableWidget = QTableWidget(len(data), num_columns + 1)  # Создаем таблицу с нужным количеством столбцов
             tableWidget.setStyleSheet("color:black;")
             tableWidget.setColumnWidth(0, 400)
@@ -293,6 +304,7 @@ class MainWindow(QMainWindow):  # Определение класса MainWindow
                 if isinstance(widget, QTableWidget):
                     return widget
         return None
+
     ####################################################################################################################
 
     @staticmethod
