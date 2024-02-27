@@ -87,6 +87,7 @@ class MainWindow(QMainWindow):  # Определение класса MainWindow
             num_columns = next(count_tem)   # Получаем количество столбцов из генератора
             tableWidget = QTableWidget(len(data), num_columns + 1)  # Создаем таблицу с нужным количеством столбцов
             tableWidget.setStyleSheet("color:black;")
+            tableWidget.setColumnWidth(0, 400)
             # Устанавливаем заголовки столбцов, первый столбец - "ФИО", остальные - согласно количеству
             tableWidget.setHorizontalHeaderLabels(['ФИО'] + [f'Столбец {i}' for i in range(1, num_columns + 1)])
             for row, item in enumerate(data):
