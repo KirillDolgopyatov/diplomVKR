@@ -24,19 +24,8 @@ class MainWindow(QMainWindow):  # Определение класса MainWindow
 
         self.setup_completer()
         self.create_tables_in_toolbox()
-        self.load_tables_into_toolbox()
 
     ####################################################################################################################
-    def load_tables_into_toolbox(self):
-        """Load table data from the database and populate the tables in QToolBox."""
-        cursor = self.db_connection.cursor()
-        cursor.execute('SELECT page_index, row_index, column_index, data FROM table_data')
-        for page_index, row, column, data in cursor.fetchall():
-            page = self.ui.toolBox.widget(page_index)
-            tableWidget = self.find_table_widget(page)
-            if tableWidget and row < tableWidget.rowCount() and column < tableWidget.columnCount():
-                tableWidget.setItem(row, column, QTableWidgetItem(data))
-
     def save_tables_data(self):
         cursor = self.db_connection.cursor()
         # Предполагаем, что у нас есть отдельные таблицы для каждой страницы в QToolBox
@@ -45,24 +34,28 @@ class MainWindow(QMainWindow):  # Определение класса MainWindow
             tableWidget = self.find_table_widget(page)
             if tableWidget:
                 table_name = f"table_data_page_{page_index}"
+                # Определяем количество столбцов для текущей таблицы
+                num_columns = tableWidget.columnCount()
+                # Формируем строку с описанием столбцов для SQL запроса
+                columns_description = ", ".join([f"column{i + 1} TEXT" for i in range(num_columns)])
                 # Создаем новую таблицу для каждой страницы QToolBox, если она не существует
                 cursor.execute(f'''CREATE TABLE IF NOT EXISTS {table_name} (
                                     id INTEGER PRIMARY KEY,
-                                    surname TEXT,
-                                    value TEXT
+                                    {columns_description}
                                   )''')
                 # Очищаем таблицу перед сохранением новых данных
                 cursor.execute(f'DELETE FROM {table_name}')
                 for row in range(tableWidget.rowCount()):
-                    # Предполагаем, что первый столбец содержит фамилии
-                    surname_item = tableWidget.item(row, 0)
-                    surname = surname_item.text() if surname_item else ""
-                    # Сохраняем данные из последующих столбцов
-                    for column in range(1, tableWidget.columnCount()):
-                        value_item = tableWidget.item(row, column)
-                        value = value_item.text() if value_item else ""
-                        cursor.execute(f'''INSERT INTO {table_name} (surname, value)
-                                          VALUES (?, ?)''', (surname, value))
+                    # Собираем данные из всех столбцов текущей строки
+                    row_data = []
+                    for column in range(num_columns):
+                        item = tableWidget.item(row, column)
+                        row_data.append(item.text() if item else "")
+                    # Формируем строку значений для SQL запроса
+                    values_placeholder = ", ".join(["?"] * num_columns)
+                    cursor.execute(
+                        f'''INSERT INTO {table_name} ({", ".join([f"column{i + 1}" for i in range(num_columns)])})
+                                      VALUES ({values_placeholder})''', row_data)
         self.db_connection.commit()
 
     def update_toolbox_tables(self):
