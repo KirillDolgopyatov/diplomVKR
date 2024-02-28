@@ -24,7 +24,60 @@ class MainWindow(QMainWindow):  # Определение класса MainWindow
 
         self.setup_completer()
         self.create_tables_in_toolbox()
+        self.load_tables_at_startup()
     ####################################################################################################################
+
+    def load_tables_at_startup(self):
+        cursor = self.db_connection.cursor()
+        # Получаем список всех таблиц в базе данных
+        cursor.execute("SELECT name FROM sqlite_master WHERE type='table';")
+        tables = cursor.fetchall()
+
+        for table_name in tables:
+            # Пропускаем системные таблицы SQLite, если они есть
+            if table_name[0].startswith('sqlite_'):
+                continue
+
+            # Проверяем, начинается ли имя таблицы с 'table_data_page_'
+            if not table_name[0].startswith('table_data_page_'):
+                continue
+
+            # Для каждой таблицы загружаем данные
+            cursor.execute(f"SELECT * FROM {table_name[0]}")
+            rows = cursor.fetchall()
+
+            # Находим соответствующий QTableWidget для текущей таблицы
+            # Например, если имя таблицы 'table_data_page_0', то индекс виджета в toolbox будет 0
+            try:
+                page_index = int(table_name[0].split('_')[-1])  # Получаем индекс страницы из имени таблицы
+                page = self.ui.toolBox.widget(page_index)
+                tableWidget = self.find_table_widget(page)
+            except (ValueError, IndexError):
+                continue  # Если не удается найти соответствующий виджет, пропускаем таблицу
+
+            if tableWidget is None:
+                continue
+
+            # Очищаем виджет таблицы перед заполнением
+            tableWidget.setRowCount(0)
+            tableWidget.setColumnCount(len(rows[0]) if rows else 0)
+
+            # Заполняем виджет таблицы данными
+            for row_data in rows:
+                row_position = tableWidget.rowCount()
+                tableWidget.insertRow(row_position)
+                for column, value in enumerate(row_data):
+                    tableWidget.setItem(row_position, column, QTableWidgetItem(str(value)))
+
+    def find_table_widget_by_name(self, table_name):
+        # Пример логики поиска, зависит от структуры вашего UI
+        for page_index in range(self.ui.toolBox.count()):
+            page = self.ui.toolBox.widget(page_index)
+            if hasattr(page, 'tableWidget'):  # Предполагаем, что у страницы есть атрибут tableWidget
+                # Проверяем, соответствует ли имя виджета таблицы имени таблицы
+                if 'some_logic_to_determine_if_the_widget_matches_the_table_name':
+                    return page.tableWidget
+        return None
 
     def save_tables_data(self):
         cursor = self.db_connection.cursor()
@@ -54,7 +107,7 @@ class MainWindow(QMainWindow):  # Определение класса MainWindow
                     # Формируем строку значений для SQL запроса
                     values_placeholder = ", ".join(["?"] * num_columns)
                     cursor.execute(
-                        f'''INSERT INTO {table_name} ({", ".join([f"column{i + 1}" for i in range(num_columns)])})
+                        f'''INSERT INTO {table_name} ({", ".join([f"column{i}" for i in range(num_columns)])})
                                       VALUES ({values_placeholder})''', row_data)
         self.db_connection.commit()
 
