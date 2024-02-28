@@ -47,11 +47,9 @@ class MainWindow(QMainWindow):  # Определение класса MainWindow
             rows = cursor.fetchall()
 
             # Находим соответствующий QTableWidget для текущей таблицы
-            # Например, если имя таблицы 'table_data_page_0', то индекс виджета в toolbox будет 0
             try:
                 page_index = int(table_name[0].split('_')[-1])  # Получаем индекс страницы из имени таблицы
-                page = self.ui.toolBox.widget(page_index)
-                tableWidget = self.find_table_widget(page)
+                tableWidget = self.find_table_widget_by_name(table_name)
             except (ValueError, IndexError):
                 continue  # Если не удается найти соответствующий виджет, пропускаем таблицу
 
@@ -60,13 +58,13 @@ class MainWindow(QMainWindow):  # Определение класса MainWindow
 
             # Очищаем виджет таблицы перед заполнением
             tableWidget.setRowCount(0)
-            tableWidget.setColumnCount(len(rows[0]) if rows else 0)
+            tableWidget.setColumnCount(len(rows[0]) - 1 if rows else 0)  # Уменьшаем количество столбцов на один
 
-            # Заполняем виджет таблицы данными
+            # Заполняем виджет таблицы данными, пропуская первый столбец
             for row_data in rows:
                 row_position = tableWidget.rowCount()
                 tableWidget.insertRow(row_position)
-                for column, value in enumerate(row_data):
+                for column, value in enumerate(row_data[1:]):  # Начинаем с 1, чтобы пропустить первый столбец
                     tableWidget.setItem(row_position, column, QTableWidgetItem(str(value)))
 
     def find_table_widget_by_name(self, table_name):
