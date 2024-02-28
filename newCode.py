@@ -24,8 +24,26 @@ class MainWindow(QMainWindow):  # Определение класса MainWindow
 
         self.setup_completer()
         self.create_tables_in_toolbox()
-
+        self.load_tables_at_startup()
     ####################################################################################################################
+    def load_tables_at_startup(self):
+        cursor = self.db_connection.cursor()
+        for page_index in range(self.ui.toolBox.count()):
+            page = self.ui.toolBox.widget(page_index)
+            tableWidget = self.find_table_widget(page)
+            if tableWidget:
+                table_name = f"table_data_page_{page_index}"
+                cursor.execute(f"PRAGMA table_info({table_name})")
+                columns = cursor.fetchall()
+                num_columns = len(columns) - 1  # Subtracting the ID column
+                tableWidget.setColumnCount(num_columns)
+                cursor.execute(f"SELECT * FROM {table_name}")
+                for row_data in cursor.fetchall():
+                    row_position = tableWidget.rowCount()
+                    tableWidget.insertRow(row_position)
+                    for column in range(1, len(row_data)):  # Skipping the ID column
+                        tableWidget.setItem(row_position, column - 1, QTableWidgetItem(str(row_data[column])))
+
     def save_tables_data(self):
         cursor = self.db_connection.cursor()
         # Предполагаем, что у нас есть отдельные таблицы для каждой страницы в QToolBox
