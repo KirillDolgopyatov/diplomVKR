@@ -278,6 +278,7 @@ class MainWindow(QMainWindow):  # Определение класса MainWindow
         if fio != '' and rank != '' and subunit != '' and duty != '':
             rowCount = self.ui.table_personnel.rowCount()
             self.ui.table_personnel.insertRow(rowCount)
+
             self.ui.table_personnel.setItem(rowCount, 0, QTableWidgetItem(fio))
             self.ui.table_personnel.setItem(rowCount, 1, QTableWidgetItem(rank))
             self.ui.table_personnel.setItem(rowCount, 2, QTableWidgetItem(subunit))
