@@ -68,16 +68,6 @@ class MainWindow(QMainWindow):  # Определение класса MainWindow
                 for column, value in enumerate(row_data[1:]):  # Начинаем с 1, чтобы пропустить первый столбец
                     tableWidget.setItem(row_position, column, QTableWidgetItem(str(value)))
 
-    def find_table_widget_by_name(self, table_name):
-        # Пример логики поиска, зависит от структуры вашего UI
-        for page_index in range(self.ui.toolBox.count()):
-            page = self.ui.toolBox.widget(page_index)
-            if hasattr(page, 'tableWidget'):  # Предполагаем, что у страницы есть атрибут tableWidget
-                # Проверяем, соответствует ли имя виджета таблицы имени таблицы
-                if 'some_logic_to_determine_if_the_widget_matches_the_table_name':
-                    return page.tableWidget
-        return None
-
     def save_tables_data(self):
         cursor = self.db_connection.cursor()
         # Предполагаем, что у нас есть отдельные таблицы для каждой страницы в QToolBox
@@ -89,7 +79,7 @@ class MainWindow(QMainWindow):  # Определение класса MainWindow
                 # Определяем количество столбцов для текущей таблицы
                 num_columns = tableWidget.columnCount()
                 # Формируем строку с описанием столбцов для SQL запроса
-                columns_description = ", ".join([f"column{i + 1} TEXT" for i in range(num_columns)])
+                columns_description = ", ".join([f"column{i + 2} TEXT" for i in range(num_columns)])
                 # Создаем новую таблицу для каждой страницы QToolBox, если она не существует
                 cursor.execute(f'''CREATE TABLE IF NOT EXISTS {table_name} (
                                     id INTEGER PRIMARY KEY,
@@ -106,7 +96,7 @@ class MainWindow(QMainWindow):  # Определение класса MainWindow
                     # Формируем строку значений для SQL запроса
                     values_placeholder = ", ".join(["?"] * num_columns)
                     cursor.execute(
-                        f'''INSERT INTO {table_name} ({", ".join([f"column{i + 1}" for i in range(num_columns)])})
+                        f'''INSERT INTO {table_name} ({", ".join([f"column{i + 2}" for i in range(num_columns)])})
                                       VALUES ({values_placeholder})''', row_data)
         self.db_connection.commit()
 
@@ -301,6 +291,7 @@ class MainWindow(QMainWindow):  # Определение класса MainWindow
             QMessageBox.warning(None, "Ошибка", "Заполните все поля")
 
         self.update_toolbox_tables()
+        self.save_tables_data()
 
     def delete_personnel(self):
         selected_ranges = self.ui.table_personnel.selectedRanges()
