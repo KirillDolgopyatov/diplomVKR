@@ -49,7 +49,8 @@ class MainWindow(QMainWindow):  # Определение класса MainWindow
             # Находим соответствующий QTableWidget для текущей таблицы
             try:
                 page_index = int(table_name[0].split('_')[-1])  # Получаем индекс страницы из имени таблицы
-                tableWidget = self.find_table_widget_by_name(table_name)
+                page = self.ui.toolBox.widget(page_index)
+                tableWidget = self.find_table_widget(page)
             except (ValueError, IndexError):
                 continue  # Если не удается найти соответствующий виджет, пропускаем таблицу
 
@@ -105,7 +106,7 @@ class MainWindow(QMainWindow):  # Определение класса MainWindow
                     # Формируем строку значений для SQL запроса
                     values_placeholder = ", ".join(["?"] * num_columns)
                     cursor.execute(
-                        f'''INSERT INTO {table_name} ({", ".join([f"column{i}" for i in range(num_columns)])})
+                        f'''INSERT INTO {table_name} ({", ".join([f"column{i + 1}" for i in range(num_columns)])})
                                       VALUES ({values_placeholder})''', row_data)
         self.db_connection.commit()
 
