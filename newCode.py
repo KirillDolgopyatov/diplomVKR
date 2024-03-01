@@ -1,20 +1,69 @@
 import sqlite3  # Импорт модуля для работы с SQLite
 import sys  # Импорт системного модуля
 
+import PyQt5
+from PyQt5.QtCore import QDateTime, QSize, QTimer, Qt, QPropertyAnimation, QEasingCurve
 from PyQt5.QtWidgets import QApplication, QMainWindow, QTableWidgetItem, QHeaderView, \
-    QMessageBox, QCompleter, QTableWidget  # Импорт необходимых классов из PyQt5
+    QMessageBox, QCompleter, QTableWidget, QLineEdit, QPushButton, QLabel, \
+    QHBoxLayout, QFrame, QVBoxLayout, QWidget  # Импорт необходимых классов из PyQt5
 
 from Designer.des import Ui_MainWindow  # Импорт дизайна интерфейса, созданного в Qt Designer
+from Designer.loginVKR import Ui_Form
 
 
+########################################################################################################################
+########################################################################################################################
+class Form(QWidget):
+    def __init__(self):
+        super().__init__()
+        self.ui = Ui_Form()
+        self.ui.setupUi(self)
+        self.drag_position = None
+        self.ui.btn_close.clicked.connect(self.close)  # закрытие окна авторизации
+        self.ui.btn_signin.clicked.connect(self.enter)
+
+    ####################################################################################################################
+    def enter(self):
+        # login = self.ui.lineEdit_login.text()
+        # password = self.ui.lineEdit_password.text()
+        # if login == "admin" and password == "12345":
+        self.close()
+        window.show()
+        # else:
+        #     QMessageBox.warning(None, "Error", "Проверьте ведённые данные")
+
+    ####################################################################################################################
+    def mousePressEvent(self, event):
+        if event.button() == Qt.LeftButton:
+            self.drag_position = event.globalPos() - self.frameGeometry().topLeft()
+            event.accept()
+
+    def mouseMoveEvent(self, event):
+        if event.buttons() == Qt.LeftButton and self.drag_position is not None:
+            self.move(event.globalPos() - self.drag_position)
+            event.accept()
+
+    def mouseReleaseEvent(self, event):
+        if event.button() == Qt.LeftButton:
+            self.drag_position = None
+            event.accept()
+
+
+########################################################################################################################
+########################################################################################################################
 class MainWindow(QMainWindow):  # Определение класса MainWindow, наследующего QMainWindow
     def __init__(self):
         super().__init__()  # Вызов конструктора базового класса
+        self.animation = None
         self.ui = Ui_MainWindow()  # Создание экземпляра дизайна интерфейса
         self.ui.setupUi(self)  # Настройка интерфейса в текущем окне
 
         self.function_switch_between_stack_widgets()  # Инициализация переключения между виджетами
         self.function_add_table_personnel()  # Инициализация функционала таблицы персонала
+
+        self.ui.helpBtn.clicked.connect(self.slideRightSubMenu)
+        self.ui.closeCenterMenu_2.clicked.connect(self.slideRightSubMenu)
+        self.installEventFilter(self)
 
         self.db_connection = sqlite3.connect('saveData/personnel.db')  # Подключение к базе данных SQLite
         self.cursor = self.db_connection.cursor()  # Создание курсора для работы с базой данных
@@ -25,8 +74,22 @@ class MainWindow(QMainWindow):  # Определение класса MainWindow
         self.setup_completer()
         self.create_tables_in_toolbox()
         self.load_tables_at_startup()
-    ####################################################################################################################
 
+        self.ui.btn_new_task.clicked.connect(self.addTask)
+
+        #   Для обновления дедлайн в задачах
+        self.task_counter = 0
+        self.task_time_labels = []
+        self.ui.btn_new_task.clicked.connect(self.addTask)
+        self.update_timer = QTimer(self)
+        self.update_timer.timeout.connect(self.update_all_time)
+        self.update_timer.start(1000)
+        self.ui.dateTimeEdit.setCalendarPopup(True)
+        self.ui.dateTimeEdit.setDateTime(PyQt5.QtCore.QDateTime.currentDateTime())
+        self.ui.scrollAreaWC.setLayout(QVBoxLayout())
+        #####
+
+    ####################################################################################################################
     def load_tables_at_startup(self):
         cursor = self.db_connection.cursor()
         # Получаем список всех таблиц в базе данных
@@ -68,6 +131,7 @@ class MainWindow(QMainWindow):  # Определение класса MainWindow
                 for column, value in enumerate(row_data[1:]):  # Начинаем с 1, чтобы пропустить первый столбец
                     tableWidget.setItem(row_position, column, QTableWidgetItem(str(value)))
 
+    ####################################################################################################################
     def save_tables_data(self):
         cursor = self.db_connection.cursor()
         # Предполагаем, что у нас есть отдельные таблицы для каждой страницы в QToolBox
@@ -100,6 +164,7 @@ class MainWindow(QMainWindow):  # Определение класса MainWindow
                                       VALUES ({values_placeholder})''', row_data)
         self.db_connection.commit()
 
+    ####################################################################################################################
     def update_toolbox_tables(self):
         # Получаем данные из table_personnel
         data = self.load_data_from_first_column()
@@ -121,7 +186,6 @@ class MainWindow(QMainWindow):  # Определение класса MainWindow
         self.cursor.execute("SELECT fio FROM personnel")
         return [item[0] for item in self.cursor.fetchall()]
 
-    ####################################################################################################################
     def create_tables_in_toolbox(self):
         """Создание таблиц в каждой странице QToolBox с данными из столбца fio."""
         data = self.load_data_from_first_column()
@@ -213,7 +277,6 @@ class MainWindow(QMainWindow):  # Определение класса MainWindow
         conn.commit()  # Подтверждение изменений в базе данных
         conn.close()  # Закрытие соединения с базой данных
 
-    ####################################################################################################################
     def load_data_from_sqlite(self):
         # Метод для загрузки данных из базы данных SQLite в таблицу интерфейса
         conn = sqlite3.connect('saveData/personnel.db')  # Подключение к базе данных
@@ -325,6 +388,87 @@ class MainWindow(QMainWindow):  # Определение класса MainWindow
 
         self.update_toolbox_tables()
 
+    ####################################################################################################################
+    def addTask(self):
+        if self.ui.le_write_task.text() != '':
+            task_text = self.ui.le_write_task.text()
+            datetime_edit = self.ui.dateTimeEdit.dateTime()
+            new_frame = QFrame(self.ui.scrollAreaWC)  # Изменено на scrollAreaWC
+            new_frame.setFrameShape(QFrame.StyledPanel)
+            new_frame.setFrameShadow(QFrame.Raised)
+            new_frame.setStyleSheet("background-color: rgb(45, 45, 45);")
+            new_frame.setFixedHeight(50)
+
+            frame_layout = QHBoxLayout(new_frame)
+
+            task_label = QLabel(task_text, new_frame)
+            task_label.setStyleSheet("color: white; font: 12pt;")
+
+            task_but = QPushButton(new_frame)
+            task_but.setFixedSize(25, 25)
+            task_but.setIconSize(QSize(20, 20))
+            task_but.setStyleSheet("""
+                   QPushButton {
+                       border-radius: 12px;
+                       border: 2px solid white;
+                   }
+                   QPushButton:hover {
+                       icon: url('icons/galka.png');
+                       icon-size: 20px;
+                   }
+                   QPushButton:pressed {
+                       icon: url('icons/galka.png');
+                       border: 2px solid grey;
+
+                   }
+               """)
+
+            task_line_edit = QLineEdit(new_frame)
+            task_line_edit.setStyleSheet("color: yellow; font: 10 pt;")
+
+            time_left_label = QLabel("", new_frame)
+            time_left_label.setStyleSheet('color:white; font: 8pt;')
+
+            frame_layout.addWidget(task_but)
+            frame_layout.addWidget(task_label)
+            frame_layout.addWidget(task_line_edit)
+            frame_layout.addWidget(time_left_label)
+
+            # Измените следующую строку, чтобы добавить new_frame в layout, который принадлежит scrollAreaWC
+            self.ui.scrollAreaWC.layout().insertWidget(0, new_frame)
+            self.ui.le_write_task.clear()
+
+            self.task_time_labels.append((datetime_edit, time_left_label))
+
+    def update_all_time(self):
+        current_time = QDateTime.currentDateTime()
+        for datetime_edit, time_left_label in self.task_time_labels:
+            time_diff = current_time.secsTo(datetime_edit)
+            is_overdue = time_diff < 0
+            abs_time_diff = abs(time_diff)
+            days_left = abs_time_diff // (60 * 60 * 24)
+            hours_left = (abs_time_diff % (60 * 60 * 24)) // (60 * 60)
+            minutes_left = (abs_time_diff % (60 * 60)) // 60
+
+            if is_overdue:
+                time_left_label.setStyleSheet('color: red')
+
+                time_left_str = f"Просрочено: {days_left} д. {hours_left} ч. {minutes_left} м."
+            else:
+                time_left_label.setStyleSheet('color: green')
+                time_left_str = f"Срок выполнения: {days_left} д. {hours_left} ч. {minutes_left} м."
+
+            time_left_label.setText(time_left_str)
+
+    ####################################################################################################################
+    @staticmethod
+    def load_count_tem():
+        count_tem = [3, 4, 5, 6, 7]
+        while True:  # Создаем бесконечный цикл
+            for num in count_tem:
+                yield num  # Возвращаем число из списка и приостанавливаем выполнение
+
+    ####################################################################################################################
     @staticmethod
     def find_table_widget(page):
         """
@@ -343,23 +487,30 @@ class MainWindow(QMainWindow):  # Определение класса MainWindow
         return None
 
     ####################################################################################################################
-
-    @staticmethod
-    def load_count_tem():
-        count_tem = [3, 4, 5, 6, 7]
-        while True:  # Создаем бесконечный цикл
-            for num in count_tem:
-                yield num  # Возвращаем число из списка и приостанавливаем выполнение
-
-    ####################################################################################################################
     def closeEvent(self, event):
         """Override the close event to save table data before closing."""
         self.save_tables_data()
         super().closeEvent(event)
 
+    def slideRightSubMenu(self):  # открывает левое меню для кнопки задачи дизайн
+        width2 = self.ui.leftSubMenu.width()
+        if width2 == 0:
+            newWidth2 = 150
+        else:
+            newWidth2 = 0
+        self.animation = QPropertyAnimation(self.ui.leftSubMenu, b"minimumWidth")
+        self.animation.setDuration(250)
+        self.animation.setStartValue(width2)
+        self.animation.setEndValue(newWidth2)
+        self.animation.setEasingCurve(QEasingCurve.InQuart)
+        self.animation.start()
 
+
+########################################################################################################################
+########################################################################################################################
 if __name__ == "__main__":
-    app = QApplication(sys.argv)  # Создание экземпляра приложения
-    window = MainWindow()  # Создание экземпляра главного окна
-    window.show()  # Отображение главного окна
-    sys.exit(app.exec_())  # Запуск цикла обработки событий приложения
+    app = QApplication(sys.argv)
+    form = Form()
+    window = MainWindow()
+    form.show()
+    sys.exit(app.exec_())

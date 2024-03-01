@@ -572,7 +572,10 @@ QPushButton:Pressed {
              </size>
             </property>
             <property name="styleSheet">
-             <string notr="true">background-color: rgb(213, 203, 203);</string>
+             <string notr="true">QFrame{
+	background-color: qlineargradient(spread:pad, x1:1, y1:0.0113636, x2:0.314, y2:0.409455, stop:0.0909091 rgba(29, 67, 155, 255), stop:0.903409 rgba(28, 28, 28, 255));
+}
+</string>
             </property>
             <property name="frameShape">
              <enum>QFrame::StyledPanel</enum>
@@ -599,7 +602,22 @@ QPushButton:Pressed {
              <item alignment="Qt::AlignTop">
               <widget class="QFrame" name="upLeftSubMenu">
                <property name="styleSheet">
-                <string notr="true">background-color: rgb(187, 187, 187);</string>
+                <string notr="true">QPushButton {
+color: white;
+padding: 5px;
+border-radius: 5px;
+background-color: rgba(255,255,255, 50)
+}
+
+QPushButton:hover {
+background-color: rgb(50, 50, 50);
+background-color: rgba(255,255,255,100)
+}
+
+QPushButton:Pressed {
+background-color: rgb(255,255,255)
+}
+</string>
                </property>
                <property name="frameShape">
                 <enum>QFrame::StyledPanel</enum>
@@ -639,16 +657,12 @@ QPushButton:Pressed {
                   </property>
                   <property name="styleSheet">
                    <string notr="true">QPushButton {
-background-color: rgb(187, 187, 187);
-border-radius: 0px;
 }
 
 QPushButton:hover {
-  background-color: rgb(139, 139, 139);
 }
 
 QPushButton:Pressed {
-	background-color: rgb(91, 91, 91);
 }
 </string>
                   </property>
@@ -742,15 +756,19 @@ QPushButton:Pressed {
                       </property>
                       <property name="styleSheet">
                        <string notr="true">QPushButton {
-  background-color: rgb(213, 203, 203);
+color: white;
+padding: 5px;
+border-radius: 5px;
+background-color: rgba(255,255,255, 50)
 }
 
 QPushButton:hover {
-  background-color: rgb(139, 139, 139);
+background-color: rgb(50, 50, 50);
+background-color: rgba(255,255,255,100)
 }
 
 QPushButton:Pressed {
-	background-color: rgb(91, 91, 91);
+background-color: rgb(255,255,255)
 }
 </string>
                       </property>
@@ -821,16 +839,19 @@ QPushButton:Pressed {
                       </property>
                       <property name="styleSheet">
                        <string notr="true">QPushButton {
-
-	background-color: rgb(213, 203, 203);
+color: white;
+padding: 5px;
+border-radius: 5px;
+background-color: rgba(255,255,255, 50)
 }
 
 QPushButton:hover {
-  background-color: rgb(139, 139, 139);
+background-color: rgb(50, 50, 50);
+background-color: rgba(255,255,255,100)
 }
 
 QPushButton:Pressed {
-	background-color: rgb(91, 91, 91);
+background-color: rgb(255,255,255)
 }
 </string>
                       </property>
@@ -859,15 +880,19 @@ QPushButton:Pressed {
                       </property>
                       <property name="styleSheet">
                        <string notr="true">QPushButton {
- background-color: rgb(213, 203, 203);
+color: white;
+padding: 5px;
+border-radius: 5px;
+background-color: rgba(255,255,255, 50)
 }
 
 QPushButton:hover {
-  background-color: rgb(139, 139, 139);
+background-color: rgb(50, 50, 50);
+background-color: rgba(255,255,255,100)
 }
 
 QPushButton:Pressed {
-	background-color: rgb(91, 91, 91);
+background-color: rgb(255,255,255)
 }
 </string>
                       </property>
@@ -941,7 +966,7 @@ QPushButton:Pressed {
 background-color: rgb(28, 28, 28);}</string>
             </property>
             <property name="currentIndex">
-             <number>2</number>
+             <number>3</number>
             </property>
             <widget class="QWidget" name="page_11">
              <layout class="QVBoxLayout" name="verticalLayout_11">
@@ -1482,8 +1507,8 @@ background-color: rgb(255,255,255)
                   <rect>
                    <x>0</x>
                    <y>0</y>
-                   <width>815</width>
-                   <height>582</height>
+                   <width>87</width>
+                   <height>411</height>
                   </rect>
                  </property>
                  <layout class="QVBoxLayout" name="verticalLayout_23">
@@ -1520,8 +1545,8 @@ background-color: rgb(37, 37, 37);</string>
                          <rect>
                           <x>0</x>
                           <y>0</y>
-                          <width>797</width>
-                          <height>240</height>
+                          <width>100</width>
+                          <height>30</height>
                          </rect>
                         </property>
                         <attribute name="label">
@@ -1538,8 +1563,8 @@ background-color: rgb(37, 37, 37);</string>
                          <rect>
                           <x>0</x>
                           <y>0</y>
-                          <width>797</width>
-                          <height>240</height>
+                          <width>100</width>
+                          <height>30</height>
                          </rect>
                         </property>
                         <attribute name="label">
@@ -1556,8 +1581,8 @@ background-color: rgb(37, 37, 37);</string>
                          <rect>
                           <x>0</x>
                           <y>0</y>
-                          <width>797</width>
-                          <height>240</height>
+                          <width>100</width>
+                          <height>30</height>
                          </rect>
                         </property>
                         <attribute name="label">
@@ -1574,8 +1599,8 @@ background-color: rgb(37, 37, 37);</string>
                          <rect>
                           <x>0</x>
                           <y>0</y>
-                          <width>797</width>
-                          <height>240</height>
+                          <width>100</width>
+                          <height>30</height>
                          </rect>
                         </property>
                         <attribute name="label">
@@ -1592,8 +1617,8 @@ background-color: rgb(37, 37, 37);</string>
                          <rect>
                           <x>0</x>
                           <y>0</y>
-                          <width>797</width>
-                          <height>240</height>
+                          <width>100</width>
+                          <height>30</height>
                          </rect>
                         </property>
                         <attribute name="label">
@@ -1610,8 +1635,8 @@ background-color: rgb(37, 37, 37);</string>
                          <rect>
                           <x>0</x>
                           <y>0</y>
-                          <width>797</width>
-                          <height>240</height>
+                          <width>100</width>
+                          <height>30</height>
                          </rect>
                         </property>
                         <attribute name="label">
@@ -1628,8 +1653,8 @@ background-color: rgb(37, 37, 37);</string>
                          <rect>
                           <x>0</x>
                           <y>0</y>
-                          <width>797</width>
-                          <height>240</height>
+                          <width>100</width>
+                          <height>30</height>
                          </rect>
                         </property>
                         <attribute name="label">
@@ -1646,8 +1671,8 @@ background-color: rgb(37, 37, 37);</string>
                          <rect>
                           <x>0</x>
                           <y>0</y>
-                          <width>797</width>
-                          <height>240</height>
+                          <width>100</width>
+                          <height>30</height>
                          </rect>
                         </property>
                         <attribute name="label">
@@ -1664,8 +1689,8 @@ background-color: rgb(37, 37, 37);</string>
                          <rect>
                           <x>0</x>
                           <y>0</y>
-                          <width>797</width>
-                          <height>240</height>
+                          <width>100</width>
+                          <height>30</height>
                          </rect>
                         </property>
                         <attribute name="label">
@@ -1966,8 +1991,8 @@ QTableWidget::item {
                         <rect>
                          <x>0</x>
                          <y>0</y>
-                         <width>52</width>
-                         <height>18</height>
+                         <width>767</width>
+                         <height>464</height>
                         </rect>
                        </property>
                        <layout class="QVBoxLayout" name="verticalLayout_24">

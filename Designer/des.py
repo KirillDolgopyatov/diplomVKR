@@ -252,7 +252,10 @@ class Ui_MainWindow(object):
         self.leftSubMenu.setSizePolicy(sizePolicy)
         self.leftSubMenu.setMinimumSize(QtCore.QSize(0, 0))
         self.leftSubMenu.setMaximumSize(QtCore.QSize(0, 16777215))
-        self.leftSubMenu.setStyleSheet("background-color: rgb(213, 203, 203);")
+        self.leftSubMenu.setStyleSheet("QFrame{\n"
+"    background-color: qlineargradient(spread:pad, x1:1, y1:0.0113636, x2:0.314, y2:0.409455, stop:0.0909091 rgba(29, 67, 155, 255), stop:0.903409 rgba(28, 28, 28, 255));\n"
+"}\n"
+"")
         self.leftSubMenu.setFrameShape(QtWidgets.QFrame.StyledPanel)
         self.leftSubMenu.setFrameShadow(QtWidgets.QFrame.Raised)
         self.leftSubMenu.setObjectName("leftSubMenu")
@@ -261,7 +264,22 @@ class Ui_MainWindow(object):
         self.verticalLayout_3.setSpacing(0)
         self.verticalLayout_3.setObjectName("verticalLayout_3")
         self.upLeftSubMenu = QtWidgets.QFrame(self.leftSubMenu)
-        self.upLeftSubMenu.setStyleSheet("background-color: rgb(187, 187, 187);")
+        self.upLeftSubMenu.setStyleSheet("QPushButton {\n"
+"color: white;\n"
+"padding: 5px;\n"
+"border-radius: 5px;\n"
+"background-color: rgba(255,255,255, 50)\n"
+"}\n"
+"\n"
+"QPushButton:hover {\n"
+"background-color: rgb(50, 50, 50);\n"
+"background-color: rgba(255,255,255,100)\n"
+"}\n"
+"\n"
+"QPushButton:Pressed {\n"
+"background-color: rgb(255,255,255)\n"
+"}\n"
+"")
         self.upLeftSubMenu.setFrameShape(QtWidgets.QFrame.StyledPanel)
         self.upLeftSubMenu.setFrameShadow(QtWidgets.QFrame.Raised)
         self.upLeftSubMenu.setObjectName("upLeftSubMenu")
@@ -277,16 +295,12 @@ class Ui_MainWindow(object):
         self.closeCenterMenu_2.setSizePolicy(sizePolicy)
         self.closeCenterMenu_2.setMaximumSize(QtCore.QSize(40, 16777215))
         self.closeCenterMenu_2.setStyleSheet("QPushButton {\n"
-"background-color: rgb(187, 187, 187);\n"
-"border-radius: 0px;\n"
 "}\n"
 "\n"
 "QPushButton:hover {\n"
-"  background-color: rgb(139, 139, 139);\n"
 "}\n"
 "\n"
 "QPushButton:Pressed {\n"
-"    background-color: rgb(91, 91, 91);\n"
 "}\n"
 "")
         self.closeCenterMenu_2.setText("")
@@ -327,15 +341,19 @@ class Ui_MainWindow(object):
         font.setBold(False)
         self.btnTask.setFont(font)
         self.btnTask.setStyleSheet("QPushButton {\n"
-"  background-color: rgb(213, 203, 203);\n"
+"color: white;\n"
+"padding: 5px;\n"
+"border-radius: 5px;\n"
+"background-color: rgba(255,255,255, 50)\n"
 "}\n"
 "\n"
 "QPushButton:hover {\n"
-"  background-color: rgb(139, 139, 139);\n"
+"background-color: rgb(50, 50, 50);\n"
+"background-color: rgba(255,255,255,100)\n"
 "}\n"
 "\n"
 "QPushButton:Pressed {\n"
-"    background-color: rgb(91, 91, 91);\n"
+"background-color: rgb(255,255,255)\n"
 "}\n"
 "")
         icon6 = QtGui.QIcon()
@@ -367,16 +385,19 @@ class Ui_MainWindow(object):
         sizePolicy.setHeightForWidth(self.btnCreateTask.sizePolicy().hasHeightForWidth())
         self.btnCreateTask.setSizePolicy(sizePolicy)
         self.btnCreateTask.setStyleSheet("QPushButton {\n"
-"\n"
-"    background-color: rgb(213, 203, 203);\n"
+"color: white;\n"
+"padding: 5px;\n"
+"border-radius: 5px;\n"
+"background-color: rgba(255,255,255, 50)\n"
 "}\n"
 "\n"
 "QPushButton:hover {\n"
-"  background-color: rgb(139, 139, 139);\n"
+"background-color: rgb(50, 50, 50);\n"
+"background-color: rgba(255,255,255,100)\n"
 "}\n"
 "\n"
 "QPushButton:Pressed {\n"
-"    background-color: rgb(91, 91, 91);\n"
+"background-color: rgb(255,255,255)\n"
 "}\n"
 "")
         icon7 = QtGui.QIcon()
@@ -392,15 +413,19 @@ class Ui_MainWindow(object):
         sizePolicy.setHeightForWidth(self.btnDeleteTask.sizePolicy().hasHeightForWidth())
         self.btnDeleteTask.setSizePolicy(sizePolicy)
         self.btnDeleteTask.setStyleSheet("QPushButton {\n"
-" background-color: rgb(213, 203, 203);\n"
+"color: white;\n"
+"padding: 5px;\n"
+"border-radius: 5px;\n"
+"background-color: rgba(255,255,255, 50)\n"
 "}\n"
 "\n"
 "QPushButton:hover {\n"
-"  background-color: rgb(139, 139, 139);\n"
+"background-color: rgb(50, 50, 50);\n"
+"background-color: rgba(255,255,255,100)\n"
 "}\n"
 "\n"
 "QPushButton:Pressed {\n"
-"    background-color: rgb(91, 91, 91);\n"
+"background-color: rgb(255,255,255)\n"
 "}\n"
 "")
         icon8 = QtGui.QIcon()
@@ -695,7 +720,7 @@ class Ui_MainWindow(object):
         self.scrollArea.setWidgetResizable(True)
         self.scrollArea.setObjectName("scrollArea")
         self.scrollAreaWidgetContents = QtWidgets.QWidget()
-        self.scrollAreaWidgetContents.setGeometry(QtCore.QRect(0, 0, 815, 582))
+        self.scrollAreaWidgetContents.setGeometry(QtCore.QRect(0, 0, 87, 411))
         self.scrollAreaWidgetContents.setObjectName("scrollAreaWidgetContents")
         self.verticalLayout_23 = QtWidgets.QVBoxLayout(self.scrollAreaWidgetContents)
         self.verticalLayout_23.setContentsMargins(0, 0, 0, 0)
@@ -711,7 +736,7 @@ class Ui_MainWindow(object):
 "background-color: rgb(37, 37, 37);")
         self.toolBox.setObjectName("toolBox")
         self.page_3 = QtWidgets.QWidget()
-        self.page_3.setGeometry(QtCore.QRect(0, 0, 797, 240))
+        self.page_3.setGeometry(QtCore.QRect(0, 0, 100, 30))
         self.page_3.setObjectName("page_3")
         self.horizontalLayout_3 = QtWidgets.QHBoxLayout(self.page_3)
         self.horizontalLayout_3.setObjectName("horizontalLayout_3")
@@ -720,7 +745,7 @@ class Ui_MainWindow(object):
         self.horizontalLayout_3.addLayout(self.verticalLayout_26)
         self.toolBox.addItem(self.page_3, "")
         self.page_5 = QtWidgets.QWidget()
-        self.page_5.setGeometry(QtCore.QRect(0, 0, 797, 240))
+        self.page_5.setGeometry(QtCore.QRect(0, 0, 100, 30))
         self.page_5.setObjectName("page_5")
         self.horizontalLayout_12 = QtWidgets.QHBoxLayout(self.page_5)
         self.horizontalLayout_12.setObjectName("horizontalLayout_12")
@@ -729,7 +754,7 @@ class Ui_MainWindow(object):
         self.horizontalLayout_12.addLayout(self.verticalLayout_27)
         self.toolBox.addItem(self.page_5, "")
         self.page_6 = QtWidgets.QWidget()
-        self.page_6.setGeometry(QtCore.QRect(0, 0, 797, 240))
+        self.page_6.setGeometry(QtCore.QRect(0, 0, 100, 30))
         self.page_6.setObjectName("page_6")
         self.horizontalLayout_17 = QtWidgets.QHBoxLayout(self.page_6)
         self.horizontalLayout_17.setObjectName("horizontalLayout_17")
@@ -738,7 +763,7 @@ class Ui_MainWindow(object):
         self.horizontalLayout_17.addLayout(self.verticalLayout_28)
         self.toolBox.addItem(self.page_6, "")
         self.page_7 = QtWidgets.QWidget()
-        self.page_7.setGeometry(QtCore.QRect(0, 0, 797, 240))
+        self.page_7.setGeometry(QtCore.QRect(0, 0, 100, 30))
         self.page_7.setObjectName("page_7")
         self.horizontalLayout_16 = QtWidgets.QHBoxLayout(self.page_7)
         self.horizontalLayout_16.setObjectName("horizontalLayout_16")
@@ -747,7 +772,7 @@ class Ui_MainWindow(object):
         self.horizontalLayout_16.addLayout(self.verticalLayout_29)
         self.toolBox.addItem(self.page_7, "")
         self.page_8 = QtWidgets.QWidget()
-        self.page_8.setGeometry(QtCore.QRect(0, 0, 797, 240))
+        self.page_8.setGeometry(QtCore.QRect(0, 0, 100, 30))
         self.page_8.setObjectName("page_8")
         self.horizontalLayout_15 = QtWidgets.QHBoxLayout(self.page_8)
         self.horizontalLayout_15.setObjectName("horizontalLayout_15")
@@ -756,7 +781,7 @@ class Ui_MainWindow(object):
         self.horizontalLayout_15.addLayout(self.verticalLayout_30)
         self.toolBox.addItem(self.page_8, "")
         self.page_9 = QtWidgets.QWidget()
-        self.page_9.setGeometry(QtCore.QRect(0, 0, 797, 240))
+        self.page_9.setGeometry(QtCore.QRect(0, 0, 100, 30))
         self.page_9.setObjectName("page_9")
         self.horizontalLayout_14 = QtWidgets.QHBoxLayout(self.page_9)
         self.horizontalLayout_14.setObjectName("horizontalLayout_14")
@@ -765,7 +790,7 @@ class Ui_MainWindow(object):
         self.horizontalLayout_14.addLayout(self.verticalLayout_31)
         self.toolBox.addItem(self.page_9, "")
         self.page_10 = QtWidgets.QWidget()
-        self.page_10.setGeometry(QtCore.QRect(0, 0, 797, 240))
+        self.page_10.setGeometry(QtCore.QRect(0, 0, 100, 30))
         self.page_10.setObjectName("page_10")
         self.horizontalLayout_13 = QtWidgets.QHBoxLayout(self.page_10)
         self.horizontalLayout_13.setObjectName("horizontalLayout_13")
@@ -774,7 +799,7 @@ class Ui_MainWindow(object):
         self.horizontalLayout_13.addLayout(self.verticalLayout_25)
         self.toolBox.addItem(self.page_10, "")
         self.page_12 = QtWidgets.QWidget()
-        self.page_12.setGeometry(QtCore.QRect(0, 0, 797, 240))
+        self.page_12.setGeometry(QtCore.QRect(0, 0, 100, 30))
         self.page_12.setObjectName("page_12")
         self.horizontalLayout_18 = QtWidgets.QHBoxLayout(self.page_12)
         self.horizontalLayout_18.setObjectName("horizontalLayout_18")
@@ -783,7 +808,7 @@ class Ui_MainWindow(object):
         self.horizontalLayout_18.addLayout(self.verticalLayout_32)
         self.toolBox.addItem(self.page_12, "")
         self.page_4 = QtWidgets.QWidget()
-        self.page_4.setGeometry(QtCore.QRect(0, 0, 797, 240))
+        self.page_4.setGeometry(QtCore.QRect(0, 0, 100, 30))
         self.page_4.setObjectName("page_4")
         self.horizontalLayout_19 = QtWidgets.QHBoxLayout(self.page_4)
         self.horizontalLayout_19.setObjectName("horizontalLayout_19")
@@ -949,7 +974,7 @@ class Ui_MainWindow(object):
         self.scrollArea_2.setWidgetResizable(True)
         self.scrollArea_2.setObjectName("scrollArea_2")
         self.scrollAreaWC = QtWidgets.QWidget()
-        self.scrollAreaWC.setGeometry(QtCore.QRect(0, 0, 52, 18))
+        self.scrollAreaWC.setGeometry(QtCore.QRect(0, 0, 767, 464))
         self.scrollAreaWC.setObjectName("scrollAreaWC")
         self.verticalLayout_24 = QtWidgets.QVBoxLayout(self.scrollAreaWC)
         self.verticalLayout_24.setObjectName("verticalLayout_24")
@@ -1072,7 +1097,7 @@ class Ui_MainWindow(object):
 
         self.retranslateUi(MainWindow)
         self.stackedWidgetLeftMenu.setCurrentIndex(0)
-        self.MainStack.setCurrentIndex(2)
+        self.MainStack.setCurrentIndex(3)
         self.toolBox.setCurrentIndex(4)
         QtCore.QMetaObject.connectSlotsByName(MainWindow)
 
