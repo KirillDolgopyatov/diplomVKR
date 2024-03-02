@@ -198,6 +198,20 @@ class MainWindow(QMainWindow):  # Определение класса MainWindow
                         # Добавляем новую строку, если данных больше, чем строк в таблице
                         row_position = tableWidget.rowCount()
                         tableWidget.insertRow(row_position)
+                        tableWidget.setStyleSheet("""
+                                                    QTableWidget {
+                                                    }
+                                                    QTableWidget QHeaderView::section {
+                                                        color: black;
+                                                        background-color: rgb(173, 142, 57);
+                                                        padding-left: 5px;
+                                                        padding-right: 5px;
+                                                    }
+                                                    QTableWidget::item {
+                                                        color:black;
+                                                        background-color: rgb(217, 217, 217);
+                                                    }
+                                                """)
                         tableWidget.setItem(row_position, 0, QTableWidgetItem(str(row_data)))
                 # Если в таблице больше строк, чем данных, удаляем лишние строки с конца
                 while tableWidget.rowCount() > len(data):
@@ -220,7 +234,7 @@ class MainWindow(QMainWindow):  # Определение класса MainWindow
             tableWidget.setStyleSheet("color:black;")
             tableWidget.setColumnWidth(0, 400)
             # Устанавливаем заголовки столбцов, первый столбец - "ФИО", остальные - согласно количеству
-            tableWidget.setHorizontalHeaderLabels(['ФИО'] + [f'Столбец {i}' for i in range(1, num_columns + 1)])
+            tableWidget.setHorizontalHeaderLabels(['ФИО'] + [f'Тема {i}' for i in range(1, num_columns + 1)])
             for row, item in enumerate(data):
                 tableWidget.setItem(row, 0, QTableWidgetItem(item))
             # Добавляем созданную таблицу на страницу
@@ -276,13 +290,16 @@ class MainWindow(QMainWindow):  # Определение класса MainWindow
         conn = sqlite3.connect('saveData/personnel.db')  # Подключение к базе данных
         cursor = conn.cursor()  # Создание курсора
 
-        # Создание таблицы, если она не существует
+        # Создание таблицы, если она не существует, с добавлением столбца id
         cursor.execute('''CREATE TABLE IF NOT EXISTS personnel (
+                            id INTEGER PRIMARY KEY AUTOINCREMENT,
                             fio TEXT,
                             rank TEXT,
                             subunit TEXT,
                             duty TEXT
                         )''')
+
+        # Остальная часть метода...
 
         cursor.execute('DELETE FROM personnel')  # Очистка таблицы перед вставкой новых данных
 
