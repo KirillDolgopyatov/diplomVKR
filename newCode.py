@@ -114,6 +114,20 @@ class MainWindow(QMainWindow):  # Определение класса MainWindow
                 page_index = int(table_name[0].split('_')[-1])  # Получаем индекс страницы из имени таблицы
                 page = self.ui.toolBox.widget(page_index)
                 tableWidget = self.find_table_widget(page)
+                tableWidget.setStyleSheet("""
+                            QTableWidget {
+                            }
+                            QTableWidget QHeaderView::section {
+                                color: black;
+                                background-color: rgb(173, 142, 57);
+                                padding-left: 5px;
+                                padding-right: 5px;
+                            }
+                            QTableWidget::item {
+                                color:black;
+                                background-color: rgb(217, 217, 217);
+                            }
+                        """)
             except (ValueError, IndexError):
                 continue  # Если не удается найти соответствующий виджет, пропускаем таблицу
 
@@ -138,6 +152,7 @@ class MainWindow(QMainWindow):  # Определение класса MainWindow
         for page_index in range(self.ui.toolBox.count()):
             page = self.ui.toolBox.widget(page_index)
             tableWidget = self.find_table_widget(page)
+
             if tableWidget:
                 table_name = f"table_data_page_{page_index}"
                 # Определяем количество столбцов для текущей таблицы
@@ -173,13 +188,20 @@ class MainWindow(QMainWindow):  # Определение класса MainWindow
             page = self.ui.toolBox.widget(i)
             tableWidget = self.find_table_widget(page)
             if tableWidget:
-                # Очищаем таблицу перед заполнением
-                tableWidget.setRowCount(0)
-                for row_data in data:
-                    row_position = tableWidget.rowCount()
-                    tableWidget.insertRow(row_position)
-                    # Заполняем только первый столбец таблицы
-                    tableWidget.setItem(row_position, 0, QTableWidgetItem(str(row_data)))
+                # Получаем текущее количество строк в таблице
+                currentRowCount = tableWidget.rowCount()
+                for index, row_data in enumerate(data):
+                    if index < currentRowCount:
+                        # Обновляем существующую строку
+                        tableWidget.item(index, 0).setText(str(row_data))
+                    else:
+                        # Добавляем новую строку, если данных больше, чем строк в таблице
+                        row_position = tableWidget.rowCount()
+                        tableWidget.insertRow(row_position)
+                        tableWidget.setItem(row_position, 0, QTableWidgetItem(str(row_data)))
+                # Если в таблице больше строк, чем данных, удаляем лишние строки с конца
+                while tableWidget.rowCount() > len(data):
+                    tableWidget.removeRow(tableWidget.rowCount() - 1)
 
     def load_data_from_first_column(self):
         """Загрузка данных из первого столбца таблицы базы данных."""
@@ -355,7 +377,6 @@ class MainWindow(QMainWindow):  # Определение класса MainWindow
             QMessageBox.warning(None, "Ошибка", "Заполните все поля")
 
         self.update_toolbox_tables()
-        self.save_tables_data()
 
     def delete_personnel(self):
         selected_ranges = self.ui.table_personnel.selectedRanges()

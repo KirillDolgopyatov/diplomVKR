@@ -966,7 +966,7 @@ background-color: rgb(255,255,255)
 background-color: rgb(28, 28, 28);}</string>
             </property>
             <property name="currentIndex">
-             <number>3</number>
+             <number>1</number>
             </property>
             <widget class="QWidget" name="page_11">
              <layout class="QVBoxLayout" name="verticalLayout_11">
@@ -1507,8 +1507,8 @@ background-color: rgb(255,255,255)
                   <rect>
                    <x>0</x>
                    <y>0</y>
-                   <width>87</width>
-                   <height>411</height>
+                   <width>815</width>
+                   <height>582</height>
                   </rect>
                  </property>
                  <layout class="QVBoxLayout" name="verticalLayout_23">
@@ -1533,20 +1533,20 @@ background-color: rgb(255,255,255)
                      <item>
                       <widget class="QToolBox" name="toolBox">
                        <property name="styleSheet">
-                        <string notr="true">color: white;
-font: 12pt;
-background-color: rgb(37, 37, 37);</string>
+                        <string notr="true">color: rgb(215, 215, 215);
+font: 14pt;
+</string>
                        </property>
                        <property name="currentIndex">
-                        <number>4</number>
+                        <number>0</number>
                        </property>
                        <widget class="QWidget" name="page_3">
                         <property name="geometry">
                          <rect>
                           <x>0</x>
                           <y>0</y>
-                          <width>100</width>
-                          <height>30</height>
+                          <width>797</width>
+                          <height>204</height>
                          </rect>
                         </property>
                         <attribute name="label">
@@ -1563,8 +1563,8 @@ background-color: rgb(37, 37, 37);</string>
                          <rect>
                           <x>0</x>
                           <y>0</y>
-                          <width>100</width>
-                          <height>30</height>
+                          <width>797</width>
+                          <height>204</height>
                          </rect>
                         </property>
                         <attribute name="label">
@@ -1581,8 +1581,8 @@ background-color: rgb(37, 37, 37);</string>
                          <rect>
                           <x>0</x>
                           <y>0</y>
-                          <width>100</width>
-                          <height>30</height>
+                          <width>797</width>
+                          <height>204</height>
                          </rect>
                         </property>
                         <attribute name="label">
@@ -1599,8 +1599,8 @@ background-color: rgb(37, 37, 37);</string>
                          <rect>
                           <x>0</x>
                           <y>0</y>
-                          <width>100</width>
-                          <height>30</height>
+                          <width>797</width>
+                          <height>204</height>
                          </rect>
                         </property>
                         <attribute name="label">
@@ -1617,8 +1617,8 @@ background-color: rgb(37, 37, 37);</string>
                          <rect>
                           <x>0</x>
                           <y>0</y>
-                          <width>100</width>
-                          <height>30</height>
+                          <width>797</width>
+                          <height>204</height>
                          </rect>
                         </property>
                         <attribute name="label">
@@ -1635,8 +1635,8 @@ background-color: rgb(37, 37, 37);</string>
                          <rect>
                           <x>0</x>
                           <y>0</y>
-                          <width>100</width>
-                          <height>30</height>
+                          <width>797</width>
+                          <height>204</height>
                          </rect>
                         </property>
                         <attribute name="label">
@@ -1653,8 +1653,8 @@ background-color: rgb(37, 37, 37);</string>
                          <rect>
                           <x>0</x>
                           <y>0</y>
-                          <width>100</width>
-                          <height>30</height>
+                          <width>797</width>
+                          <height>204</height>
                          </rect>
                         </property>
                         <attribute name="label">
@@ -1671,8 +1671,8 @@ background-color: rgb(37, 37, 37);</string>
                          <rect>
                           <x>0</x>
                           <y>0</y>
-                          <width>100</width>
-                          <height>30</height>
+                          <width>797</width>
+                          <height>204</height>
                          </rect>
                         </property>
                         <attribute name="label">
@@ -1689,8 +1689,8 @@ background-color: rgb(37, 37, 37);</string>
                          <rect>
                           <x>0</x>
                           <y>0</y>
-                          <width>100</width>
-                          <height>30</height>
+                          <width>797</width>
+                          <height>204</height>
                          </rect>
                         </property>
                         <attribute name="label">
@@ -2263,7 +2263,7 @@ background-color: rgb(255,255,255)
  </widget>
  <resources>
   <include location="res_rc.qrc"/>
-  <include location="../../../.designer/backup/res_rc.qrc"/>
+  <include location="res_rc.qrc"/>
  </resources>
  <connections/>
 </ui>
