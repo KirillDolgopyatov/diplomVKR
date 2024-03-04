@@ -2,10 +2,10 @@ import sqlite3  # Импорт модуля для работы с SQLite
 import sys  # Импорт системного модуля
 
 import PyQt5
-from PyQt5.QtCore import QDateTime, QSize, QTimer, Qt, QPropertyAnimation, QEasingCurve, QDate
+from PyQt5.QtCore import QDateTime, QSize, QTimer, Qt, QPropertyAnimation, QEasingCurve
 from PyQt5.QtWidgets import QApplication, QMainWindow, QTableWidgetItem, QHeaderView, \
     QMessageBox, QCompleter, QTableWidget, QLineEdit, QPushButton, QLabel, \
-    QHBoxLayout, QFrame, QVBoxLayout, QWidget, QDateEdit  # Импорт необходимых классов из PyQt5
+    QHBoxLayout, QFrame, QVBoxLayout, QWidget, QMenu, QInputDialog  # Импорт необходимых классов из PyQt5
 
 from Designer.des import Ui_MainWindow  # Импорт дизайна интерфейса, созданного в Qt Designer
 from Designer.loginVKR import Ui_Form
@@ -234,21 +234,28 @@ class MainWindow(QMainWindow):  # Определение класса MainWindow
             tableWidget.setStyleSheet("color:black;")
             tableWidget.setColumnWidth(0, 400)
 
+            tableWidget.setContextMenuPolicy(Qt.CustomContextMenu)
+            tableWidget.customContextMenuRequested.connect(self.onContextMenuRequested)
+
             # Устанавливаем заголовки столбцов, первый столбец - "ФИО", остальные - согласно количеству
             tableWidget.setHorizontalHeaderLabels(['ФИО'] + [f'Тема {i}' for i in range(1, num_columns + 1)])
-
-            for row in range(tableWidget.rowCount()):
-                tableWidget.setItem(row, 0, QTableWidgetItem(data[row]))  # Заполняем первый столбец данными "ФИО"
-                for column in range(1, tableWidget.columnCount()):  # Начинаем с 1, чтобы пропустить первый столбец
-                    date_edit = QDateEdit()
-                    date_edit.setDate(QDate.currentDate())
-                    date_edit.setCalendarPopup(True)
-                    tableWidget.setCellWidget(row, column, date_edit)
-
             # Добавляем созданную таблицу на страницу
             page.layout().addWidget(tableWidget)
 
     ####################################################################################################################
+
+    def onContextMenuRequested(self, position):
+        contextMenu = QMenu(self)
+        applyDataAction = contextMenu.addAction("Ввести данные в выделенные ячейки")
+        action = contextMenu.exec_(self.ui.table_personnel.mapToGlobal(position))
+        if action == applyDataAction:
+            self.showInputDialog()  # Метод для отображения диалогового окна ввода данных
+
+    def showInputDialog(self):
+        text, ok = QInputDialog.getText(self, 'Ввод данных', 'Введите данные:')
+        if ok and text:
+            self.applyDataToSelectedCells(text)
+
     def setup_completer(self):
         # Получение всех уникальных значений из первого столбца таблицы
         list_fio = set()
