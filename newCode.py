@@ -5,7 +5,7 @@ import PyQt5
 from PyQt5.QtCore import QDateTime, QSize, QTimer, Qt, QPropertyAnimation, QEasingCurve
 from PyQt5.QtWidgets import QApplication, QMainWindow, QTableWidgetItem, QHeaderView, \
     QMessageBox, QCompleter, QTableWidget, QLineEdit, QPushButton, QLabel, \
-    QHBoxLayout, QFrame, QVBoxLayout, QWidget, QMenu, QInputDialog  # Импорт необходимых классов из PyQt5
+    QHBoxLayout, QFrame, QVBoxLayout, QWidget  # Импорт необходимых классов из PyQt5
 
 from Designer.des import Ui_MainWindow  # Импорт дизайна интерфейса, созданного в Qt Designer
 from Designer.loginVKR import Ui_Form
@@ -147,6 +147,7 @@ class MainWindow(QMainWindow):  # Определение класса MainWindow
 
     ####################################################################################################################
     def save_tables_data(self):
+        page_names = {0: "Разведывательная подготовка", 1: "Другая страница"}
         cursor = self.db_connection.cursor()
         # Предполагаем, что у нас есть отдельные таблицы для каждой страницы в QToolBox
         for page_index in range(self.ui.toolBox.count()):
@@ -154,7 +155,8 @@ class MainWindow(QMainWindow):  # Определение класса MainWindow
             tableWidget = self.find_table_widget(page)
 
             if tableWidget:
-                table_name = f"table_data_page_{page_index}"
+                page_name = page_names.get(page_index, f"page_{page_index}")
+                table_name = page_name
                 # Определяем количество столбцов для текущей таблицы
                 num_columns = tableWidget.columnCount()
                 # Формируем строку с описанием столбцов для SQL запроса
@@ -234,27 +236,12 @@ class MainWindow(QMainWindow):  # Определение класса MainWindow
             tableWidget.setStyleSheet("color:black;")
             tableWidget.setColumnWidth(0, 400)
 
-            tableWidget.setContextMenuPolicy(Qt.CustomContextMenu)
-            tableWidget.customContextMenuRequested.connect(self.onContextMenuRequested)
-
             # Устанавливаем заголовки столбцов, первый столбец - "ФИО", остальные - согласно количеству
             tableWidget.setHorizontalHeaderLabels(['ФИО'] + [f'Тема {i}' for i in range(1, num_columns + 1)])
             # Добавляем созданную таблицу на страницу
             page.layout().addWidget(tableWidget)
 
     ####################################################################################################################
-
-    def onContextMenuRequested(self, position):
-        contextMenu = QMenu(self)
-        applyDataAction = contextMenu.addAction("Ввести данные в выделенные ячейки")
-        action = contextMenu.exec_(self.ui.table_personnel.mapToGlobal(position))
-        if action == applyDataAction:
-            self.showInputDialog()  # Метод для отображения диалогового окна ввода данных
-
-    def showInputDialog(self):
-        text, ok = QInputDialog.getText(self, 'Ввод данных', 'Введите данные:')
-        if ok and text:
-            self.applyDataToSelectedCells(text)
 
     def setup_completer(self):
         # Получение всех уникальных значений из первого столбца таблицы
