@@ -147,16 +147,13 @@ class MainWindow(QMainWindow):  # Определение класса MainWindow
 
     ####################################################################################################################
     def save_tables_data(self):
-        page_names = {0: "Разведывательная подготовка", 1: "Другая страница"}
         cursor = self.db_connection.cursor()
         # Предполагаем, что у нас есть отдельные таблицы для каждой страницы в QToolBox
         for page_index in range(self.ui.toolBox.count()):
             page = self.ui.toolBox.widget(page_index)
             tableWidget = self.find_table_widget(page)
-
             if tableWidget:
-                page_name = page_names.get(page_index, f"page_{page_index}")
-                table_name = page_name
+                table_name = f"table_data_page_{page_index}"
                 # Определяем количество столбцов для текущей таблицы
                 num_columns = tableWidget.columnCount()
                 # Формируем строку с описанием столбцов для SQL запроса
@@ -235,14 +232,14 @@ class MainWindow(QMainWindow):  # Определение класса MainWindow
             tableWidget = QTableWidget(len(data), num_columns + 1)  # Создаем таблицу с нужным количеством столбцов
             tableWidget.setStyleSheet("color:black;")
             tableWidget.setColumnWidth(0, 400)
-
             # Устанавливаем заголовки столбцов, первый столбец - "ФИО", остальные - согласно количеству
             tableWidget.setHorizontalHeaderLabels(['ФИО'] + [f'Тема {i}' for i in range(1, num_columns + 1)])
+            for row, item in enumerate(data):
+                tableWidget.setItem(row, 0, QTableWidgetItem(item))
             # Добавляем созданную таблицу на страницу
             page.layout().addWidget(tableWidget)
 
     ####################################################################################################################
-
     def setup_completer(self):
         # Получение всех уникальных значений из первого столбца таблицы
         list_fio = set()
@@ -294,7 +291,7 @@ class MainWindow(QMainWindow):  # Определение класса MainWindow
 
         # Создание таблицы, если она не существует, с добавлением столбца id
         cursor.execute('''CREATE TABLE IF NOT EXISTS personnel (
-                            id INTEGER PRIMARY KEY,
+                            id INTEGER PRIMARY KEY AUTOINCREMENT,
                             fio TEXT,
                             rank TEXT,
                             subunit TEXT,
@@ -325,11 +322,10 @@ class MainWindow(QMainWindow):  # Определение класса MainWindow
 
         # Создание таблицы, если она не существует
         cursor.execute('''CREATE TABLE IF NOT EXISTS personnel (
-                            id INTEGER PRIMARY KEY,
                             fio TEXT,
                             rank TEXT,
                             subunit TEXT,
-                            duty TEXT
+                            duty TEXT   
                         )''')
 
         cursor.execute('''SELECT fio, rank, subunit, duty FROM personnel''')  # Выборка данных из таблицы
@@ -504,7 +500,7 @@ class MainWindow(QMainWindow):  # Определение класса MainWindow
     ####################################################################################################################
     @staticmethod
     def load_count_tem():
-        count_tem = [3, 4, 5, 6, 7]
+        count_tem = [4, 6, 6, 4, 40, 60, 6, 4, 20, 4, 30, 10, 4, 10, 54, 16, 10, 8]
         while True:  # Создаем бесконечный цикл
             for num in count_tem:
                 yield num  # Возвращаем число из списка и приостанавливаем выполнение
