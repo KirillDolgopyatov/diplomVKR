@@ -89,6 +89,7 @@ class MainWindow(QMainWindow):  # Определение класса MainWindow
         self.ui.scrollAreaWC.setLayout(QVBoxLayout())
         #####
         self.populate_combobox()  # Заполнение QComboBox данными
+        self.ui.comboBox.currentIndexChanged.connect(self.update_person_info)
 
     def fetch_names_from_db(self):
         self.cursor.execute("SELECT fio FROM personnel")
@@ -103,6 +104,7 @@ class MainWindow(QMainWindow):  # Определение класса MainWindow
         self.ui.comboBox.addItems(names)  # Добавляем имена в comboBox
         self.ui.comboBox.setCurrentIndex(0)  # Устанавливаем пустой элемент активным
         self.update_person_info()
+
     def update_person_info(self):
         selected_name = self.ui.comboBox.currentText()
         if selected_name:
@@ -537,7 +539,8 @@ class MainWindow(QMainWindow):  # Определение класса MainWindow
     ####################################################################################################################
     @staticmethod
     def load_count_tem():
-        count_tem = [4, 6, 6, 4, 40, 60, 6, 4, 20, 4, 30, 10, 4, 10, 54, 16, 10, 8]
+        # count_tem = [4, 6, 6, 4, 40, 60, 6, 4, 20, 4, 30, 10, 4, 10, 54, 16, 10, 8]
+        count_tem = [3, 3, 3, 2, 8, 19, 5, 2, 6, 3, 10, 10, 4, 3, 8, 5, 5, 3]
         while True:  # Создаем бесконечный цикл
             for num in count_tem:
                 yield num  # Возвращаем число из списка и приостанавливаем выполнение
