@@ -89,6 +89,16 @@ class MainWindow(QMainWindow):  # Определение класса MainWindow
         self.ui.scrollAreaWC.setLayout(QVBoxLayout())
         #####
 
+    def fetch_names_from_db(self):
+        self.cursor.execute("SELECT fio FROM personnel")
+        rows = self.cursor.fetchall()
+        names = [row[0] for row in rows]  # Извлекаем имена из первого столбца
+        return names
+
+    def populate_combobox(self):
+        names = self.fetch_names_from_db()
+        self.ui.comboBox.clear()  # Очищаем comboBox перед заполнением
+        self.ui.comboBox.addItems(names)  # Добавляем имена в comboBox
     ####################################################################################################################
     def load_tables_at_startup(self):
         cursor = self.db_connection.cursor()
@@ -238,8 +248,8 @@ class MainWindow(QMainWindow):  # Определение класса MainWindow
             tableWidget.setHorizontalHeaderLabels(['ФИО'] + [f'Тема {i}' for i in range(1, num_columns + 1)])
             for row, item in enumerate(data):
                 tableWidget.setItem(row, 0, QTableWidgetItem(item))
-            # Добавляем созданную таблицу на страницу
 
+            # Добавляем созданную таблицу на страницу
             page.layout().addWidget(tableWidget)
 
     ####################################################################################################################

@@ -966,7 +966,7 @@ background-color: rgb(255,255,255)
 background-color: rgb(28, 28, 28);}</string>
             </property>
             <property name="currentIndex">
-             <number>2</number>
+             <number>0</number>
             </property>
             <widget class="QWidget" name="page_11">
              <layout class="QVBoxLayout" name="verticalLayout_11">
@@ -985,6 +985,31 @@ background-color: rgb(28, 28, 28);}</string>
               <property name="bottomMargin">
                <number>0</number>
               </property>
+              <item>
+               <widget class="QFrame" name="frame_3">
+                <property name="frameShape">
+                 <enum>QFrame::StyledPanel</enum>
+                </property>
+                <property name="frameShadow">
+                 <enum>QFrame::Raised</enum>
+                </property>
+                <layout class="QVBoxLayout" name="verticalLayout_19">
+                 <item alignment="Qt::AlignLeft|Qt::AlignTop">
+                  <widget class="QComboBox" name="comboBox">
+                   <property name="minimumSize">
+                    <size>
+                     <width>300</width>
+                     <height>30</height>
+                    </size>
+                   </property>
+                   <property name="styleSheet">
+                    <string notr="true">background-color: rgb(217, 217, 217);</string>
+                   </property>
+                  </widget>
+                 </item>
+                </layout>
+               </widget>
+              </item>
              </layout>
             </widget>
             <widget class="QWidget" name="page_22">
@@ -1578,8 +1603,8 @@ font: 14pt;
                       <rect>
                        <x>0</x>
                        <y>0</y>
-                       <width>786</width>
-                       <height>508</height>
+                       <width>100</width>
+                       <height>30</height>
                       </rect>
                      </property>
                      <property name="sizePolicy">
@@ -1614,8 +1639,8 @@ font: 14pt;
                       <rect>
                        <x>0</x>
                        <y>0</y>
-                       <width>786</width>
-                       <height>508</height>
+                       <width>100</width>
+                       <height>30</height>
                       </rect>
                      </property>
                      <attribute name="label">
@@ -1628,8 +1653,8 @@ font: 14pt;
                       <rect>
                        <x>0</x>
                        <y>0</y>
-                       <width>786</width>
-                       <height>508</height>
+                       <width>100</width>
+                       <height>30</height>
                       </rect>
                      </property>
                      <property name="sizePolicy">
@@ -1648,8 +1673,8 @@ font: 14pt;
                       <rect>
                        <x>0</x>
                        <y>0</y>
-                       <width>786</width>
-                       <height>508</height>
+                       <width>100</width>
+                       <height>30</height>
                       </rect>
                      </property>
                      <attribute name="label">
@@ -1678,8 +1703,8 @@ font: 14pt;
                       <rect>
                        <x>0</x>
                        <y>0</y>
-                       <width>786</width>
-                       <height>508</height>
+                       <width>100</width>
+                       <height>30</height>
                       </rect>
                      </property>
                      <property name="sizePolicy">
@@ -1714,8 +1739,8 @@ font: 14pt;
                       <rect>
                        <x>0</x>
                        <y>0</y>
-                       <width>786</width>
-                       <height>508</height>
+                       <width>100</width>
+                       <height>30</height>
                       </rect>
                      </property>
                      <property name="sizePolicy">
@@ -1750,8 +1775,8 @@ font: 14pt;
                       <rect>
                        <x>0</x>
                        <y>0</y>
-                       <width>786</width>
-                       <height>508</height>
+                       <width>100</width>
+                       <height>30</height>
                       </rect>
                      </property>
                      <property name="sizePolicy">
@@ -1786,8 +1811,8 @@ font: 14pt;
                       <rect>
                        <x>0</x>
                        <y>0</y>
-                       <width>786</width>
-                       <height>508</height>
+                       <width>100</width>
+                       <height>30</height>
                       </rect>
                      </property>
                      <property name="sizePolicy">
@@ -1822,8 +1847,8 @@ font: 14pt;
                       <rect>
                        <x>0</x>
                        <y>0</y>
-                       <width>786</width>
-                       <height>508</height>
+                       <width>100</width>
+                       <height>30</height>
                       </rect>
                      </property>
                      <property name="sizePolicy">
@@ -1858,8 +1883,8 @@ font: 14pt;
                       <rect>
                        <x>0</x>
                        <y>0</y>
-                       <width>786</width>
-                       <height>508</height>
+                       <width>100</width>
+                       <height>30</height>
                       </rect>
                      </property>
                      <property name="sizePolicy">
@@ -1894,8 +1919,8 @@ font: 14pt;
                       <rect>
                        <x>0</x>
                        <y>0</y>
-                       <width>786</width>
-                       <height>508</height>
+                       <width>100</width>
+                       <height>30</height>
                       </rect>
                      </property>
                      <property name="sizePolicy">
@@ -1930,8 +1955,8 @@ font: 14pt;
                       <rect>
                        <x>0</x>
                        <y>0</y>
-                       <width>786</width>
-                       <height>508</height>
+                       <width>100</width>
+                       <height>30</height>
                       </rect>
                      </property>
                      <property name="sizePolicy">
@@ -1950,8 +1975,8 @@ font: 14pt;
                       <rect>
                        <x>0</x>
                        <y>0</y>
-                       <width>786</width>
-                       <height>508</height>
+                       <width>100</width>
+                       <height>30</height>
                       </rect>
                      </property>
                      <property name="sizePolicy">
@@ -1986,8 +2011,8 @@ font: 14pt;
                       <rect>
                        <x>0</x>
                        <y>0</y>
-                       <width>786</width>
-                       <height>508</height>
+                       <width>100</width>
+                       <height>30</height>
                       </rect>
                      </property>
                      <property name="sizePolicy">
@@ -2006,8 +2031,8 @@ font: 14pt;
                       <rect>
                        <x>0</x>
                        <y>0</y>
-                       <width>786</width>
-                       <height>508</height>
+                       <width>100</width>
+                       <height>30</height>
                       </rect>
                      </property>
                      <property name="sizePolicy">
@@ -2026,8 +2051,8 @@ font: 14pt;
                       <rect>
                        <x>0</x>
                        <y>0</y>
-                       <width>786</width>
-                       <height>508</height>
+                       <width>100</width>
+                       <height>30</height>
                       </rect>
                      </property>
                      <property name="sizePolicy">
@@ -2062,8 +2087,8 @@ font: 14pt;
                       <rect>
                        <x>0</x>
                        <y>0</y>
-                       <width>786</width>
-                       <height>508</height>
+                       <width>100</width>
+                       <height>30</height>
                       </rect>
                      </property>
                      <property name="sizePolicy">
@@ -2363,8 +2388,8 @@ QTableWidget::item {
                         <rect>
                          <x>0</x>
                          <y>0</y>
-                         <width>52</width>
-                         <height>18</height>
+                         <width>100</width>
+                         <height>30</height>
                         </rect>
                        </property>
                        <layout class="QVBoxLayout" name="verticalLayout_24">
