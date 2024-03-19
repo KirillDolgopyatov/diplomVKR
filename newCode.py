@@ -5,7 +5,7 @@ import PyQt5
 from PyQt5.QtCore import QDateTime, QSize, QTimer, Qt, QPropertyAnimation, QEasingCurve
 from PyQt5.QtWidgets import QApplication, QMainWindow, QTableWidgetItem, QHeaderView, \
     QMessageBox, QCompleter, QTableWidget, QLineEdit, QPushButton, QLabel, \
-    QHBoxLayout, QFrame, QVBoxLayout, QWidget  # Импорт необходимых классов из PyQt5
+    QHBoxLayout, QFrame, QVBoxLayout, QWidget, QSizePolicy  # Импорт необходимых классов из PyQt5
 
 from Designer.des import Ui_MainWindow  # Импорт дизайна интерфейса, созданного в Qt Designer
 from Designer.loginVKR import Ui_Form
@@ -225,11 +225,13 @@ class MainWindow(QMainWindow):  # Определение класса MainWindow
         """Создание таблиц в каждой странице QToolBox с данными из столбца fio."""
         data = self.load_data_from_first_column()
         count_tem = self.load_count_tem()
+        self.ui.toolBox.setSizePolicy(QSizePolicy.Expanding, QSizePolicy.Expanding)
         for i in range(self.ui.toolBox.count()):
             page = self.ui.toolBox.widget(i)
             # Предполагается, что функция load_count_tem возвращает количество столбцов для каждой таблицы
             num_columns = next(count_tem)  # Получаем количество столбцов из генератора
             tableWidget = QTableWidget(len(data), num_columns + 1)  # Создаем таблицу с нужным количеством столбцов
+            tableWidget.setSizePolicy(QSizePolicy.Expanding, QSizePolicy.Expanding)  # Устанавливаем политику размеров
             tableWidget.setStyleSheet("color:black;")
             tableWidget.setColumnWidth(0, 400)
             # Устанавливаем заголовки столбцов, первый столбец - "ФИО", остальные - согласно количеству
@@ -237,6 +239,7 @@ class MainWindow(QMainWindow):  # Определение класса MainWindow
             for row, item in enumerate(data):
                 tableWidget.setItem(row, 0, QTableWidgetItem(item))
             # Добавляем созданную таблицу на страницу
+
             page.layout().addWidget(tableWidget)
 
     ####################################################################################################################
