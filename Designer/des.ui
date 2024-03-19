@@ -6,7 +6,7 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>985</width>
+    <width>991</width>
     <height>700</height>
    </rect>
   </property>
@@ -966,7 +966,7 @@ background-color: rgb(255,255,255)
 background-color: rgb(28, 28, 28);}</string>
             </property>
             <property name="currentIndex">
-             <number>1</number>
+             <number>2</number>
             </property>
             <widget class="QWidget" name="page_11">
              <layout class="QVBoxLayout" name="verticalLayout_11">
@@ -1507,204 +1507,576 @@ background-color: rgb(255,255,255)
                   <rect>
                    <x>0</x>
                    <y>0</y>
-                   <width>815</width>
-                   <height>582</height>
+                   <width>804</width>
+                   <height>1318</height>
                   </rect>
                  </property>
-                 <layout class="QVBoxLayout" name="verticalLayout_23">
-                  <property name="spacing">
-                   <number>0</number>
-                  </property>
-                  <property name="leftMargin">
-                   <number>0</number>
-                  </property>
-                  <property name="topMargin">
-                   <number>0</number>
-                  </property>
-                  <property name="rightMargin">
-                   <number>0</number>
-                  </property>
-                  <property name="bottomMargin">
-                   <number>0</number>
-                  </property>
+                 <layout class="QHBoxLayout" name="horizontalLayout_29">
                   <item>
-                   <widget class="QWidget" name="widget_2" native="true">
-                    <layout class="QVBoxLayout" name="verticalLayout_19">
-                     <item>
-                      <widget class="QToolBox" name="toolBox">
-                       <property name="styleSheet">
-                        <string notr="true">color: rgb(215, 215, 215);
+                   <widget class="QToolBox" name="toolBox">
+                    <property name="sizePolicy">
+                     <sizepolicy hsizetype="Expanding" vsizetype="Expanding">
+                      <horstretch>0</horstretch>
+                      <verstretch>0</verstretch>
+                     </sizepolicy>
+                    </property>
+                    <property name="minimumSize">
+                     <size>
+                      <width>0</width>
+                      <height>1300</height>
+                     </size>
+                    </property>
+                    <property name="styleSheet">
+                     <string notr="true">color: rgb(215, 215, 215);
 font: 14pt;
 </string>
-                       </property>
-                       <property name="currentIndex">
-                        <number>0</number>
-                       </property>
-                       <widget class="QWidget" name="page_3">
-                        <property name="geometry">
-                         <rect>
-                          <x>0</x>
-                          <y>0</y>
-                          <width>797</width>
-                          <height>204</height>
-                         </rect>
-                        </property>
-                        <attribute name="label">
-                         <string>1. Разведывательня подготовка, 4 ч.</string>
-                        </attribute>
-                        <layout class="QHBoxLayout" name="horizontalLayout_3">
-                         <item>
-                          <layout class="QVBoxLayout" name="verticalLayout_26"/>
-                         </item>
-                        </layout>
-                       </widget>
-                       <widget class="QWidget" name="page_5">
-                        <property name="geometry">
-                         <rect>
-                          <x>0</x>
-                          <y>0</y>
-                          <width>797</width>
-                          <height>204</height>
-                         </rect>
-                        </property>
-                        <attribute name="label">
-                         <string>2. РХБ защита, 6 ч.</string>
-                        </attribute>
-                        <layout class="QHBoxLayout" name="horizontalLayout_12">
-                         <item>
-                          <layout class="QVBoxLayout" name="verticalLayout_27"/>
-                         </item>
-                        </layout>
-                       </widget>
-                       <widget class="QWidget" name="page_6">
-                        <property name="geometry">
-                         <rect>
-                          <x>0</x>
-                          <y>0</y>
-                          <width>797</width>
-                          <height>204</height>
-                         </rect>
-                        </property>
-                        <attribute name="label">
-                         <string>3. Инженерная защита, 6 ч.</string>
-                        </attribute>
-                        <layout class="QHBoxLayout" name="horizontalLayout_17">
-                         <item>
-                          <layout class="QVBoxLayout" name="verticalLayout_28"/>
-                         </item>
-                        </layout>
-                       </widget>
-                       <widget class="QWidget" name="page_7">
-                        <property name="geometry">
-                         <rect>
-                          <x>0</x>
-                          <y>0</y>
-                          <width>797</width>
-                          <height>204</height>
-                         </rect>
-                        </property>
-                        <attribute name="label">
-                         <string>4. Первая помощь, 60 ч.</string>
-                        </attribute>
-                        <layout class="QHBoxLayout" name="horizontalLayout_16">
-                         <item>
-                          <layout class="QVBoxLayout" name="verticalLayout_29"/>
-                         </item>
-                        </layout>
-                       </widget>
-                       <widget class="QWidget" name="page_8">
-                        <property name="geometry">
-                         <rect>
-                          <x>0</x>
-                          <y>0</y>
-                          <width>797</width>
-                          <height>204</height>
-                         </rect>
-                        </property>
-                        <attribute name="label">
-                         <string>5. Военная топография, 4 ч.</string>
-                        </attribute>
-                        <layout class="QHBoxLayout" name="horizontalLayout_15">
-                         <item>
-                          <layout class="QVBoxLayout" name="verticalLayout_30"/>
-                         </item>
-                        </layout>
-                       </widget>
-                       <widget class="QWidget" name="page_9">
-                        <property name="geometry">
-                         <rect>
-                          <x>0</x>
-                          <y>0</y>
-                          <width>797</width>
-                          <height>204</height>
-                         </rect>
-                        </property>
-                        <attribute name="label">
-                         <string>6. Мобилизационная подготовка, 40 ч.</string>
-                        </attribute>
-                        <layout class="QHBoxLayout" name="horizontalLayout_14">
-                         <item>
-                          <layout class="QVBoxLayout" name="verticalLayout_31"/>
-                         </item>
-                        </layout>
-                       </widget>
-                       <widget class="QWidget" name="page_10">
-                        <property name="geometry">
-                         <rect>
-                          <x>0</x>
-                          <y>0</y>
-                          <width>797</width>
-                          <height>204</height>
-                         </rect>
-                        </property>
-                        <attribute name="label">
-                         <string>7. Методическая подготовка, 6 ч.</string>
-                        </attribute>
-                        <layout class="QHBoxLayout" name="horizontalLayout_13">
-                         <item>
-                          <layout class="QVBoxLayout" name="verticalLayout_25"/>
-                         </item>
-                        </layout>
-                       </widget>
-                       <widget class="QWidget" name="page_12">
-                        <property name="geometry">
-                         <rect>
-                          <x>0</x>
-                          <y>0</y>
-                          <width>797</width>
-                          <height>204</height>
-                         </rect>
-                        </property>
-                        <attribute name="label">
-                         <string>8. Вождение, 4 ч.</string>
-                        </attribute>
-                        <layout class="QHBoxLayout" name="horizontalLayout_18">
-                         <item>
-                          <layout class="QVBoxLayout" name="verticalLayout_32"/>
-                         </item>
-                        </layout>
-                       </widget>
-                       <widget class="QWidget" name="page_4">
-                        <property name="geometry">
-                         <rect>
-                          <x>0</x>
-                          <y>0</y>
-                          <width>797</width>
-                          <height>204</height>
-                         </rect>
-                        </property>
-                        <attribute name="label">
-                         <string>9. Психологическая подготока, 20 ч.</string>
-                        </attribute>
-                        <layout class="QHBoxLayout" name="horizontalLayout_19">
-                         <item>
-                          <layout class="QVBoxLayout" name="verticalLayout_33"/>
-                         </item>
-                        </layout>
-                       </widget>
-                      </widget>
-                     </item>
-                    </layout>
+                    </property>
+                    <property name="currentIndex">
+                     <number>0</number>
+                    </property>
+                    <property name="tabSpacing">
+                     <number>10</number>
+                    </property>
+                    <widget class="QWidget" name="page1">
+                     <property name="geometry">
+                      <rect>
+                       <x>0</x>
+                       <y>0</y>
+                       <width>786</width>
+                       <height>508</height>
+                      </rect>
+                     </property>
+                     <property name="sizePolicy">
+                      <sizepolicy hsizetype="Expanding" vsizetype="Expanding">
+                       <horstretch>0</horstretch>
+                       <verstretch>0</verstretch>
+                      </sizepolicy>
+                     </property>
+                     <attribute name="label">
+                      <string>1. Разведывательня подготовка, 4 ч.</string>
+                     </attribute>
+                     <layout class="QHBoxLayout" name="horizontalLayout_3">
+                      <property name="spacing">
+                       <number>0</number>
+                      </property>
+                      <property name="leftMargin">
+                       <number>0</number>
+                      </property>
+                      <property name="topMargin">
+                       <number>0</number>
+                      </property>
+                      <property name="rightMargin">
+                       <number>0</number>
+                      </property>
+                      <property name="bottomMargin">
+                       <number>0</number>
+                      </property>
+                     </layout>
+                    </widget>
+                    <widget class="QWidget" name="page2">
+                     <property name="geometry">
+                      <rect>
+                       <x>0</x>
+                       <y>0</y>
+                       <width>786</width>
+                       <height>508</height>
+                      </rect>
+                     </property>
+                     <property name="sizePolicy">
+                      <sizepolicy hsizetype="Preferred" vsizetype="Expanding">
+                       <horstretch>0</horstretch>
+                       <verstretch>0</verstretch>
+                      </sizepolicy>
+                     </property>
+                     <attribute name="label">
+                      <string>2. РХБ защита, 6 ч.</string>
+                     </attribute>
+                     <layout class="QHBoxLayout" name="horizontalLayout_12">
+                      <property name="spacing">
+                       <number>0</number>
+                      </property>
+                      <property name="leftMargin">
+                       <number>0</number>
+                      </property>
+                      <property name="topMargin">
+                       <number>0</number>
+                      </property>
+                      <property name="rightMargin">
+                       <number>0</number>
+                      </property>
+                      <property name="bottomMargin">
+                       <number>0</number>
+                      </property>
+                     </layout>
+                    </widget>
+                    <widget class="QWidget" name="page3">
+                     <property name="geometry">
+                      <rect>
+                       <x>0</x>
+                       <y>0</y>
+                       <width>786</width>
+                       <height>508</height>
+                      </rect>
+                     </property>
+                     <attribute name="label">
+                      <string>3. Инженерная защита, 6 ч.</string>
+                     </attribute>
+                     <layout class="QHBoxLayout" name="horizontalLayout_17"/>
+                    </widget>
+                    <widget class="QWidget" name="page4">
+                     <property name="geometry">
+                      <rect>
+                       <x>0</x>
+                       <y>0</y>
+                       <width>786</width>
+                       <height>508</height>
+                      </rect>
+                     </property>
+                     <property name="sizePolicy">
+                      <sizepolicy hsizetype="Preferred" vsizetype="Expanding">
+                       <horstretch>0</horstretch>
+                       <verstretch>0</verstretch>
+                      </sizepolicy>
+                     </property>
+                     <attribute name="label">
+                      <string>4. Первая помощь, 60 ч.</string>
+                     </attribute>
+                     <layout class="QHBoxLayout" name="horizontalLayout_16"/>
+                    </widget>
+                    <widget class="QWidget" name="page_8">
+                     <property name="geometry">
+                      <rect>
+                       <x>0</x>
+                       <y>0</y>
+                       <width>786</width>
+                       <height>508</height>
+                      </rect>
+                     </property>
+                     <attribute name="label">
+                      <string>5. Военная топография, 4 ч.</string>
+                     </attribute>
+                     <layout class="QHBoxLayout" name="horizontalLayout_15">
+                      <property name="spacing">
+                       <number>0</number>
+                      </property>
+                      <property name="leftMargin">
+                       <number>0</number>
+                      </property>
+                      <property name="topMargin">
+                       <number>0</number>
+                      </property>
+                      <property name="rightMargin">
+                       <number>0</number>
+                      </property>
+                      <property name="bottomMargin">
+                       <number>0</number>
+                      </property>
+                     </layout>
+                    </widget>
+                    <widget class="QWidget" name="page6">
+                     <property name="geometry">
+                      <rect>
+                       <x>0</x>
+                       <y>0</y>
+                       <width>786</width>
+                       <height>508</height>
+                      </rect>
+                     </property>
+                     <property name="sizePolicy">
+                      <sizepolicy hsizetype="Preferred" vsizetype="Expanding">
+                       <horstretch>0</horstretch>
+                       <verstretch>0</verstretch>
+                      </sizepolicy>
+                     </property>
+                     <attribute name="label">
+                      <string>6. Мобилизационная подготовка, 40 ч.</string>
+                     </attribute>
+                     <layout class="QHBoxLayout" name="horizontalLayout_14">
+                      <property name="spacing">
+                       <number>0</number>
+                      </property>
+                      <property name="leftMargin">
+                       <number>0</number>
+                      </property>
+                      <property name="topMargin">
+                       <number>0</number>
+                      </property>
+                      <property name="rightMargin">
+                       <number>0</number>
+                      </property>
+                      <property name="bottomMargin">
+                       <number>0</number>
+                      </property>
+                     </layout>
+                    </widget>
+                    <widget class="QWidget" name="page7">
+                     <property name="geometry">
+                      <rect>
+                       <x>0</x>
+                       <y>0</y>
+                       <width>786</width>
+                       <height>508</height>
+                      </rect>
+                     </property>
+                     <property name="sizePolicy">
+                      <sizepolicy hsizetype="Preferred" vsizetype="Expanding">
+                       <horstretch>0</horstretch>
+                       <verstretch>0</verstretch>
+                      </sizepolicy>
+                     </property>
+                     <attribute name="label">
+                      <string>7. Методическая подготовка, 6 ч.</string>
+                     </attribute>
+                     <layout class="QHBoxLayout" name="horizontalLayout_13">
+                      <property name="spacing">
+                       <number>0</number>
+                      </property>
+                      <property name="leftMargin">
+                       <number>0</number>
+                      </property>
+                      <property name="topMargin">
+                       <number>0</number>
+                      </property>
+                      <property name="rightMargin">
+                       <number>0</number>
+                      </property>
+                      <property name="bottomMargin">
+                       <number>0</number>
+                      </property>
+                     </layout>
+                    </widget>
+                    <widget class="QWidget" name="page8">
+                     <property name="geometry">
+                      <rect>
+                       <x>0</x>
+                       <y>0</y>
+                       <width>786</width>
+                       <height>508</height>
+                      </rect>
+                     </property>
+                     <property name="sizePolicy">
+                      <sizepolicy hsizetype="Preferred" vsizetype="Expanding">
+                       <horstretch>0</horstretch>
+                       <verstretch>0</verstretch>
+                      </sizepolicy>
+                     </property>
+                     <attribute name="label">
+                      <string>8. Вождение, 4 ч.</string>
+                     </attribute>
+                     <layout class="QHBoxLayout" name="horizontalLayout_18">
+                      <property name="spacing">
+                       <number>0</number>
+                      </property>
+                      <property name="leftMargin">
+                       <number>0</number>
+                      </property>
+                      <property name="topMargin">
+                       <number>0</number>
+                      </property>
+                      <property name="rightMargin">
+                       <number>0</number>
+                      </property>
+                      <property name="bottomMargin">
+                       <number>0</number>
+                      </property>
+                     </layout>
+                    </widget>
+                    <widget class="QWidget" name="page9">
+                     <property name="geometry">
+                      <rect>
+                       <x>0</x>
+                       <y>0</y>
+                       <width>786</width>
+                       <height>508</height>
+                      </rect>
+                     </property>
+                     <property name="sizePolicy">
+                      <sizepolicy hsizetype="Preferred" vsizetype="Expanding">
+                       <horstretch>0</horstretch>
+                       <verstretch>0</verstretch>
+                      </sizepolicy>
+                     </property>
+                     <attribute name="label">
+                      <string>9. Психологическая подготока, 20 ч.</string>
+                     </attribute>
+                     <layout class="QHBoxLayout" name="horizontalLayout_19">
+                      <property name="spacing">
+                       <number>0</number>
+                      </property>
+                      <property name="leftMargin">
+                       <number>0</number>
+                      </property>
+                      <property name="topMargin">
+                       <number>0</number>
+                      </property>
+                      <property name="rightMargin">
+                       <number>0</number>
+                      </property>
+                      <property name="bottomMargin">
+                       <number>0</number>
+                      </property>
+                     </layout>
+                    </widget>
+                    <widget class="QWidget" name="page10">
+                     <property name="geometry">
+                      <rect>
+                       <x>0</x>
+                       <y>0</y>
+                       <width>786</width>
+                       <height>508</height>
+                      </rect>
+                     </property>
+                     <property name="sizePolicy">
+                      <sizepolicy hsizetype="Expanding" vsizetype="Expanding">
+                       <horstretch>0</horstretch>
+                       <verstretch>0</verstretch>
+                      </sizepolicy>
+                     </property>
+                     <attribute name="label">
+                      <string>10. Руководящие документы, 4 ч.</string>
+                     </attribute>
+                     <layout class="QHBoxLayout" name="horizontalLayout_22">
+                      <property name="spacing">
+                       <number>0</number>
+                      </property>
+                      <property name="leftMargin">
+                       <number>0</number>
+                      </property>
+                      <property name="topMargin">
+                       <number>0</number>
+                      </property>
+                      <property name="rightMargin">
+                       <number>0</number>
+                      </property>
+                      <property name="bottomMargin">
+                       <number>0</number>
+                      </property>
+                     </layout>
+                    </widget>
+                    <widget class="QWidget" name="page11">
+                     <property name="geometry">
+                      <rect>
+                       <x>0</x>
+                       <y>0</y>
+                       <width>786</width>
+                       <height>508</height>
+                      </rect>
+                     </property>
+                     <property name="sizePolicy">
+                      <sizepolicy hsizetype="Expanding" vsizetype="Expanding">
+                       <horstretch>0</horstretch>
+                       <verstretch>0</verstretch>
+                      </sizepolicy>
+                     </property>
+                     <attribute name="label">
+                      <string>11. Противопожарная подготовка, 30 ч.</string>
+                     </attribute>
+                     <layout class="QHBoxLayout" name="horizontalLayout_21">
+                      <property name="spacing">
+                       <number>0</number>
+                      </property>
+                      <property name="leftMargin">
+                       <number>0</number>
+                      </property>
+                      <property name="topMargin">
+                       <number>0</number>
+                      </property>
+                      <property name="rightMargin">
+                       <number>0</number>
+                      </property>
+                      <property name="bottomMargin">
+                       <number>0</number>
+                      </property>
+                     </layout>
+                    </widget>
+                    <widget class="QWidget" name="page12">
+                     <property name="geometry">
+                      <rect>
+                       <x>0</x>
+                       <y>0</y>
+                       <width>786</width>
+                       <height>508</height>
+                      </rect>
+                     </property>
+                     <property name="sizePolicy">
+                      <sizepolicy hsizetype="Expanding" vsizetype="Expanding">
+                       <horstretch>0</horstretch>
+                       <verstretch>0</verstretch>
+                      </sizepolicy>
+                     </property>
+                     <attribute name="label">
+                      <string>12. Основы обеспечения защиты государственных интересов, 10 ч.</string>
+                     </attribute>
+                     <layout class="QHBoxLayout" name="horizontalLayout_20">
+                      <property name="spacing">
+                       <number>0</number>
+                      </property>
+                      <property name="leftMargin">
+                       <number>0</number>
+                      </property>
+                      <property name="topMargin">
+                       <number>0</number>
+                      </property>
+                      <property name="rightMargin">
+                       <number>0</number>
+                      </property>
+                      <property name="bottomMargin">
+                       <number>0</number>
+                      </property>
+                     </layout>
+                    </widget>
+                    <widget class="QWidget" name="page13">
+                     <property name="geometry">
+                      <rect>
+                       <x>0</x>
+                       <y>0</y>
+                       <width>786</width>
+                       <height>508</height>
+                      </rect>
+                     </property>
+                     <property name="sizePolicy">
+                      <sizepolicy hsizetype="Expanding" vsizetype="Expanding">
+                       <horstretch>0</horstretch>
+                       <verstretch>0</verstretch>
+                      </sizepolicy>
+                     </property>
+                     <attribute name="label">
+                      <string>13. Военная экология, 4 ч.</string>
+                     </attribute>
+                     <layout class="QHBoxLayout" name="horizontalLayout_23"/>
+                    </widget>
+                    <widget class="QWidget" name="page14">
+                     <property name="geometry">
+                      <rect>
+                       <x>0</x>
+                       <y>0</y>
+                       <width>786</width>
+                       <height>508</height>
+                      </rect>
+                     </property>
+                     <property name="sizePolicy">
+                      <sizepolicy hsizetype="Preferred" vsizetype="Expanding">
+                       <horstretch>0</horstretch>
+                       <verstretch>0</verstretch>
+                      </sizepolicy>
+                     </property>
+                     <attribute name="label">
+                      <string>14. Безопасность военной службы, 10 ч.</string>
+                     </attribute>
+                     <layout class="QHBoxLayout" name="horizontalLayout_24">
+                      <property name="spacing">
+                       <number>0</number>
+                      </property>
+                      <property name="leftMargin">
+                       <number>0</number>
+                      </property>
+                      <property name="topMargin">
+                       <number>0</number>
+                      </property>
+                      <property name="rightMargin">
+                       <number>0</number>
+                      </property>
+                      <property name="bottomMargin">
+                       <number>0</number>
+                      </property>
+                     </layout>
+                    </widget>
+                    <widget class="QWidget" name="page15">
+                     <property name="geometry">
+                      <rect>
+                       <x>0</x>
+                       <y>0</y>
+                       <width>786</width>
+                       <height>508</height>
+                      </rect>
+                     </property>
+                     <property name="sizePolicy">
+                      <sizepolicy hsizetype="Preferred" vsizetype="Expanding">
+                       <horstretch>0</horstretch>
+                       <verstretch>0</verstretch>
+                      </sizepolicy>
+                     </property>
+                     <attribute name="label">
+                      <string>15. Тактико-специальная подготовка, 54.</string>
+                     </attribute>
+                     <layout class="QHBoxLayout" name="horizontalLayout_25"/>
+                    </widget>
+                    <widget class="QWidget" name="page16">
+                     <property name="geometry">
+                      <rect>
+                       <x>0</x>
+                       <y>0</y>
+                       <width>786</width>
+                       <height>508</height>
+                      </rect>
+                     </property>
+                     <property name="sizePolicy">
+                      <sizepolicy hsizetype="Preferred" vsizetype="Expanding">
+                       <horstretch>0</horstretch>
+                       <verstretch>0</verstretch>
+                      </sizepolicy>
+                     </property>
+                     <attribute name="label">
+                      <string>16. Специальная подготовка, 16 ч.</string>
+                     </attribute>
+                     <layout class="QHBoxLayout" name="horizontalLayout_26"/>
+                    </widget>
+                    <widget class="QWidget" name="page17">
+                     <property name="geometry">
+                      <rect>
+                       <x>0</x>
+                       <y>0</y>
+                       <width>786</width>
+                       <height>508</height>
+                      </rect>
+                     </property>
+                     <property name="sizePolicy">
+                      <sizepolicy hsizetype="Preferred" vsizetype="Expanding">
+                       <horstretch>0</horstretch>
+                       <verstretch>0</verstretch>
+                      </sizepolicy>
+                     </property>
+                     <attribute name="label">
+                      <string>17. Техническая подготовка, 10 ч.</string>
+                     </attribute>
+                     <layout class="QHBoxLayout" name="horizontalLayout_27">
+                      <property name="spacing">
+                       <number>0</number>
+                      </property>
+                      <property name="leftMargin">
+                       <number>0</number>
+                      </property>
+                      <property name="topMargin">
+                       <number>0</number>
+                      </property>
+                      <property name="rightMargin">
+                       <number>0</number>
+                      </property>
+                      <property name="bottomMargin">
+                       <number>0</number>
+                      </property>
+                     </layout>
+                    </widget>
+                    <widget class="QWidget" name="page18">
+                     <property name="geometry">
+                      <rect>
+                       <x>0</x>
+                       <y>0</y>
+                       <width>786</width>
+                       <height>508</height>
+                      </rect>
+                     </property>
+                     <property name="sizePolicy">
+                      <sizepolicy hsizetype="Preferred" vsizetype="Expanding">
+                       <horstretch>0</horstretch>
+                       <verstretch>0</verstretch>
+                      </sizepolicy>
+                     </property>
+                     <attribute name="label">
+                      <string>18. Огневая подготовка, 8 ч.</string>
+                     </attribute>
+                     <layout class="QHBoxLayout" name="horizontalLayout_28"/>
+                    </widget>
                    </widget>
                   </item>
                  </layout>
@@ -1991,8 +2363,8 @@ QTableWidget::item {
                         <rect>
                          <x>0</x>
                          <y>0</y>
-                         <width>767</width>
-                         <height>464</height>
+                         <width>52</width>
+                         <height>18</height>
                         </rect>
                        </property>
                        <layout class="QVBoxLayout" name="verticalLayout_24">
