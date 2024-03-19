@@ -88,6 +88,7 @@ class MainWindow(QMainWindow):  # Определение класса MainWindow
         self.ui.dateTimeEdit.setDateTime(PyQt5.QtCore.QDateTime.currentDateTime())
         self.ui.scrollAreaWC.setLayout(QVBoxLayout())
         #####
+        self.populate_combobox()  # Заполнение QComboBox данными
 
     def fetch_names_from_db(self):
         self.cursor.execute("SELECT fio FROM personnel")
@@ -96,9 +97,29 @@ class MainWindow(QMainWindow):  # Определение класса MainWindow
         return names
 
     def populate_combobox(self):
-        names = self.fetch_names_from_db()
         self.ui.comboBox.clear()  # Очищаем comboBox перед заполнением
+        self.ui.comboBox.addItem("")  # Добавляем пустой элемент в качестве первого элемента
+        names = self.fetch_names_from_db()
         self.ui.comboBox.addItems(names)  # Добавляем имена в comboBox
+        self.ui.comboBox.setCurrentIndex(0)  # Устанавливаем пустой элемент активным
+        self.update_person_info()
+    def update_person_info(self):
+        selected_name = self.ui.comboBox.currentText()
+        if selected_name:
+            self.cursor.execute("SELECT fio, rank, subunit, duty FROM personnel WHERE fio=?", (selected_name,))
+            person_info = self.cursor.fetchone()
+            if person_info:
+                # Предполагаем, что у вас есть QLabel для каждого поля информации
+                self.ui.labelFio.setText(person_info[0])
+                self.ui.labelRank.setText(person_info[1])
+                self.ui.labelSubunit.setText(person_info[2])
+                self.ui.labelDuty.setText(person_info[3])
+            else:
+                # Очистка QLabel, если информация не найдена
+                self.ui.labelFio.setText("")
+                self.ui.labelRank.setText("")
+                self.ui.labelSubunit.setText("")
+                self.ui.labelDuty.setText("")
     ####################################################################################################################
     def load_tables_at_startup(self):
         cursor = self.db_connection.cursor()
@@ -406,6 +427,8 @@ class MainWindow(QMainWindow):  # Определение класса MainWindow
             QMessageBox.warning(None, "Ошибка", "Заполните все поля")
 
         self.update_toolbox_tables()
+        self.populate_combobox()  # Заполнение QComboBox данными
+
 
     def delete_personnel(self):
         selected_ranges = self.ui.table_personnel.selectedRanges()
@@ -437,6 +460,7 @@ class MainWindow(QMainWindow):  # Определение класса MainWindow
             QMessageBox.warning(None, "Ошибка", "Выберите строки для удаления")
 
         self.update_toolbox_tables()
+        self.populate_combobox()  # Заполнение QComboBox данными
 
     ####################################################################################################################
     def addTask(self):
