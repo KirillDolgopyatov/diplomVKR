@@ -111,17 +111,33 @@ class MainWindow(QMainWindow):  # Определение класса MainWindow
             self.cursor.execute("SELECT fio, rank, subunit, duty FROM personnel WHERE fio=?", (selected_name,))
             person_info = self.cursor.fetchone()
             if person_info:
-                # Предполагаем, что у вас есть QLabel для каждого поля информации
                 self.ui.labelFio.setText(person_info[0])
                 self.ui.labelRank.setText(person_info[1])
                 self.ui.labelSubunit.setText(person_info[2])
                 self.ui.labelDuty.setText(person_info[3])
+
+                # Новый код для подсчета изученных тем
+                total_subjects_studied = 0
+                for i in range(self.ui.toolBox.count()):
+                    page = self.ui.toolBox.widget(i)
+                    tableWidget = self.find_table_widget(page)
+                    if tableWidget:
+                        for row in range(tableWidget.rowCount()):
+                            fio_cell = tableWidget.item(row, 0)
+                            if fio_cell and fio_cell.text() == selected_name:
+                                for column in range(1, tableWidget.columnCount()):  # Пропускаем первый столбец с ФИО
+                                    subject_cell = tableWidget.item(row, column)
+                                    if subject_cell and subject_cell.text().strip():  # Проверяем, не пуста ли ячейка
+                                        total_subjects_studied += 1
+                                break  # Прерываем цикл, так как нашли нужного человека
+                self.ui.labelDuty_3.setText(
+                    str(total_subjects_studied))  # Обновляем labelDuty_3 количеством изученных тем
             else:
-                # Очистка QLabel, если информация не найдена
                 self.ui.labelFio.setText("")
                 self.ui.labelRank.setText("")
                 self.ui.labelSubunit.setText("")
                 self.ui.labelDuty.setText("")
+                self.ui.labelDuty_3.setText("")  # Очищаем labelDuty_3, если информация не найдена
     ####################################################################################################################
     def load_tables_at_startup(self):
         cursor = self.db_connection.cursor()
