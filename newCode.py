@@ -225,7 +225,8 @@ class MainWindow(QMainWindow):  # Определение класса MainWindow
                     # Формируем строку значений для SQL запроса
                     values_placeholder = ", ".join(["?"] * num_columns)
                     cursor.execute(
-                        f'''INSERT INTO {table_name} ({", ".join([f"column{i + 2}" for i in range(num_columns)])})
+                        f'''INSERT INTO {table_name} ({", ".join([f"column{i + 2}"
+                                                                  for i in range(num_columns)])})
                                       VALUES ({values_placeholder})''', row_data)
         self.db_connection.commit()
 
@@ -273,19 +274,19 @@ class MainWindow(QMainWindow):  # Определение класса MainWindow
         return [item[0] for item in self.cursor.fetchall()]
 
     def create_tables_in_toolbox(self):
-        """Создание таблиц в каждой странице QToolBox с данными из столбца fio."""
+
         data = self.load_data_from_first_column()
         count_tem = self.load_count_tem()
         self.ui.toolBox.setSizePolicy(QSizePolicy.Expanding, QSizePolicy.Expanding)
         for i in range(self.ui.toolBox.count()):
             page = self.ui.toolBox.widget(i)
-            # Предполагается, что функция load_count_tem возвращает количество столбцов для каждой таблицы
+
             num_columns = next(count_tem)  # Получаем количество столбцов из генератора
             tableWidget = QTableWidget(len(data), num_columns + 1)  # Создаем таблицу с нужным количеством столбцов
             tableWidget.setSizePolicy(QSizePolicy.Expanding, QSizePolicy.Expanding)  # Устанавливаем политику размеров
             tableWidget.setStyleSheet("color:black;")
             tableWidget.setColumnWidth(0, 400)
-            # Устанавливаем заголовки столбцов, первый столбец - "ФИО", остальные - согласно количеству
+
             tableWidget.setHorizontalHeaderLabels(['ФИО'] + [f'Тема {i}' for i in range(1, num_columns + 1)])
             for row, item in enumerate(data):
                 tableWidget.setItem(row, 0, QTableWidgetItem(item))
@@ -301,34 +302,24 @@ class MainWindow(QMainWindow):  # Определение класса MainWindow
             cell_item = self.ui.table_personnel.item(i, 0)
             if cell_item is not None:
                 list_fio.add(cell_item.text())
-
-        # Создание QCompleter с этими значениями
         completer_fio = QCompleter(list(list_fio))
-
         list_rank = set()
         for i in range(self.ui.table_personnel.rowCount()):
             cell_item = self.ui.table_personnel.item(i, 1)
             if cell_item is not None:
                 list_rank.add(cell_item.text())
-
-        # Создание QCompleter с этими значениями
         completer_rank = QCompleter(list(list_rank))
-
         list_subunit = set()
         for i in range(self.ui.table_personnel.rowCount()):
             cell_item = self.ui.table_personnel.item(i, 2)
             if cell_item is not None:
                 list_subunit.add(cell_item.text())
-
-        # Создание QCompleter с этими значениями
         completer_subunit = QCompleter(list(list_subunit))
-
         list_duty = set()
         for i in range(self.ui.table_personnel.rowCount()):
             cell_item = self.ui.table_personnel.item(i, 3)
             if cell_item is not None:
                 list_duty.add(cell_item.text())
-
         # Создание QCompleter с этими значениями
         completer_duty = QCompleter(list(list_duty))
 
@@ -342,7 +333,6 @@ class MainWindow(QMainWindow):  # Определение класса MainWindow
         # Метод для сохранения данных из таблицы в базу данных SQLite
         conn = sqlite3.connect('saveData/personnel.db')  # Подключение к базе данных
         cursor = conn.cursor()  # Создание курсора
-
         # Создание таблицы, если она не существует, с добавлением столбца id
         cursor.execute('''CREATE TABLE IF NOT EXISTS personnel (
                             id INTEGER PRIMARY KEY AUTOINCREMENT,
@@ -351,21 +341,16 @@ class MainWindow(QMainWindow):  # Определение класса MainWindow
                             subunit TEXT,
                             duty TEXT
                         )''')
-
         # Остальная часть метода...
-
         cursor.execute('DELETE FROM personnel')  # Очистка таблицы перед вставкой новых данных
-
         # Вставка данных из таблицы интерфейса в базу данных
         for i in range(self.ui.table_personnel.rowCount()):
             fio = self.ui.table_personnel.item(i, 0).text() if self.ui.table_personnel.item(i, 0) else ''
             rank = self.ui.table_personnel.item(i, 1).text() if self.ui.table_personnel.item(i, 1) else ''
             subunit = self.ui.table_personnel.item(i, 2).text() if self.ui.table_personnel.item(i, 2) else ''
             duty = self.ui.table_personnel.item(i, 3).text() if self.ui.table_personnel.item(i, 3) else ''
-
             cursor.execute('''INSERT INTO personnel (fio, rank, subunit, duty)
                               VALUES (?, ?, ?, ?)''', (fio, rank, subunit, duty))
-
         conn.commit()  # Подтверждение изменений в базе данных
         conn.close()  # Закрытие соединения с базой данных
 
@@ -373,7 +358,6 @@ class MainWindow(QMainWindow):  # Определение класса MainWindow
         # Метод для загрузки данных из базы данных SQLite в таблицу интерфейса
         conn = sqlite3.connect('saveData/personnel.db')  # Подключение к базе данных
         cursor = conn.cursor()  # Создание курсора
-
         # Создание таблицы, если она не существует
         cursor.execute('''CREATE TABLE IF NOT EXISTS personnel (
                             fio TEXT,
@@ -381,7 +365,6 @@ class MainWindow(QMainWindow):  # Определение класса MainWindow
                             subunit TEXT,
                             duty TEXT   
                         )''')
-
         cursor.execute('''SELECT fio, rank, subunit, duty FROM personnel''')  # Выборка данных из таблицы
         rows = cursor.fetchall()  # Получение всех строк
 
@@ -391,7 +374,6 @@ class MainWindow(QMainWindow):  # Определение класса MainWindow
             self.ui.table_personnel.insertRow(rowCount)
             for i, value in enumerate(row):
                 self.ui.table_personnel.setItem(rowCount, i, QTableWidgetItem(str(value)))
-
         conn.close()  # Закрытие соединения с базой данных
 
     ####################################################################################################################
@@ -448,7 +430,6 @@ class MainWindow(QMainWindow):  # Определение класса MainWindow
 
         self.update_toolbox_tables()
         self.populate_combobox()  # Заполнение QComboBox данными
-
 
     def delete_personnel(self):
         selected_ranges = self.ui.table_personnel.selectedRanges()
