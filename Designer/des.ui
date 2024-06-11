@@ -1328,7 +1328,7 @@ color: rgb(0, 0, 0);
                     <string notr="true">color: rgb(255, 255, 255);</string>
                    </property>
                    <property name="text">
-                    <string>Количество изученных тем </string>
+                    <string>Изученные темы:       </string>
                    </property>
                   </widget>
                  </item>
@@ -1346,99 +1346,15 @@ color: rgb(0, 0, 0);
                      <height>25</height>
                     </size>
                    </property>
-                   <property name="styleSheet">
-                    <string notr="true">background-color: rgba(250, 250, 250, 220);
-border-radius: 5px;
-border-style: solid;
-border-width: 0.5px;
-padding-left: 15px;
-
-border: none;
-color: rgb(0, 0, 0);
-</string>
-                   </property>
-                   <property name="text">
-                    <string/>
-                   </property>
-                  </widget>
-                 </item>
-                </layout>
-               </widget>
-              </item>
-              <item>
-               <widget class="QFrame" name="frame_25">
-                <property name="frameShape">
-                 <enum>QFrame::StyledPanel</enum>
-                </property>
-                <property name="frameShadow">
-                 <enum>QFrame::Raised</enum>
-                </property>
-                <layout class="QFormLayout" name="formLayout_2">
-                 <property name="horizontalSpacing">
-                  <number>6</number>
-                 </property>
-                 <property name="leftMargin">
-                  <number>50</number>
-                 </property>
-                 <property name="rightMargin">
-                  <number>30</number>
-                 </property>
-                 <item row="0" column="0">
-                  <widget class="QLabel" name="labelDuty_4">
-                   <property name="sizePolicy">
-                    <sizepolicy hsizetype="Preferred" vsizetype="Preferred">
-                     <horstretch>0</horstretch>
-                     <verstretch>0</verstretch>
-                    </sizepolicy>
-                   </property>
-                   <property name="minimumSize">
-                    <size>
-                     <width>0</width>
-                     <height>0</height>
-                    </size>
-                   </property>
-                   <property name="maximumSize">
-                    <size>
-                     <width>16777215</width>
-                     <height>30</height>
-                    </size>
-                   </property>
                    <property name="font">
                     <font>
-                     <pointsize>14</pointsize>
+                     <pointsize>11</pointsize>
                     </font>
                    </property>
                    <property name="styleSheet">
-                    <string notr="true">color: rgb(255, 255, 255);</string>
-                   </property>
-                   <property name="text">
-                    <string>Средний бал                       </string>
-                   </property>
-                  </widget>
-                 </item>
-                 <item row="0" column="1">
-                  <widget class="QLabel" name="labelDuty_5">
-                   <property name="sizePolicy">
-                    <sizepolicy hsizetype="Preferred" vsizetype="Preferred">
-                     <horstretch>0</horstretch>
-                     <verstretch>0</verstretch>
-                    </sizepolicy>
-                   </property>
-                   <property name="maximumSize">
-                    <size>
-                     <width>100</width>
-                     <height>25</height>
-                    </size>
-                   </property>
-                   <property name="styleSheet">
-                    <string notr="true">background-color: rgba(250, 250, 250, 220);
-border-radius: 5px;
-border-style: solid;
-border-width: 0.5px;
-padding-left: 15px;
-
+                    <string notr="true">
 border: none;
-color: rgb(0, 0, 0);
+color: rgb(255, 255, 255);
 </string>
                    </property>
                    <property name="text">
@@ -1496,7 +1412,7 @@ color: rgb(0, 0, 0);
                     <string notr="true">color: rgb(255, 255, 255);</string>
                    </property>
                    <property name="text">
-                    <string>Посещаемость                    </string>
+                    <string>Посещаемость:          </string>
                    </property>
                   </widget>
                  </item>
@@ -1514,15 +1430,183 @@ color: rgb(0, 0, 0);
                      <height>25</height>
                     </size>
                    </property>
+                   <property name="font">
+                    <font>
+                     <pointsize>11</pointsize>
+                    </font>
+                   </property>
                    <property name="styleSheet">
-                    <string notr="true">background-color: rgba(250, 250, 250, 220);
-border-radius: 5px;
-border-style: solid;
-border-width: 0.5px;
-padding-left: 15px;
-
+                    <string notr="true">
 border: none;
-color: rgb(0, 0, 0);
+color: rgb(255, 255, 255);
+</string>
+                   </property>
+                   <property name="text">
+                    <string/>
+                   </property>
+                  </widget>
+                 </item>
+                </layout>
+               </widget>
+              </item>
+              <item>
+               <widget class="QFrame" name="frame_27">
+                <property name="frameShape">
+                 <enum>QFrame::StyledPanel</enum>
+                </property>
+                <property name="frameShadow">
+                 <enum>QFrame::Raised</enum>
+                </property>
+                <layout class="QFormLayout" name="formLayout_8">
+                 <property name="horizontalSpacing">
+                  <number>6</number>
+                 </property>
+                 <property name="leftMargin">
+                  <number>50</number>
+                 </property>
+                 <property name="rightMargin">
+                  <number>30</number>
+                 </property>
+                 <item row="0" column="0">
+                  <widget class="QLabel" name="labelDuty_12">
+                   <property name="sizePolicy">
+                    <sizepolicy hsizetype="Preferred" vsizetype="Preferred">
+                     <horstretch>0</horstretch>
+                     <verstretch>0</verstretch>
+                    </sizepolicy>
+                   </property>
+                   <property name="minimumSize">
+                    <size>
+                     <width>0</width>
+                     <height>0</height>
+                    </size>
+                   </property>
+                   <property name="maximumSize">
+                    <size>
+                     <width>16777215</width>
+                     <height>30</height>
+                    </size>
+                   </property>
+                   <property name="font">
+                    <font>
+                     <pointsize>14</pointsize>
+                    </font>
+                   </property>
+                   <property name="styleSheet">
+                    <string notr="true">color: rgb(255, 255, 255);</string>
+                   </property>
+                   <property name="text">
+                    <string>Средний бал:             </string>
+                   </property>
+                  </widget>
+                 </item>
+                 <item row="0" column="1">
+                  <widget class="QLabel" name="labelDuty_5">
+                   <property name="sizePolicy">
+                    <sizepolicy hsizetype="Preferred" vsizetype="Preferred">
+                     <horstretch>0</horstretch>
+                     <verstretch>0</verstretch>
+                    </sizepolicy>
+                   </property>
+                   <property name="maximumSize">
+                    <size>
+                     <width>100</width>
+                     <height>25</height>
+                    </size>
+                   </property>
+                   <property name="font">
+                    <font>
+                     <pointsize>11</pointsize>
+                    </font>
+                   </property>
+                   <property name="styleSheet">
+                    <string notr="true">
+border: none;
+color: rgb(255, 255, 255);
+</string>
+                   </property>
+                   <property name="text">
+                    <string/>
+                   </property>
+                  </widget>
+                 </item>
+                </layout>
+               </widget>
+              </item>
+              <item>
+               <widget class="QFrame" name="frame_28">
+                <property name="frameShape">
+                 <enum>QFrame::StyledPanel</enum>
+                </property>
+                <property name="frameShadow">
+                 <enum>QFrame::Raised</enum>
+                </property>
+                <layout class="QFormLayout" name="formLayout_9">
+                 <property name="horizontalSpacing">
+                  <number>6</number>
+                 </property>
+                 <property name="leftMargin">
+                  <number>50</number>
+                 </property>
+                 <property name="rightMargin">
+                  <number>30</number>
+                 </property>
+                 <item row="0" column="0">
+                  <widget class="QLabel" name="labelDuty_13">
+                   <property name="sizePolicy">
+                    <sizepolicy hsizetype="Preferred" vsizetype="Preferred">
+                     <horstretch>0</horstretch>
+                     <verstretch>0</verstretch>
+                    </sizepolicy>
+                   </property>
+                   <property name="minimumSize">
+                    <size>
+                     <width>0</width>
+                     <height>0</height>
+                    </size>
+                   </property>
+                   <property name="maximumSize">
+                    <size>
+                     <width>16777215</width>
+                     <height>30</height>
+                    </size>
+                   </property>
+                   <property name="font">
+                    <font>
+                     <pointsize>14</pointsize>
+                    </font>
+                   </property>
+                   <property name="styleSheet">
+                    <string notr="true">color: rgb(255, 255, 255);</string>
+                   </property>
+                   <property name="text">
+                    <string>Средний бал:             </string>
+                   </property>
+                  </widget>
+                 </item>
+                 <item row="0" column="1">
+                  <widget class="QLabel" name="labelDuty_8">
+                   <property name="sizePolicy">
+                    <sizepolicy hsizetype="Preferred" vsizetype="Preferred">
+                     <horstretch>0</horstretch>
+                     <verstretch>0</verstretch>
+                    </sizepolicy>
+                   </property>
+                   <property name="maximumSize">
+                    <size>
+                     <width>100</width>
+                     <height>25</height>
+                    </size>
+                   </property>
+                   <property name="font">
+                    <font>
+                     <pointsize>11</pointsize>
+                    </font>
+                   </property>
+                   <property name="styleSheet">
+                    <string notr="true">
+border: none;
+color: rgb(255, 255, 255);
 </string>
                    </property>
                    <property name="text">
@@ -2068,7 +2152,7 @@ background-color: rgb(255,255,255)
                   <rect>
                    <x>0</x>
                    <y>0</y>
-                   <width>107</width>
+                   <width>780</width>
                    <height>1322</height>
                   </rect>
                  </property>
@@ -2103,8 +2187,8 @@ font: 14pt;
                       <rect>
                        <x>0</x>
                        <y>0</y>
-                       <width>100</width>
-                       <height>30</height>
+                       <width>758</width>
+                       <height>472</height>
                       </rect>
                      </property>
                      <property name="sizePolicy">
@@ -2139,8 +2223,8 @@ font: 14pt;
                       <rect>
                        <x>0</x>
                        <y>0</y>
-                       <width>100</width>
-                       <height>30</height>
+                       <width>758</width>
+                       <height>472</height>
                       </rect>
                      </property>
                      <property name="sizePolicy">
@@ -2175,8 +2259,8 @@ font: 14pt;
                       <rect>
                        <x>0</x>
                        <y>0</y>
-                       <width>100</width>
-                       <height>30</height>
+                       <width>758</width>
+                       <height>472</height>
                       </rect>
                      </property>
                      <attribute name="label">
@@ -2189,8 +2273,8 @@ font: 14pt;
                       <rect>
                        <x>0</x>
                        <y>0</y>
-                       <width>100</width>
-                       <height>30</height>
+                       <width>758</width>
+                       <height>472</height>
                       </rect>
                      </property>
                      <property name="sizePolicy">
@@ -2209,8 +2293,8 @@ font: 14pt;
                       <rect>
                        <x>0</x>
                        <y>0</y>
-                       <width>100</width>
-                       <height>30</height>
+                       <width>758</width>
+                       <height>472</height>
                       </rect>
                      </property>
                      <attribute name="label">
@@ -2239,8 +2323,8 @@ font: 14pt;
                       <rect>
                        <x>0</x>
                        <y>0</y>
-                       <width>100</width>
-                       <height>30</height>
+                       <width>758</width>
+                       <height>472</height>
                       </rect>
                      </property>
                      <property name="sizePolicy">
@@ -2275,8 +2359,8 @@ font: 14pt;
                       <rect>
                        <x>0</x>
                        <y>0</y>
-                       <width>100</width>
-                       <height>30</height>
+                       <width>758</width>
+                       <height>472</height>
                       </rect>
                      </property>
                      <property name="sizePolicy">
@@ -2311,8 +2395,8 @@ font: 14pt;
                       <rect>
                        <x>0</x>
                        <y>0</y>
-                       <width>100</width>
-                       <height>30</height>
+                       <width>758</width>
+                       <height>472</height>
                       </rect>
                      </property>
                      <property name="sizePolicy">
@@ -2347,8 +2431,8 @@ font: 14pt;
                       <rect>
                        <x>0</x>
                        <y>0</y>
-                       <width>100</width>
-                       <height>30</height>
+                       <width>758</width>
+                       <height>472</height>
                       </rect>
                      </property>
                      <property name="sizePolicy">
@@ -2383,8 +2467,8 @@ font: 14pt;
                       <rect>
                        <x>0</x>
                        <y>0</y>
-                       <width>100</width>
-                       <height>30</height>
+                       <width>758</width>
+                       <height>472</height>
                       </rect>
                      </property>
                      <property name="sizePolicy">
@@ -2419,8 +2503,8 @@ font: 14pt;
                       <rect>
                        <x>0</x>
                        <y>0</y>
-                       <width>100</width>
-                       <height>30</height>
+                       <width>758</width>
+                       <height>472</height>
                       </rect>
                      </property>
                      <property name="sizePolicy">
@@ -2455,8 +2539,8 @@ font: 14pt;
                       <rect>
                        <x>0</x>
                        <y>0</y>
-                       <width>100</width>
-                       <height>30</height>
+                       <width>758</width>
+                       <height>472</height>
                       </rect>
                      </property>
                      <property name="sizePolicy">
@@ -2491,8 +2575,8 @@ font: 14pt;
                       <rect>
                        <x>0</x>
                        <y>0</y>
-                       <width>100</width>
-                       <height>30</height>
+                       <width>758</width>
+                       <height>472</height>
                       </rect>
                      </property>
                      <property name="sizePolicy">
@@ -2511,8 +2595,8 @@ font: 14pt;
                       <rect>
                        <x>0</x>
                        <y>0</y>
-                       <width>100</width>
-                       <height>30</height>
+                       <width>758</width>
+                       <height>472</height>
                       </rect>
                      </property>
                      <property name="sizePolicy">
@@ -2547,8 +2631,8 @@ font: 14pt;
                       <rect>
                        <x>0</x>
                        <y>0</y>
-                       <width>100</width>
-                       <height>30</height>
+                       <width>758</width>
+                       <height>472</height>
                       </rect>
                      </property>
                      <property name="sizePolicy">
@@ -2567,8 +2651,8 @@ font: 14pt;
                       <rect>
                        <x>0</x>
                        <y>0</y>
-                       <width>100</width>
-                       <height>30</height>
+                       <width>758</width>
+                       <height>472</height>
                       </rect>
                      </property>
                      <property name="sizePolicy">
@@ -2587,8 +2671,8 @@ font: 14pt;
                       <rect>
                        <x>0</x>
                        <y>0</y>
-                       <width>100</width>
-                       <height>30</height>
+                       <width>758</width>
+                       <height>472</height>
                       </rect>
                      </property>
                      <property name="sizePolicy">
@@ -2623,8 +2707,8 @@ font: 14pt;
                       <rect>
                        <x>0</x>
                        <y>0</y>
-                       <width>100</width>
-                       <height>30</height>
+                       <width>758</width>
+                       <height>472</height>
                       </rect>
                      </property>
                      <property name="sizePolicy">
@@ -2924,8 +3008,8 @@ QTableWidget::item {
                         <rect>
                          <x>0</x>
                          <y>0</y>
-                         <width>100</width>
-                         <height>30</height>
+                         <width>32</width>
+                         <height>22</height>
                         </rect>
                        </property>
                        <layout class="QVBoxLayout" name="verticalLayout_24">

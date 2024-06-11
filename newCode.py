@@ -118,6 +118,7 @@ class MainWindow(QMainWindow):  # Определение класса MainWindow
 
                 total_subjects_studied = 0
                 total_subjects = 0  # Initialize variable for counting total subjects
+                total_score = 0  # Initialize variable for total score
                 for i in range(self.ui.toolBox.count()):
                     page = self.ui.toolBox.widget(i)
                     tableWidget = self.find_table_widget(page)
@@ -131,15 +132,32 @@ class MainWindow(QMainWindow):  # Определение класса MainWindow
                                     subject_cell = tableWidget.item(row, column)
                                     if subject_cell and subject_cell.text().strip():  # Check if cell is not empty
                                         total_subjects_studied += 1
+                                        total_score += float(subject_cell.text().strip())  # Add score to total
                                 break  # Break the loop since we found the person
                 # Update labelDuty_3 to show studied subjects out of total subjects
                 self.ui.labelDuty_3.setText(f"{total_subjects_studied} / {total_subjects}")
+
+                # Calculate and update average score in labelDuty_5
+                if total_subjects_studied > 0:
+                    average_score = total_score / total_subjects_studied
+                    self.ui.labelDuty_5.setText(f"{average_score:.2f}")
+                else:
+                    self.ui.labelDuty_5.setText("N/A")
+
+                # Calculate and update attendance in labelPresent
+                if total_subjects > 0:
+                    attendance = (total_subjects_studied / total_subjects) * 100
+                    self.ui.labelPresent.setText(f"{attendance:.2f}%")
+                else:
+                    self.ui.labelPresent.setText("N/A")
             else:
                 self.ui.labelFio.setText("")
                 self.ui.labelRank.setText("")
                 self.ui.labelSubunit.setText("")
                 self.ui.labelDuty.setText("")
                 self.ui.labelDuty_3.setText("")  # Clear labelDuty_3 if no information is found
+                self.ui.labelDuty_5.setText("N/A")  # Clear labelDuty_5 if no information is found
+                self.ui.labelPresent.setText("N/A")  # Clear labelPresent if no information is found
     ####################################################################################################################
     def load_tables_at_startup(self):
         cursor = self.db_connection.cursor()
