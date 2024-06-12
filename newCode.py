@@ -119,12 +119,18 @@ class MainWindow(QMainWindow):  # Определение класса MainWindow
                 total_subjects_studied = 0
                 total_subjects = 0  # Initialize variable for counting total subjects
                 total_score = 0  # Initialize variable for total score
+                highest_avg_score = 0  # Initialize variable for highest average score
+                highest_avg_page_name = ""  # Initialize variable for page name with highest average score
+
                 for i in range(self.ui.toolBox.count()):
                     page = self.ui.toolBox.widget(i)
                     tableWidget = self.find_table_widget(page)
                     if tableWidget:
                         # Update total_subjects to include subjects from all pages
                         total_subjects += tableWidget.columnCount() - 1  # Subtract 1 for the FIO column
+                        page_total_score = 0  # Initialize variable for total score on the current page
+                        page_subjects_studied = 0  # Initialize variable for subjects studied on the current page
+
                         for row in range(tableWidget.rowCount()):
                             fio_cell = tableWidget.item(row, 0)
                             if fio_cell and fio_cell.text() == selected_name:
@@ -132,8 +138,19 @@ class MainWindow(QMainWindow):  # Определение класса MainWindow
                                     subject_cell = tableWidget.item(row, column)
                                     if subject_cell and subject_cell.text().strip():  # Check if cell is not empty
                                         total_subjects_studied += 1
-                                        total_score += float(subject_cell.text().strip())  # Add score to total
+                                        page_subjects_studied += 1
+                                        score = float(subject_cell.text().strip())
+                                        total_score += score  # Add score to total
+                                        page_total_score += score  # Add score to page total
                                 break  # Break the loop since we found the person
+
+                        # Calculate average score for the current page
+                        if page_subjects_studied > 0:
+                            page_avg_score = page_total_score / page_subjects_studied
+                            if page_avg_score > highest_avg_score:
+                                highest_avg_score = page_avg_score
+                                highest_avg_page_name = self.ui.toolBox.itemText(i)
+
                 # Update labelDuty_3 to show studied subjects out of total subjects
                 self.ui.labelDuty_3.setText(f"{total_subjects_studied} / {total_subjects}")
 
@@ -150,14 +167,21 @@ class MainWindow(QMainWindow):  # Определение класса MainWindow
                     self.ui.labelPresent.setText(f"{attendance:.2f}%")
                 else:
                     self.ui.labelPresent.setText("N/A")
+
+                # Update labelDuty_8 to show the page name with the highest average score
+                if highest_avg_page_name:
+                    self.ui.labelDuty_8.setText(f"{highest_avg_score,' - ', highest_avg_page_name}")
+                else:
+                    self.ui.labelDuty_8.setText("N/A")
             else:
                 self.ui.labelFio.setText("")
                 self.ui.labelRank.setText("")
                 self.ui.labelSubunit.setText("")
                 self.ui.labelDuty.setText("")
-                self.ui.labelDuty_3.setText("")  # Clear labelDuty_3 if no information is found
-                self.ui.labelDuty_5.setText("N/A")  # Clear labelDuty_5 if no information is found
-                self.ui.labelPresent.setText("N/A")  # Clear labelPresent if no information is found
+                self.ui.labelDuty_3.setText("")
+                self.ui.labelDuty_5.setText("N/A")
+                self.ui.labelPresent.setText("N/A")
+                self.ui.labelDuty_8.setText("N/A")
     ####################################################################################################################
     def load_tables_at_startup(self):
         cursor = self.db_connection.cursor()
